@@ -277,7 +277,7 @@ img { max-width: 100%; display: block; }
 .nibi-video {
   height: 100%;
   width: auto;
-  max-height: 400px;
+  max-height: 280px;
   border-radius: 12px;
   object-fit: cover;
   background: #f0f0f5;
