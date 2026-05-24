@@ -292,19 +292,28 @@ img { max-width: 100%; display: block; }
 }
 .work-featured {
   margin-bottom: 24px;
+  margin-top: 48px;
+}
+.work-featured .work-card {
+  width: 100%;
 }
 .work-featured-layout {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  display: flex;
+  flex-direction: row;
   gap: 32px;
   align-items: center;
 }
+.work-featured-text {
+  flex: 1;
+  min-width: 0;
+}
 .work-featured-video {
-  width: 100%;
+  flex: 1.2;
+  min-width: 0;
 }
 @media (max-width: 768px) {
   .work-featured-layout {
-    grid-template-columns: 1fr;
+    flex-direction: column;
   }
 }
 
