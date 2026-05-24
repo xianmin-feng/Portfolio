@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nibi Case Study | Xianmin Feng</title>
+<meta name="description" content="Case study: Nibi — an AI wellness companion app designed and built by Xianmin Feng.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">XF</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="subpage-hero">
+  <div class="container">
+    <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
+    <h1 class="subpage-title">Nibi — AI Wellness Companion</h1>
+    <p class="subpage-subtitle">Designing a wellness app that feels like a conversation, not a spreadsheet</p>
+    <div class="subpage-meta">
+      <span>iOS + watchOS</span>
+      <span>SwiftUI</span>
+      <span>Multi-LLM AI</span>
+      <span>Personal Project</span>
+    </div>
+  </div>
+</section>
+
+<!-- Video -->
+<section class="section">
+  <div class="container">
+    <div class="subpage-video-container">
+      <video class="subpage-video" controls playsinline>
+        <source src="assets/nibi-demo.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- Case Study Content -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+
+      <div class="case-block">
+        <h3>The Problem</h3>
+        <p>Every week starts with good intentions -- drink more water, sleep better, manage stress, take breaks. By midweek, most of it is forgotten. Existing tools felt either too cold (habit trackers that feel like spreadsheets) or too disconnected (chatbots that know nothing about your day). Nothing bridged the gap between tracking and understanding.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>The Insight</h3>
+        <p>Wellness isn't a dashboard problem -- it's a relationship problem. People don't need more charts and red warning icons. They need something that <em>notices</em> when they haven't had water in hours, <em>knows</em> they slept poorly, and responds with warmth instead of judgment. The tool should feel less like a spreadsheet and more like a conversation.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>The Solution</h3>
+        <p>Nibi is a lightweight iOS companion that connects daily wellness tracking with context-aware AI conversations. Ask "How am I doing today?" and instead of a generic response, Nibi knows you only slept 5 hours, your stress is high, and you've only had 2 glasses of water. Every response is grounded in your actual data.</p>
+        <p>The name "Nibi" comes from the Japanese word for "you" -- because the app is entirely about you. Your habits, your mood, your pace.</p>
+        <div class="case-features">
+          <div class="case-feature">
+            <strong>Daily Check-In</strong>
+            <span>Mood, sleep, hydration, stress, movement -- under 2 minutes</span>
+          </div>
+          <div class="case-feature">
+            <strong>Wellness Score</strong>
+            <span>One number (0-100) summarizing your day, with weekly trends</span>
+          </div>
+          <div class="case-feature">
+            <strong>AI Chat</strong>
+            <span>Context-aware companion that knows your data before you say anything</span>
+          </div>
+          <div class="case-feature">
+            <strong>Smart Nudges</strong>
+            <span>Gentle reminders for hydration, movement, and wind-down</span>
+          </div>
+          <div class="case-feature">
+            <strong>Living Avatar</strong>
+            <span>Expressions that react to your wellness score -- happy, concerned, encouraging</span>
+          </div>
+          <div class="case-feature">
+            <strong>Guided Breathing</strong>
+            <span>4-7-8 method with animated visuals and ambient meditation audio</span>
+          </div>
+          <div class="case-feature">
+            <strong>watchOS Companion</strong>
+            <span>Quick check-ins, heart rate monitoring, and breathing exercises on your wrist</span>
+          </div>
+          <div class="case-feature">
+            <strong>Home Screen Widget</strong>
+            <span>Today's score + one-tap water logging without opening the app</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-block">
+        <h3>Design Decisions</h3>
+        <ul class="case-list">
+          <li><strong>Zero dependencies</strong> -- Pure SwiftUI, SwiftData, HealthKit. No third-party bloat. Every icon is hand-drawn as a custom SwiftUI Shape for visual consistency.</li>
+          <li><strong>Privacy first</strong> -- All data stays on-device. No accounts, no sign-ups, no data collection. AI chat only activates with your own API key.</li>
+          <li><strong>Multi-provider AI</strong> -- Supports Claude, Gemini, OpenAI, Llama, Groq, and Together AI. Users choose their preferred model. Without a key, Nibi still works with thoughtful built-in responses.</li>
+          <li><strong>Emotional design</strong> -- The floating Nibi avatar blinks, changes expressions, and can be dragged anywhere on screen. Small details that make the experience feel alive.</li>
+          <li><strong>Scoring integrity</strong> -- Every core metric always counts toward the wellness score. Logging just one thing won't inflate your number -- the system uses a fixed denominator to stay honest.</li>
+        </ul>
+      </div>
+
+      <div class="case-block">
+        <h3>How I Built It</h3>
+        <p>The entire app was built in a single day using <strong>Cursor</strong> as my IDE paired with <strong>Claude</strong> as the AI coding assistant. The workflow was conversational -- describe what I wanted, iterate in real time, refine through back-and-forth. Features that would normally take weeks came together in hours.</p>
+        <p>The describe &rarr; implement &rarr; test &rarr; refine loop ran in minutes. The UX polish phase was especially effective -- I'd test on the simulator, notice something that felt off, describe it in plain English, and get a precise, targeted fix. That tight feedback loop is what made it possible to go from functional to polished quickly.</p>
+        <div class="case-tech-table">
+          <div class="case-tech-row">
+            <span class="case-tech-label">IDE</span>
+            <span class="case-tech-value">Cursor + Claude AI</span>
+          </div>
+          <div class="case-tech-row">
+            <span class="case-tech-label">UI</span>
+            <span class="case-tech-value">SwiftUI (iOS 17+)</span>
+          </div>
+          <div class="case-tech-row">
+            <span class="case-tech-label">Data</span>
+            <span class="case-tech-value">SwiftData</span>
+          </div>
+          <div class="case-tech-row">
+            <span class="case-tech-label">Health</span>
+            <span class="case-tech-value">Apple HealthKit</span>
+          </div>
+          <div class="case-tech-row">
+            <span class="case-tech-label">Audio</span>
+            <span class="case-tech-value">AVFoundation (procedural ambient sounds)</span>
+          </div>
+          <div class="case-tech-row">
+            <span class="case-tech-label">Security</span>
+            <span class="case-tech-value">Keychain Services</span>
+          </div>
+          <div class="case-tech-row">
+            <span class="case-tech-label">Widget</span>
+            <span class="case-tech-value">WidgetKit + AppIntents</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-block">
+        <h3>The Takeaway</h3>
+        <p>Nibi reinforced two beliefs: first, that the best tools are the ones that understand you -- not just your inputs. Second, that AI-assisted development has dramatically lowered the bar for turning ideas into real products. The gap between imagining something and holding it in your hand has never been smaller.</p>
+      </div>
+
+    </div>
+
+    <div class="case-cta">
+      <a href="https://github.com/xianmin-feng/Nibi" target="_blank" class="btn btn-primary">View on GitHub &rarr;</a>
+      <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
