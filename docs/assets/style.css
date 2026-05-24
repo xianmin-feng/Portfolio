@@ -256,6 +256,24 @@ img { max-width: 100%; display: block; }
   padding: 4px 10px;
   border-radius: 20px;
 }
+.work-card.featured {
+  border-color: #6366f1;
+  border-width: 2px;
+  background: linear-gradient(135deg, #fafaff 0%, #f4f4ff 100%);
+}
+.work-tag.personal {
+  color: #059669;
+  background: #ecfdf5;
+}
+.work-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6366f1;
+  transition: color 0.2s;
+}
+.work-link:hover { color: #4f46e5; }
 
 /* ===== Timeline ===== */
 .timeline {
