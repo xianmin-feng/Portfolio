@@ -276,11 +276,12 @@ img { max-width: 100%; display: block; }
 .work-link:hover { color: #4f46e5; }
 .work-video {
   position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  margin-top: 12px;
+  width: 60%;
+  padding-bottom: 106.67%;
+  margin: 12px auto 0;
   border-radius: 8px;
   overflow: hidden;
+  background: #000;
 }
 .work-video iframe {
   position: absolute;
