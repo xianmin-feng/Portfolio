@@ -297,7 +297,7 @@ img { max-width: 100%; display: block; }
   min-width: 0;
 }
 .work-featured-video {
-  flex: 0 0 180px;
+  flex: 0 0 300px;
 }
 @media (max-width: 768px) {
   .work-featured-layout {
