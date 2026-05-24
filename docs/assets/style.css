@@ -257,9 +257,9 @@ img { max-width: 100%; display: block; }
   border-radius: 20px;
 }
 .work-card.featured {
-  border-color: #6366f1;
-  border-width: 2px;
-  background: linear-gradient(135deg, #fafaff 0%, #f4f4ff 100%);
+  border-color: #e8e8ee;
+  border-width: 1px;
+  background: #fff;
 }
 .work-tag.personal {
   color: #059669;
