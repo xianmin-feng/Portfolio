@@ -275,9 +275,12 @@ img { max-width: 100%; display: block; }
 }
 .work-link:hover { color: #4f46e5; }
 .nibi-video {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 500px;
   border-radius: 12px;
   background: #f0f0f5;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 .work-featured {
   margin-bottom: 24px;
@@ -293,11 +296,14 @@ img { max-width: 100%; display: block; }
   align-items: center;
 }
 .work-featured-text {
-  flex: 1;
+  flex: 1 1 50%;
   min-width: 0;
 }
 .work-featured-video {
-  flex: 0 0 300px;
+  flex: 1 1 50%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
 }
 @media (max-width: 768px) {
   .work-featured-layout {
