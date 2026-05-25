@@ -69,7 +69,13 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0x4a4039);
+renderer.localClippingEnabled = true;
 container.appendChild(renderer.domElement);
+
+// Clipping planes: mask between header and system bar
+const clipTop = new THREE.Plane(new THREE.Vector3(0, -1, 0), 2.4);    // clips above y=2.4
+const clipBottom = new THREE.Plane(new THREE.Vector3(0, 1, 0), 2.4);  // clips below y=-2.4
+const clipPlanes = [clipTop, clipBottom];
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -409,7 +415,7 @@ for (let page = 0; page < 2; page++) {
   const color1 = new THREE.Color(app.c1);
   const bg = new THREE.Mesh(
     roundedRectGeo(TILE, TILE, 0.18),
-    new THREE.MeshBasicMaterial({ color: color1 })
+    new THREE.MeshBasicMaterial({ color: color1, clippingPlanes: clipPlanes })
   );
   bg.position.z = 0;
   group.add(bg);
@@ -435,7 +441,7 @@ for (let page = 0; page < 2; page++) {
   }, 128, 128);
   const shadow = new THREE.Mesh(
     new THREE.PlaneGeometry(TILE * 0.55, TILE * 0.55),
-    new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0, depthWrite: false })
+    new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0, depthWrite: false, clippingPlanes: clipPlanes })
   );
   shadow.position.set(0, -0.03, 0.005);
   group.add(shadow);
@@ -451,7 +457,7 @@ for (let page = 0; page < 2; page++) {
   }, 128, 128);
   const icon = new THREE.Mesh(
     new THREE.PlaneGeometry(TILE * 0.55, TILE * 0.55),
-    new THREE.MeshBasicMaterial({ map: iconTex, transparent: true, depthWrite: false })
+    new THREE.MeshBasicMaterial({ map: iconTex, transparent: true, depthWrite: false, clippingPlanes: clipPlanes })
   );
   icon.position.z = 0.02;
   group.add(icon);
@@ -468,7 +474,7 @@ for (let page = 0; page < 2; page++) {
   }, 256, 48);
   const label = new THREE.Mesh(
     new THREE.PlaneGeometry(TILE * 1.1, TILE * 0.22),
-    new THREE.MeshBasicMaterial({ map: labelTex, transparent: true, depthWrite: false })
+    new THREE.MeshBasicMaterial({ map: labelTex, transparent: true, depthWrite: false, clippingPlanes: clipPlanes })
   );
   label.position.set(0, -TILE * 0.72, 0.01);
   group.add(label);
