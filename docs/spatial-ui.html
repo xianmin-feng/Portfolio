@@ -18,7 +18,7 @@
   }
   .back-nav a:hover { background: rgba(0,0,0,0.4); }
   .demo-title { position: fixed; top: 20px; right: 24px; z-index: 100; text-align: right; }
-  .demo-title h1 { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.9); text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+  .demo-title h1 { font-size: 28px; font-weight: 300; color: rgba(255,255,255,0.95); text-shadow: 0 1px 6px rgba(0,0,0,0.3); letter-spacing: 2px; }
   .demo-title p { font-size: 11px; color: rgba(255,255,255,0.6); text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
   .tab-switcher {
     position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); z-index: 100;
@@ -48,7 +48,20 @@
 <body>
 
 <div class="back-nav"><a href="index.html">&larr; Back to Portfolio</a></div>
-<div class="demo-title"><h1>Spatial OS Navigator</h1><p>Interactive Three.js Demo</p></div>
+<div class="demo-title">
+  <h1 id="clock">12:00</h1>
+  <p>Interactive Three.js Demo</p>
+</div>
+<script>
+function updateClock() {
+  const now = new Date();
+  const h = now.getHours() % 12 || 12;
+  const m = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('clock').textContent = h + ':' + m;
+}
+updateClock();
+setInterval(updateClock, 1000);
+</script>
 
 <div class="tab-switcher">
   <button class="tab-btn" data-tab="settings" title="Settings">
