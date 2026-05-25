@@ -863,7 +863,7 @@ function animate() {
     const targetOp = isHovered ? 1 : 0;
     btn.tooltip.material.opacity += (targetOp - btn.tooltip.material.opacity) * (1 - Math.pow(0.001, dt));
     if (!btn.isActive) {
-      const targetCircleOp = isHovered ? 0.25 : 0.15;
+      const targetCircleOp = isHovered ? 0.25 : 0;
       btn.circle.material.opacity += (targetCircleOp - btn.circle.material.opacity) * (1 - Math.pow(0.001, dt));
     }
     if (isHovered) document.body.style.cursor = 'pointer';
