@@ -340,7 +340,7 @@ for (let row = 0; row < rowLayout.length; row++) {
     new THREE.PlaneGeometry(TILE * 0.55, TILE * 0.55),
     new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0, depthWrite: false })
   );
-  shadow.position.z = 0.005;
+  shadow.position.set(0, -0.03, 0.005);
   group.add(shadow);
 
   // --- LAYER 3: White icon (lifts forward on hover) ---
