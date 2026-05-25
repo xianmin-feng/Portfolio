@@ -696,7 +696,7 @@ for (let i = 0; i < sysBarTabs.length; i++) {
     roughness: 0.3,
     clearcoat: 0.5,
   });
-  const circle = new THREE.Mesh(new THREE.CircleGeometry(0.35, 32), circleMat);
+  const circle = new THREE.Mesh(new THREE.CircleGeometry(0.21, 32), circleMat);
   const backing = circle; // reuse for switchTab compatibility
   circle.userData = { tabIndex: i, isTabBtn: true };
   btnGroup.add(circle);
