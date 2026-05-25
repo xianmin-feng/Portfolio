@@ -17,43 +17,6 @@
     padding: 8px 16px; border-radius: 20px; transition: background 0.2s;
   }
   .back-nav a:hover { background: rgba(0,0,0,0.4); }
-  .tab-switcher {
-    position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); z-index: 100;
-    display: flex; gap: 40px; background: none;
-    padding: 4px;
-  }
-  .tab-btn {
-    width: 56px; height: 56px; border: none;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    color: rgba(255,255,255,0.55);
-    border-radius: 50%; cursor: pointer; transition: all 0.25s;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .tab-btn svg { width: 26px; height: 26px; }
-  .tab-btn.active { background: rgba(255,255,255,0.35); color: #fff; }
-  .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.22); color: rgba(255,255,255,0.85); }
-  .tab-btn { position: relative; }
-  .tab-btn .tooltip {
-    position: absolute;
-    bottom: 68px;
-    left: 50%;
-    transform: translateX(-50%) scale(0.8);
-    background: rgba(255,255,255,0.6);
-    color: #1a1a2e;
-    font-size: 18px;
-    font-weight: 500;
-    padding: 9px 21px;
-    border-radius: 14px;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s, transform 0.2s;
-  }
-  .tab-btn:hover .tooltip {
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-  }
   .info-panel {
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
     background: rgba(0,0,0,0.3); backdrop-filter: blur(20px);
@@ -77,26 +40,6 @@ function getTimeStr() {
 }
 </script>
 
-<div class="tab-switcher">
-  <button class="tab-btn" data-tab="settings">
-    <span class="tooltip">Settings</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-    </svg>
-  </button>
-  <button class="tab-btn active" data-tab="apps">
-    <span class="tooltip">App</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
-    </svg>
-  </button>
-  <button class="tab-btn" data-tab="search">
-    <span class="tooltip">Search</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-    </svg>
-  </button>
-</div>
 
 <div id="canvas-container"></div>
 
@@ -728,16 +671,107 @@ for (let i = 0; i < 6; i++) {
 scene.add(searchGroup);
 
 // Tab switching
-const tabBtns = document.querySelectorAll('.tab-btn');
+// ===== 3D System Bar (below app grid) =====
+const sysBarGroup = new THREE.Group();
+sysBarGroup.position.set(0, -2.8, 0);
+
+const sysBarButtons = [];
+const sysBarTabs = [
+  { name: 'Settings', tab: 'settings' },
+  { name: 'App', tab: 'apps' },
+  { name: 'Search', tab: 'search' },
+];
+
+for (let i = 0; i < sysBarTabs.length; i++) {
+  const x = (i - 1) * 1.4;
+  const btnGroup = new THREE.Group();
+  btnGroup.position.set(x, 0, 0);
+
+  // Circle background
+  const isActive = sysBarTabs[i].tab === 'apps';
+  const circleMat = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: isActive ? 0.35 : 0.15,
+    roughness: 0.3,
+    clearcoat: 0.5,
+  });
+  const circle = new THREE.Mesh(new THREE.CircleGeometry(0.35, 32), circleMat);
+  circle.userData = { tabIndex: i, isTabBtn: true };
+  btnGroup.add(circle);
+
+  // Icon
+  const iconTex = canvasTex((ctx, w, h) => {
+    ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+    ctx.fillStyle = 'rgba(255,255,255,0.85)';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    const cx = w/2, cy = h/2, s = w*0.3;
+    if (sysBarTabs[i].tab === 'settings') {
+      // Gear
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.35, 0, Math.PI*2); ctx.stroke();
+      for (let j = 0; j < 6; j++) {
+        const a = (j/6)*Math.PI*2;
+        ctx.beginPath();
+        ctx.moveTo(cx+Math.cos(a)*s*0.55, cy+Math.sin(a)*s*0.55);
+        ctx.lineTo(cx+Math.cos(a)*s*0.85, cy+Math.sin(a)*s*0.85);
+        ctx.stroke();
+      }
+    } else if (sysBarTabs[i].tab === 'apps') {
+      // Grid
+      const g = s*0.35;
+      for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) {
+        ctx.beginPath();
+        ctx.roundRect(cx-g*1.15+c*g*1.3, cy-g*1.15+r*g*1.3, g, g, g*0.2);
+        ctx.stroke();
+      }
+    } else {
+      // Search
+      ctx.beginPath(); ctx.arc(cx-s*0.1, cy-s*0.1, s*0.5, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx+s*0.25, cy+s*0.25); ctx.lineTo(cx+s*0.7, cy+s*0.7); ctx.stroke();
+    }
+  }, 64, 64);
+  const iconMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.4, 0.4),
+    new THREE.MeshBasicMaterial({ map: iconTex, transparent: true, depthWrite: false })
+  );
+  iconMesh.position.z = 0.01;
+  btnGroup.add(iconMesh);
+
+  // Tooltip (hidden by default)
+  const tooltipTex = canvasTex((ctx, w, h) => {
+    ctx.fillStyle = 'rgba(255,255,255,0.6)';
+    ctx.beginPath(); ctx.roundRect(4, 4, w-8, h-8, 12); ctx.fill();
+    ctx.fillStyle = '#1a1a2e';
+    ctx.font = '500 20px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(sysBarTabs[i].name, w/2, h/2);
+  }, 128, 40);
+  const tooltip = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.8, 0.25),
+    new THREE.MeshBasicMaterial({ map: tooltipTex, transparent: true, opacity: 0, depthWrite: false })
+  );
+  tooltip.position.set(0, 0.55, 0.01);
+  btnGroup.add(tooltip);
+
+  sysBarButtons.push({ group: btnGroup, circle, tooltip, tab: sysBarTabs[i].tab, isActive });
+  sysBarGroup.add(btnGroup);
+}
+scene.add(sysBarGroup);
+
 let activeTab = 'apps';
 function switchTab(tab) {
   activeTab = tab;
-  tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
   appGridGroup.visible = tab === 'apps';
   settingsGroup.visible = tab === 'settings';
   searchGroup.visible = tab === 'search';
+  for (const btn of sysBarButtons) {
+    btn.isActive = btn.tab === tab;
+    btn.circle.material.opacity = btn.isActive ? 0.35 : 0.15;
+  }
 }
-tabBtns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
 
 // Raycasting
 const raycaster = new THREE.Raycaster();
@@ -745,6 +779,14 @@ const mouse = new THREE.Vector2(-10, -10);
 window.addEventListener('mousemove', e => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+});
+window.addEventListener('click', () => {
+  raycaster.setFromCamera(mouse, camera);
+  const btnHits = raycaster.intersectObjects(sysBarButtons.map(b => b.circle));
+  if (btnHits.length > 0) {
+    const btn = sysBarButtons.find(b => b.circle === btnHits[0].object);
+    if (btn) switchTab(btn.tab);
+  }
 });
 
 // Animate
@@ -792,11 +834,27 @@ function animate() {
     }
   }
 
+  // System bar hover + tooltip
+  raycaster.setFromCamera(mouse, camera);
+  const btnHits = raycaster.intersectObjects(sysBarButtons.map(b => b.circle));
+  const hoveredBtn = btnHits.length > 0 ? sysBarButtons.find(b => b.circle === btnHits[0].object) : null;
+  for (const btn of sysBarButtons) {
+    const isHovered = btn === hoveredBtn;
+    const targetOp = isHovered ? 1 : 0;
+    btn.tooltip.material.opacity += (targetOp - btn.tooltip.material.opacity) * (1 - Math.pow(0.001, dt));
+    if (!btn.isActive) {
+      const targetCircleOp = isHovered ? 0.25 : 0.15;
+      btn.circle.material.opacity += (targetCircleOp - btn.circle.material.opacity) * (1 - Math.pow(0.001, dt));
+    }
+    if (isHovered) document.body.style.cursor = 'pointer';
+  }
+
   // Float
   const fy = Math.sin(t * 0.4) * 0.04;
   appGridGroup.position.y = fy;
   settingsGroup.position.y = fy;
   searchGroup.position.y = fy;
+  sysBarGroup.position.y = -2.8 + fy;
 
 
   controls.update();
