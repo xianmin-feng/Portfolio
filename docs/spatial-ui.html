@@ -33,6 +33,27 @@
   .tab-btn svg { width: 26px; height: 26px; }
   .tab-btn.active { background: rgba(255,255,255,0.35); color: #fff; }
   .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.22); color: rgba(255,255,255,0.85); }
+  .tab-btn { position: relative; }
+  .tab-btn .tooltip {
+    position: absolute;
+    bottom: 68px;
+    left: 50%;
+    transform: translateX(-50%) scale(0.8);
+    background: rgba(255,255,255,0.6);
+    color: #1a1a2e;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .tab-btn:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
   .info-panel {
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
     background: rgba(0,0,0,0.3); backdrop-filter: blur(20px);
@@ -57,17 +78,20 @@ function getTimeStr() {
 </script>
 
 <div class="tab-switcher">
-  <button class="tab-btn" data-tab="settings" title="Settings">
+  <button class="tab-btn" data-tab="settings">
+    <span class="tooltip">Settings</span>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
     </svg>
   </button>
-  <button class="tab-btn active" data-tab="apps" title="Apps">
+  <button class="tab-btn active" data-tab="apps">
+    <span class="tooltip">App</span>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
     </svg>
   </button>
-  <button class="tab-btn" data-tab="search" title="Search">
+  <button class="tab-btn" data-tab="search">
+    <span class="tooltip">Search</span>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
     </svg>
