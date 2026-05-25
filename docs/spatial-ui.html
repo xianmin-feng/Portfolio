@@ -743,6 +743,10 @@ function animate() {
       // Ease-out: fast start, smooth deceleration
       const easeOut = (cur, tgt) => cur + (tgt - cur) * (1 - Math.pow(0.0015, dt));
 
+      // Background moves forward a little on hover
+      const targetBgZ = tile.hovered ? 0.1 : 0;
+      tile.bg.position.z = easeOut(tile.bg.position.z, targetBgZ);
+
       // Icon lifts forward on hover
       const targetZ = tile.hovered ? tile.iconHoverZ : tile.iconRestZ;
       tile.icon.position.z = easeOut(tile.icon.position.z, targetZ);
