@@ -759,7 +759,7 @@ for (let i = 0; i < sysBarTabs.length; i++) {
     ctx.fillText(sysBarTabs[i].name, w/2, h/2);
   }, 128, 40);
   const tooltip = new THREE.Mesh(
-    new THREE.PlaneGeometry(0.8, 0.35),
+    new THREE.PlaneGeometry(0.8, 0.3),
     new THREE.MeshBasicMaterial({ map: tooltipTex, transparent: true, opacity: 0, depthWrite: false })
   );
   tooltip.position.set(0, 0.38, 0.01);
