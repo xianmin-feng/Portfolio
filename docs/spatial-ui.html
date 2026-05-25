@@ -10,18 +10,14 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; overflow: hidden; background: #c4b5a3; }
   canvas { display: block; }
-  .back-nav {
-    position: fixed; top: 20px; left: 24px; z-index: 100;
-  }
+  .back-nav { position: fixed; top: 20px; left: 24px; z-index: 100; }
   .back-nav a {
     color: rgba(255,255,255,0.85); text-decoration: none; font-size: 14px; font-weight: 500;
     background: rgba(0,0,0,0.25); backdrop-filter: blur(10px);
     padding: 8px 16px; border-radius: 20px; transition: background 0.2s;
   }
   .back-nav a:hover { background: rgba(0,0,0,0.4); }
-  .demo-title {
-    position: fixed; top: 20px; right: 24px; z-index: 100; text-align: right;
-  }
+  .demo-title { position: fixed; top: 20px; right: 24px; z-index: 100; text-align: right; }
   .demo-title h1 { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.9); text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
   .demo-title p { font-size: 11px; color: rgba(255,255,255,0.6); text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
   .tab-switcher {
@@ -94,21 +90,17 @@ controls.enablePan = false;
 controls.minDistance = 5;
 controls.maxDistance = 16;
 
-// ===== Background =====
-const bgMesh = new THREE.Mesh(
+// Background
+const bgPlane = new THREE.Mesh(
   new THREE.PlaneGeometry(30, 20),
   new THREE.ShaderMaterial({
     vertexShader: `varying vec2 vUv; void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`,
     fragmentShader: `
       varying vec2 vUv;
       void main() {
-        vec3 tl = vec3(0.58, 0.52, 0.44);
-        vec3 tr = vec3(0.82, 0.78, 0.72);
-        vec3 bl = vec3(0.50, 0.46, 0.38);
-        vec3 br = vec3(0.76, 0.72, 0.66);
-        vec3 top = mix(tl, tr, vUv.x);
-        vec3 bot = mix(bl, br, vUv.x);
-        vec3 col = mix(bot, top, vUv.y);
+        vec3 tl = vec3(0.58,0.52,0.44); vec3 tr = vec3(0.82,0.78,0.72);
+        vec3 bl = vec3(0.50,0.46,0.38); vec3 br = vec3(0.76,0.72,0.66);
+        vec3 col = mix(mix(bl,br,vUv.x), mix(tl,tr,vUv.x), vUv.y);
         float vig = 1.0 - smoothstep(0.4, 0.9, length(vUv - 0.5));
         col *= 0.88 + vig * 0.12;
         gl_FragColor = vec4(col, 1.0);
@@ -116,60 +108,56 @@ const bgMesh = new THREE.Mesh(
     `,
   })
 );
-bgMesh.position.z = -5;
-scene.add(bgMesh);
+bgPlane.position.z = -5;
+scene.add(bgPlane);
 
-// ===== Lighting =====
 scene.add(new THREE.AmbientLight(0xfff5e6, 0.7));
 const dirLight = new THREE.DirectionalLight(0xfff8f0, 0.6);
 dirLight.position.set(3, 5, 5);
 scene.add(dirLight);
 
-// ===== Helper: rounded rect geometry =====
+// Helpers
 function roundedRectGeo(w, h, r) {
-  const shape = new THREE.Shape();
+  const s = new THREE.Shape();
   const x = -w/2, y = -h/2;
-  shape.moveTo(x+r, y);
-  shape.lineTo(x+w-r, y); shape.quadraticCurveTo(x+w, y, x+w, y+r);
-  shape.lineTo(x+w, y+h-r); shape.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-  shape.lineTo(x+r, y+h); shape.quadraticCurveTo(x, y+h, x, y+h-r);
-  shape.lineTo(x, y+r); shape.quadraticCurveTo(x, y, x+r, y);
-  return new THREE.ShapeGeometry(shape);
+  s.moveTo(x+r,y); s.lineTo(x+w-r,y); s.quadraticCurveTo(x+w,y,x+w,y+r);
+  s.lineTo(x+w,y+h-r); s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  s.lineTo(x+r,y+h); s.quadraticCurveTo(x,y+h,x,y+h-r);
+  s.lineTo(x,y+r); s.quadraticCurveTo(x,y,x+r,y);
+  return new THREE.ShapeGeometry(s);
 }
 
-// ===== Helper: canvas texture =====
-function canvasTex(drawFn, w = 256, h = 256) {
+function canvasTex(fn, w=256, h=256) {
   const c = document.createElement('canvas');
   c.width = w; c.height = h;
-  drawFn(c.getContext('2d'), w, h);
+  fn(c.getContext('2d'), w, h);
   const t = new THREE.CanvasTexture(c);
   t.minFilter = THREE.LinearFilter;
   return t;
 }
 
-// ===== App configs =====
+// App data
 const apps = [
-  { name: 'Browser',    colors: ['#4FC3F7','#0288D1'], emoji: '🌐' },
-  { name: 'Instagram',  colors: ['#F58529','#DD2A7B'], emoji: '📷' },
-  { name: 'Facebook',   colors: ['#4267B2','#1877F2'], emoji: '👤' },
-  { name: 'Beat Saber', colors: ['#E53935','#B71C1C'], emoji: '⚔️' },
-  { name: 'Messenger',  colors: ['#00C6FF','#0078FF'], emoji: '💬' },
-  { name: 'Shop',       colors: ['#FFB74D','#F57C00'], emoji: '🛒' },
-  { name: 'Photos',     colors: ['#CE93D8','#7B1FA2'], emoji: '🖼' },
-  { name: 'Spotify',    colors: ['#1ED760','#158A3E'], emoji: '🎵' },
-  { name: 'Max',        colors: ['#1A37E8','#001A8F'], emoji: '🎬' },
-  { name: 'Sky',        colors: ['#81D4FA','#29B6F6'], emoji: '☁️' },
-  { name: 'WhatsApp',   colors: ['#25D366','#128C7E'], emoji: '📱' },
-  { name: 'FitXR',      colors: ['#76FF03','#64DD17'], emoji: '💪' },
+  { name: 'Browser',    c1: '#4FC3F7', c2: '#0288D1', icon: '🌐' },
+  { name: 'Instagram',  c1: '#F58529', c2: '#DD2A7B', icon: '📷' },
+  { name: 'Facebook',   c1: '#4267B2', c2: '#1877F2', icon: '👤' },
+  { name: 'Beat Saber', c1: '#E53935', c2: '#B71C1C', icon: '⚔️' },
+  { name: 'Messenger',  c1: '#00C6FF', c2: '#0078FF', icon: '💬' },
+  { name: 'Shop',       c1: '#FFB74D', c2: '#F57C00', icon: '🛒' },
+  { name: 'Photos',     c1: '#CE93D8', c2: '#7B1FA2', icon: '🖼' },
+  { name: 'Spotify',    c1: '#1ED760', c2: '#158A3E', icon: '🎵' },
+  { name: 'Max',        c1: '#1A37E8', c2: '#001A8F', icon: '🎬' },
+  { name: 'Sky',        c1: '#81D4FA', c2: '#29B6F6', icon: '☁️' },
+  { name: 'WhatsApp',   c1: '#25D366', c2: '#128C7E', icon: '📱' },
+  { name: 'FitXR',      c1: '#76FF03', c2: '#64DD17', icon: '💪' },
 ];
 
-// ===== App Grid =====
+// ===== APP GRID =====
 const appGridGroup = new THREE.Group();
 const allTiles = [];
-const TILE = 0.85;
+const TILE = 0.88;
 const GAP = 1.2;
-const COLS = 4;
-const ROWS = 3;
+const COLS = 4, ROWS = 3;
 
 for (let i = 0; i < apps.length; i++) {
   const col = i % COLS;
@@ -181,63 +169,70 @@ for (let i = 0; i < apps.length; i++) {
   const group = new THREE.Group();
   group.position.set(x, y, 0);
 
-  // --- LAYER 1: Background tile (frosted white, stays at z=0) ---
-  const bgMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.15,
-    roughness: 0.5,
-    side: THREE.FrontSide,
-  });
-  const bg = new THREE.Mesh(roundedRectGeo(TILE, TILE, 0.16), bgMat);
-  bg.position.z = 0;
-  group.add(bg);
-
-  // --- LAYER 2: Shadow (dark, starts behind icon, moves forward on hover) ---
-  const shadowMat = new THREE.MeshBasicMaterial({
-    color: 0x000000,
-    transparent: true,
-    opacity: 0.25,
-    depthWrite: false,
-  });
-  const shadow = new THREE.Mesh(roundedRectGeo(TILE * 0.72, TILE * 0.72, 0.14), shadowMat);
-  shadow.position.z = 0.03;
-  group.add(shadow);
-
-  // --- LAYER 3: Icon (solid colorful tile, moves forward on hover) ---
-  const iconTex = canvasTex((ctx, w, h) => {
-    const m = 8, r = w * 0.2;
-    // Gradient background
+  // --- LAYER 1: Colorful app tile background (stays at z=0) ---
+  const bgTex = canvasTex((ctx, w, h) => {
+    const m = 4, r = w * 0.22;
     const grd = ctx.createLinearGradient(m, m, w-m, h-m);
-    grd.addColorStop(0, app.colors[0]);
-    grd.addColorStop(1, app.colors[1]);
+    grd.addColorStop(0, app.c1);
+    grd.addColorStop(1, app.c2);
     ctx.beginPath();
     ctx.roundRect(m, m, w-m*2, h-m*2, r);
     ctx.fillStyle = grd;
     ctx.fill();
-    // Subtle top highlight
+    // Subtle top shine
     ctx.save();
     ctx.beginPath();
-    ctx.roundRect(m, m, w-m*2, (h-m*2)*0.45, r);
+    ctx.roundRect(m, m, w-m*2, (h-m*2)*0.4, r);
     ctx.clip();
-    ctx.fillStyle = 'rgba(255,255,255,0.18)';
-    ctx.fillRect(m, m, w-m*2, h*0.45);
+    ctx.fillStyle = 'rgba(255,255,255,0.12)';
+    ctx.fillRect(m, m, w-m*2, h*0.4);
     ctx.restore();
-    // Emoji
-    ctx.font = `${w*0.38}px serif`;
+  });
+  const bg = new THREE.Mesh(
+    roundedRectGeo(TILE, TILE, 0.18),
+    new THREE.MeshBasicMaterial({ map: bgTex })
+  );
+  bg.position.z = 0;
+  group.add(bg);
+
+  // --- LAYER 2: Icon shadow (cast onto colorful bg when icon lifts) ---
+  // Starts invisible, becomes visible on hover, sits between bg and icon
+  const shadowTex = canvasTex((ctx, w, h) => {
+    // Soft shadow blob
+    const cx = w/2, cy = h/2;
+    const grd = ctx.createRadialGradient(cx, cy, w*0.05, cx, cy, w*0.38);
+    grd.addColorStop(0, 'rgba(0,0,0,0.6)');
+    grd.addColorStop(0.6, 'rgba(0,0,0,0.25)');
+    grd.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+  });
+  const shadow = new THREE.Mesh(
+    new THREE.PlaneGeometry(TILE * 0.7, TILE * 0.7),
+    new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0, depthWrite: false })
+  );
+  shadow.position.z = 0.01; // just above bg
+  group.add(shadow);
+
+  // --- LAYER 3: White icon/symbol (lifts forward on hover) ---
+  const iconTex = canvasTex((ctx, w, h) => {
+    // White icon centered
+    ctx.font = `${w * 0.55}px serif`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(app.emoji, w/2, h/2 + 2);
-  });
-  const iconMat = new THREE.MeshBasicMaterial({ map: iconTex, transparent: false });
-  const icon = new THREE.Mesh(roundedRectGeo(TILE * 0.75, TILE * 0.75, 0.14), iconMat);
-  icon.position.z = 0.06;
+    ctx.fillText(app.icon, w/2, h/2);
+  }, 128, 128);
+  const icon = new THREE.Mesh(
+    new THREE.PlaneGeometry(TILE * 0.5, TILE * 0.5),
+    new THREE.MeshBasicMaterial({ map: iconTex, transparent: true, depthWrite: false })
+  );
+  icon.position.z = 0.02; // just above bg at rest
   group.add(icon);
 
-  // --- Label ---
+  // Label below
   const labelTex = canvasTex((ctx, w, h) => {
     ctx.fillStyle = 'rgba(255,255,255,0.9)';
-    ctx.font = '500 24px Inter, sans-serif';
+    ctx.font = '500 22px Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.shadowColor = 'rgba(0,0,0,0.5)';
@@ -245,23 +240,21 @@ for (let i = 0; i < apps.length; i++) {
     ctx.fillText(app.name, w/2, h/2);
   }, 256, 48);
   const label = new THREE.Mesh(
-    new THREE.PlaneGeometry(TILE * 0.95, TILE * 0.18),
+    new THREE.PlaneGeometry(TILE * 0.95, TILE * 0.17),
     new THREE.MeshBasicMaterial({ map: labelTex, transparent: true, depthWrite: false })
   );
-  label.position.set(0, -TILE * 0.55, 0.01);
+  label.position.set(0, -TILE * 0.56, 0.01);
   group.add(label);
 
   allTiles.push({
     group, bg, shadow, icon,
     hovered: false,
-    // Z positions
-    iconRestZ: 0.06,
-    iconHoverZ: 0.4,
-    shadowRestZ: 0.03,
-    shadowHoverZ: 0.2,
+    // At rest: icon at z=0.02, shadow at z=0.01
+    // On hover: icon lifts to z=0.45, shadow stays on bg surface at z=0.01 but becomes visible
+    iconRestZ: 0.02,
+    iconHoverZ: 0.45,
     currentScale: 1,
   });
-
   appGridGroup.add(group);
 }
 
@@ -276,29 +269,25 @@ for (let i = 0; i < 3; i++) {
 }
 scene.add(appGridGroup);
 
-// ===== Glowing orb =====
+// Glowing orb
 const orbGroup = new THREE.Group();
-orbGroup.add(new THREE.Mesh(
-  new THREE.SphereGeometry(0.1, 32, 32),
-  new THREE.MeshBasicMaterial({ color: 0x6366f1 })
-));
+orbGroup.add(new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({ color: 0x6366f1 })));
 const glowTex = canvasTex((ctx, w, h) => {
-  const grd = ctx.createRadialGradient(w/2, h/2, w*0.08, w/2, h/2, w*0.45);
+  const grd = ctx.createRadialGradient(w/2,h/2,w*0.08,w/2,h/2,w*0.45);
   grd.addColorStop(0, 'rgba(99,102,241,0.7)');
   grd.addColorStop(0.5, 'rgba(99,102,241,0.15)');
   grd.addColorStop(1, 'rgba(99,102,241,0)');
-  ctx.fillStyle = grd;
-  ctx.fillRect(0,0,w,h);
+  ctx.fillStyle = grd; ctx.fillRect(0,0,w,h);
 });
-const glow = new THREE.Mesh(
+const glowMesh = new THREE.Mesh(
   new THREE.PlaneGeometry(0.8, 0.8),
   new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, depthWrite: false })
 );
-orbGroup.add(glow);
+orbGroup.add(glowMesh);
 orbGroup.position.set(0, 2.5, 0.1);
 scene.add(orbGroup);
 
-// ===== Settings Bar =====
+// ===== SETTINGS BAR =====
 const settingsGroup = new THREE.Group();
 settingsGroup.visible = false;
 
@@ -325,29 +314,19 @@ for (const row of barData) {
   for (const pill of row.pills) {
     const px = ox + pill.w / 2;
     ox += pill.w + 0.12;
-
-    // Frosted pill background
-    const pillBg = new THREE.Mesh(
+    const pillMesh = new THREE.Mesh(
       roundedRectGeo(pill.w, 0.42, 0.2),
-      new THREE.MeshPhysicalMaterial({
-        color: 0xffffff, transparent: true, opacity: 0.28,
-        roughness: 0.3, clearcoat: 0.5, side: THREE.FrontSide,
-      })
+      new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.28, roughness: 0.3, clearcoat: 0.5 })
     );
-    pillBg.position.set(px, row.y, 0);
-    settingsGroup.add(pillBg);
-
-    // Icons inside pill
+    pillMesh.position.set(px, row.y, 0);
+    settingsGroup.add(pillMesh);
     const iconCount = pill.icons.length;
     const spacing = pill.w / (iconCount + 1);
     for (let j = 0; j < iconCount; j++) {
       const ix = px - pill.w/2 + spacing * (j + 1);
       const iTex = canvasTex((ctx, w, h) => {
-        ctx.font = '28px serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = 'rgba(60,55,50,0.7)';
-        ctx.fillText(pill.icons[j], w/2, h/2);
+        ctx.font = '28px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(60,55,50,0.7)'; ctx.fillText(pill.icons[j], w/2, h/2);
       }, 64, 64);
       const iMesh = new THREE.Mesh(
         new THREE.PlaneGeometry(0.25, 0.25),
@@ -358,8 +337,6 @@ for (const row of barData) {
     }
   }
 }
-
-// Settings dots
 for (let i = 0; i < 3; i++) {
   const dot = new THREE.Mesh(
     new THREE.CircleGeometry(i === 1 ? 0.055 : 0.035, 16),
@@ -370,26 +347,20 @@ for (let i = 0; i < 3; i++) {
 }
 scene.add(settingsGroup);
 
-// ===== Search View =====
+// ===== SEARCH VIEW =====
 const searchGroup = new THREE.Group();
 searchGroup.visible = false;
 
-// Search bar
 const searchBar = new THREE.Mesh(
   roundedRectGeo(4.5, 0.48, 0.24),
-  new THREE.MeshPhysicalMaterial({
-    color: 0xffffff, transparent: true, opacity: 0.22,
-    roughness: 0.3, clearcoat: 0.5,
-  })
+  new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.22, roughness: 0.3, clearcoat: 0.5 })
 );
 searchBar.position.set(0, 1.2, 0);
 searchGroup.add(searchBar);
 
 const sTex = canvasTex((ctx, w, h) => {
-  ctx.fillStyle = 'rgba(255,255,255,0.5)';
-  ctx.font = '400 20px Inter, sans-serif';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
+  ctx.fillStyle = 'rgba(255,255,255,0.5)'; ctx.font = '400 20px Inter, sans-serif';
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
   ctx.fillText('🔍  Search apps, settings...', 20, h/2);
 }, 512, 48);
 const sLabel = new THREE.Mesh(
@@ -399,45 +370,34 @@ const sLabel = new THREE.Mesh(
 sLabel.position.set(0, 1.2, 0.01);
 searchGroup.add(sLabel);
 
-// Recent apps
-const rLabel = canvasTex((ctx, w, h) => {
-  ctx.fillStyle = 'rgba(255,255,255,0.55)';
-  ctx.font = '500 20px Inter, sans-serif';
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
+const rTex = canvasTex((ctx, w, h) => {
+  ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.font = '500 20px Inter, sans-serif';
+  ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
   ctx.fillText('Recent', 10, h/2);
 }, 192, 36);
 const rMesh = new THREE.Mesh(
   new THREE.PlaneGeometry(1, 0.18),
-  new THREE.MeshBasicMaterial({ map: rLabel, transparent: true, depthWrite: false })
+  new THREE.MeshBasicMaterial({ map: rTex, transparent: true, depthWrite: false })
 );
 rMesh.position.set(-2, 0.55, 0);
 searchGroup.add(rMesh);
 
 for (let i = 0; i < 6; i++) {
-  const app = apps[i];
-  const x = (i - 2.5) * 0.9;
+  const app = apps[i]; const x = (i - 2.5) * 0.9;
   const iTex = canvasTex((ctx, w, h) => {
-    const m = 8, r = w * 0.2;
+    const m = 4, r = w * 0.22;
     const grd = ctx.createLinearGradient(m, m, w-m, h-m);
-    grd.addColorStop(0, app.colors[0]);
-    grd.addColorStop(1, app.colors[1]);
+    grd.addColorStop(0, app.c1); grd.addColorStop(1, app.c2);
     ctx.beginPath(); ctx.roundRect(m, m, w-m*2, h-m*2, r);
     ctx.fillStyle = grd; ctx.fill();
-    ctx.font = `${w*0.35}px serif`;
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText(app.emoji, w/2, h/2+2);
+    ctx.font = `${w*0.4}px serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(app.icon, w/2, h/2+2);
   });
-  const mesh = new THREE.Mesh(
-    roundedRectGeo(0.6, 0.6, 0.12),
-    new THREE.MeshBasicMaterial({ map: iTex })
-  );
+  const mesh = new THREE.Mesh(roundedRectGeo(0.6, 0.6, 0.12), new THREE.MeshBasicMaterial({ map: iTex }));
   mesh.position.set(x, -0.05, 0);
   searchGroup.add(mesh);
-
   const lTex = canvasTex((ctx, w, h) => {
-    ctx.fillStyle = 'rgba(255,255,255,0.75)';
-    ctx.font = '400 18px Inter, sans-serif';
+    ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.font = '400 18px Inter, sans-serif';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.shadowColor = 'rgba(0,0,0,0.4)'; ctx.shadowBlur = 3;
     ctx.fillText(app.name, w/2, h/2);
@@ -451,7 +411,7 @@ for (let i = 0; i < 6; i++) {
 }
 scene.add(searchGroup);
 
-// ===== Tab switching =====
+// Tab switching
 const tabBtns = document.querySelectorAll('.tab-btn');
 let activeTab = 'apps';
 function switchTab(tab) {
@@ -463,7 +423,7 @@ function switchTab(tab) {
 }
 tabBtns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
 
-// ===== Raycasting =====
+// Raycasting
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2(-10, -10);
 window.addEventListener('mousemove', e => {
@@ -471,9 +431,8 @@ window.addEventListener('mousemove', e => {
   mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
 });
 
-// ===== Animate =====
+// Animate
 const clock = new THREE.Clock();
-
 function animate() {
   requestAnimationFrame(animate);
   const dt = clock.getDelta();
@@ -487,25 +446,25 @@ function animate() {
     if (hits.length > 0) {
       const tile = allTiles.find(t => t.bg === hits[0].object);
       if (tile) { tile.hovered = true; document.body.style.cursor = 'pointer'; }
-    } else {
-      document.body.style.cursor = 'default';
-    }
+    } else { document.body.style.cursor = 'default'; }
 
     for (const tile of allTiles) {
-      // Icon z-depth
-      const tz = tile.hovered ? tile.iconHoverZ : tile.iconRestZ;
-      tile.icon.position.z += (tz - tile.icon.position.z) * dt * speed;
+      // Icon lifts forward on hover
+      const targetZ = tile.hovered ? tile.iconHoverZ : tile.iconRestZ;
+      tile.icon.position.z += (targetZ - tile.icon.position.z) * dt * speed;
 
-      // Shadow z-depth
-      const sz = tile.hovered ? tile.shadowHoverZ : tile.shadowRestZ;
-      tile.shadow.position.z += (sz - tile.shadow.position.z) * dt * speed;
+      // Shadow becomes visible on hover (cast onto the colorful bg)
+      const targetShadowOpacity = tile.hovered ? 0.6 : 0;
+      tile.shadow.material.opacity += (targetShadowOpacity - tile.shadow.material.opacity) * dt * speed;
 
-      // Shadow opacity
-      const so = tile.hovered ? 0.45 : 0.2;
-      tile.shadow.material.opacity += (so - tile.shadow.material.opacity) * dt * speed;
+      // Shadow stays on the bg surface (z=0.01), doesn't move
+      // Shadow gets slightly larger when icon is higher
+      const shadowScale = tile.hovered ? 1.15 : 1;
+      tile.shadow.scale.x += (shadowScale - tile.shadow.scale.x) * dt * speed;
+      tile.shadow.scale.y += (shadowScale - tile.shadow.scale.y) * dt * speed;
 
-      // Scale
-      const sc = tile.hovered ? 1.08 : 1;
+      // Slight scale up on hover
+      const sc = tile.hovered ? 1.05 : 1;
       tile.currentScale += (sc - tile.currentScale) * dt * speed;
       tile.group.scale.setScalar(tile.currentScale);
     }
@@ -519,7 +478,7 @@ function animate() {
 
   // Orb pulse
   orbGroup.scale.setScalar(1 + Math.sin(t * 2) * 0.08);
-  glow.material.opacity = 0.5 + Math.sin(t * 1.5) * 0.15;
+  glowMesh.material.opacity = 0.5 + Math.sin(t * 1.5) * 0.15;
 
   controls.update();
   renderer.render(scene, camera);
