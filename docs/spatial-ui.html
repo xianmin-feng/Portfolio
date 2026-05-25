@@ -160,21 +160,114 @@ function canvasTex(fn, w=256, h=256) {
   return t;
 }
 
+// Shared icon drawing function
+function drawAppIcon(name, ctx, cx, cy, s) {
+  const d = {
+    'Browser': () => {
+      ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx, cy, s*0.4, s, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s, cy); ctx.lineTo(cx+s, cy); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx, cy-s); ctx.lineTo(cx, cy+s); ctx.stroke();
+    },
+    'Instagram': () => {
+      const r = s*0.3;
+      ctx.beginPath(); ctx.roundRect(cx-s, cy-s, s*2, s*2, r); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.45, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+s*0.6, cy-s*0.6, s*0.12, 0, Math.PI*2); ctx.fill();
+    },
+    'Facebook': () => {
+      ctx.font = `bold ${s*2.2}px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('f', cx+s*0.1, cy+s*0.1);
+    },
+    'Beat Saber': () => {
+      ctx.beginPath(); ctx.moveTo(cx-s*0.6, cy+s*0.8); ctx.lineTo(cx+s*0.3, cy-s*0.8); ctx.lineTo(cx+s*0.6, cy-s*0.5);
+      ctx.lineTo(cx-s*0.3, cy+s*0.8); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.1, cy-s*0.1); ctx.lineTo(cx+s*0.6, cy-s*0.8); ctx.stroke();
+    },
+    'Messenger': () => {
+      ctx.beginPath();
+      ctx.moveTo(cx, cy+s); ctx.lineTo(cx-s*0.4, cy+s*0.5);
+      ctx.quadraticCurveTo(cx-s, cy+s*0.1, cx-s, cy-s*0.2);
+      ctx.quadraticCurveTo(cx-s, cy-s, cx, cy-s);
+      ctx.quadraticCurveTo(cx+s, cy-s, cx+s, cy-s*0.2);
+      ctx.quadraticCurveTo(cx+s, cy+s*0.5, cx+s*0.1, cy+s*0.7);
+      ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.4, cy+s*0.1); ctx.lineTo(cx, cy-s*0.2); ctx.lineTo(cx+s*0.4, cy+s*0.1); ctx.stroke();
+    },
+    'Store': () => {
+      ctx.beginPath(); ctx.moveTo(cx-s*0.8, cy-s*0.5); ctx.lineTo(cx-s*0.5, cy-s*0.5);
+      ctx.lineTo(cx-s*0.3, cy+s*0.7); ctx.lineTo(cx+s*0.8, cy+s*0.7); ctx.lineTo(cx+s*0.9, cy-s*0.1);
+      ctx.lineTo(cx-s*0.2, cy-s*0.1); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx-s*0.1, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
+    },
+    'TV': () => {
+      ctx.strokeRect(cx-s*0.85, cy-s*0.55, s*1.7, s*1.05);
+      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.5); ctx.lineTo(cx-s*0.3, cy+s*0.8); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx+s*0.3, cy+s*0.5); ctx.lineTo(cx+s*0.3, cy+s*0.8); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy+s*0.8); ctx.lineTo(cx+s*0.5, cy+s*0.8); ctx.stroke();
+    },
+    'Spotify': () => {
+      ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath(); ctx.arc(cx, cy+s*0.3, s*(0.4+i*0.22), -2.2, -0.94); ctx.stroke();
+      }
+    },
+    'Max': () => {
+      ctx.font = `bold ${s*1.4}px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('max', cx, cy+s*0.1);
+    },
+    'Horizon Worlds': () => {
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.85, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy-s*0.1); ctx.quadraticCurveTo(cx, cy-s*0.6, cx+s*0.5, cy-s*0.1); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy+s*0.2); ctx.quadraticCurveTo(cx, cy-s*0.3, cx+s*0.5, cy+s*0.2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.5); ctx.quadraticCurveTo(cx, cy+s*0.1, cx+s*0.3, cy+s*0.5); ctx.stroke();
+    },
+    'Chats': () => {
+      ctx.beginPath();
+      ctx.moveTo(cx-s*0.7, cy+s*0.8); ctx.lineTo(cx-s*0.8, cy-s*0.3);
+      ctx.quadraticCurveTo(cx-s*0.8, cy-s*0.8, cx, cy-s*0.8);
+      ctx.quadraticCurveTo(cx+s*0.8, cy-s*0.8, cx+s*0.8, cy-s*0.3);
+      ctx.quadraticCurveTo(cx+s*0.8, cy+s*0.2, cx, cy+s*0.2);
+      ctx.lineTo(cx-s*0.3, cy+s*0.2); ctx.closePath(); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.35, cy-s*0.25); ctx.lineTo(cx+s*0.35, cy-s*0.25); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.35, cy+s*0.0); ctx.lineTo(cx+s*0.2, cy+s*0.0); ctx.stroke();
+    },
+    'WhatsApp': () => {
+      ctx.beginPath(); ctx.arc(cx, cy-s*0.1, s*0.8, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.6); ctx.quadraticCurveTo(cx-s*0.8, cy+s*1, cx-s*0.1, cy+s*0.8); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy); ctx.quadraticCurveTo(cx-s*0.3, cy-s*0.35, cx, cy-s*0.35);
+      ctx.quadraticCurveTo(cx+s*0.3, cy-s*0.35, cx+s*0.3, cy);
+      ctx.quadraticCurveTo(cx+s*0.3, cy+s*0.2, cx+s*0.1, cy+s*0.25);
+      ctx.lineTo(cx-s*0.1, cy+s*0.25); ctx.stroke();
+    },
+    'XBox': () => {
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.9, 0, Math.PI*2); ctx.stroke();
+      ctx.font = `bold ${s*1.2}px sans-serif`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('X', cx, cy+s*0.05);
+    },
+  };
+  if (d[name]) d[name]();
+}
+
 // App data
 const apps = [
-  { name: 'Browser',    c1: '#4FC3F7', c2: '#0288D1', icon: '🌐' },
-  { name: 'Instagram',  c1: '#F58529', c2: '#DD2A7B', icon: '📷' },
-  { name: 'Facebook',   c1: '#4267B2', c2: '#1877F2', icon: '👤' },
-  { name: 'Beat Saber', c1: '#E53935', c2: '#B71C1C', icon: '⚔️' },
-  { name: 'Messenger',  c1: '#00C6FF', c2: '#0078FF', icon: '💬' },
-  { name: 'Shop',       c1: '#FFB74D', c2: '#F57C00', icon: '🛒' },
-  { name: 'Photos',     c1: '#CE93D8', c2: '#7B1FA2', icon: '🖼' },
-  { name: 'Spotify',    c1: '#1ED760', c2: '#158A3E', icon: '🎵' },
-  { name: 'Max',        c1: '#1A37E8', c2: '#001A8F', icon: '🎬' },
-  { name: 'Sky',        c1: '#81D4FA', c2: '#29B6F6', icon: '☁️' },
-  { name: 'WhatsApp',   c1: '#25D366', c2: '#128C7E', icon: '📱' },
-  { name: 'FitXR',      c1: '#76FF03', c2: '#64DD17', icon: '💪' },
-  { name: 'Explore',    c1: '#78909C', c2: '#546E7A', icon: '🧭' },
+  { name: 'Browser',       c1: '#4FC3F7', c2: '#0288D1' },
+  { name: 'Instagram',     c1: '#F58529', c2: '#DD2A7B' },
+  { name: 'Facebook',      c1: '#4267B2', c2: '#1877F2' },
+  { name: 'Beat Saber',    c1: '#E53935', c2: '#B71C1C' },
+  { name: 'Messenger',     c1: '#00C6FF', c2: '#0078FF' },
+  { name: 'Store',         c1: '#FFB74D', c2: '#F57C00' },
+  { name: 'TV',            c1: '#7E57C2', c2: '#512DA8' },
+  { name: 'Spotify',       c1: '#1ED760', c2: '#158A3E' },
+  { name: 'Max',           c1: '#1A37E8', c2: '#001A8F' },
+  { name: 'Horizon Worlds',c1: '#29B6F6', c2: '#0277BD' },
+  { name: 'Chats',         c1: '#AB47BC', c2: '#7B1FA2' },
+  { name: 'WhatsApp',      c1: '#25D366', c2: '#128C7E' },
+  { name: 'XBox',          c1: '#107C10', c2: '#0B5E0B' },
 ];
 
 // ===== APP GRID (4-5-4 staggered) =====
@@ -223,93 +316,7 @@ for (let row = 0; row < rowLayout.length; row++) {
     ctx.lineWidth = 6;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    const cx = w/2, cy = h/2, s = w * 0.35;
-    const iconDrawers = {
-      'Browser': () => {
-        ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.ellipse(cx, cy, s*0.4, s, 0, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s, cy); ctx.lineTo(cx+s, cy); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy-s); ctx.lineTo(cx, cy+s); ctx.stroke();
-      },
-      'Instagram': () => {
-        const r = s*0.3;
-        ctx.beginPath(); ctx.roundRect(cx-s, cy-s, s*2, s*2, r); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx, cy, s*0.45, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx+s*0.6, cy-s*0.6, s*0.12, 0, Math.PI*2); ctx.fill();
-      },
-      'Facebook': () => {
-        ctx.font = `bold ${s*2.2}px sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('f', cx+s*0.1, cy+s*0.1);
-      },
-      'Beat Saber': () => {
-        ctx.beginPath(); ctx.moveTo(cx-s*0.6, cy+s*0.8); ctx.lineTo(cx+s*0.3, cy-s*0.8); ctx.lineTo(cx+s*0.6, cy-s*0.5);
-        ctx.lineTo(cx-s*0.3, cy+s*0.8); ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.1, cy-s*0.1); ctx.lineTo(cx+s*0.6, cy-s*0.8); ctx.stroke();
-      },
-      'Messenger': () => {
-        ctx.beginPath();
-        ctx.moveTo(cx, cy+s); ctx.lineTo(cx-s*0.4, cy+s*0.5);
-        ctx.quadraticCurveTo(cx-s, cy+s*0.1, cx-s, cy-s*0.2);
-        ctx.quadraticCurveTo(cx-s, cy-s, cx, cy-s);
-        ctx.quadraticCurveTo(cx+s, cy-s, cx+s, cy-s*0.2);
-        ctx.quadraticCurveTo(cx+s, cy+s*0.5, cx+s*0.1, cy+s*0.7);
-        ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.4, cy+s*0.1); ctx.lineTo(cx, cy-s*0.2); ctx.lineTo(cx+s*0.4, cy+s*0.1); ctx.stroke();
-      },
-      'Shop': () => {
-        ctx.beginPath(); ctx.moveTo(cx-s*0.8, cy-s*0.5); ctx.lineTo(cx-s*0.5, cy-s*0.5);
-        ctx.lineTo(cx-s*0.3, cy+s*0.7); ctx.lineTo(cx+s*0.8, cy+s*0.7); ctx.lineTo(cx+s*0.9, cy-s*0.1);
-        ctx.lineTo(cx-s*0.2, cy-s*0.1); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx-s*0.1, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
-      },
-      'Photos': () => {
-        ctx.strokeRect(cx-s*0.8, cy-s*0.6, s*1.6, s*1.2);
-        ctx.beginPath(); ctx.moveTo(cx-s*0.8, cy+s*0.3); ctx.lineTo(cx-s*0.2, cy-s*0.1);
-        ctx.lineTo(cx+s*0.2, cy+s*0.2); ctx.lineTo(cx+s*0.5, cy-s*0.05); ctx.lineTo(cx+s*0.8, cy+s*0.3); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx-s*0.35, cy-s*0.2, s*0.15, 0, Math.PI*2); ctx.fill();
-      },
-      'Spotify': () => {
-        ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
-        for (let i = 0; i < 3; i++) {
-          ctx.beginPath(); ctx.arc(cx, cy+s*0.3, s*(0.4+i*0.22), -2.2, -0.94); ctx.stroke();
-        }
-      },
-      'Max': () => {
-        ctx.font = `bold ${s*1.4}px sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('max', cx, cy+s*0.1);
-      },
-      'Sky': () => {
-        ctx.beginPath();
-        ctx.arc(cx-s*0.15, cy, s*0.45, Math.PI, 0);
-        ctx.arc(cx+s*0.4, cy, s*0.3, Math.PI+0.3, -0.1);
-        ctx.lineTo(cx-s*0.7, cy); ctx.arc(cx-s*0.5, cy, s*0.2, Math.PI, 0);
-        ctx.stroke();
-      },
-      'WhatsApp': () => {
-        ctx.beginPath(); ctx.arc(cx, cy-s*0.1, s*0.8, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.6); ctx.quadraticCurveTo(cx-s*0.8, cy+s*1, cx-s*0.1, cy+s*0.8); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy); ctx.quadraticCurveTo(cx-s*0.3, cy-s*0.35, cx, cy-s*0.35);
-        ctx.quadraticCurveTo(cx+s*0.3, cy-s*0.35, cx+s*0.3, cy);
-        ctx.quadraticCurveTo(cx+s*0.3, cy+s*0.2, cx+s*0.1, cy+s*0.25);
-        ctx.lineTo(cx-s*0.1, cy+s*0.25); ctx.stroke();
-      },
-      'FitXR': () => {
-        ctx.beginPath(); ctx.arc(cx, cy-s*0.5, s*0.25, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy-s*0.25); ctx.lineTo(cx, cy+s*0.5); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy); ctx.lineTo(cx+s*0.5, cy); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy+s*0.5); ctx.lineTo(cx-s*0.3, cy+s); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy+s*0.5); ctx.lineTo(cx+s*0.3, cy+s); ctx.stroke();
-      },
-      'Explore': () => {
-        ctx.beginPath(); ctx.arc(cx, cy, s*0.85, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.15, cy+s*0.4); ctx.lineTo(cx-s*0.4, cy-s*0.15);
-        ctx.lineTo(cx+s*0.15, cy-s*0.4); ctx.lineTo(cx+s*0.4, cy+s*0.15); ctx.closePath(); ctx.fill();
-      },
-    };
-    if (iconDrawers[app.name]) iconDrawers[app.name]();
+    drawAppIcon(app.name, ctx, w/2, h/2, w * 0.35);
   }, 128, 128);
   const shadow = new THREE.Mesh(
     new THREE.PlaneGeometry(TILE * 0.55, TILE * 0.55),
@@ -325,94 +332,7 @@ for (let row = 0; row < rowLayout.length; row++) {
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    const cx = w/2, cy = h/2, s = w * 0.35;
-    // Draw white line-style icon for each app
-    const iconDrawers = {
-      'Browser': () => {
-        ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.ellipse(cx, cy, s*0.4, s, 0, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s, cy); ctx.lineTo(cx+s, cy); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy-s); ctx.lineTo(cx, cy+s); ctx.stroke();
-      },
-      'Instagram': () => {
-        const r = s*0.3;
-        ctx.beginPath(); ctx.roundRect(cx-s, cy-s, s*2, s*2, r); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx, cy, s*0.45, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx+s*0.6, cy-s*0.6, s*0.12, 0, Math.PI*2); ctx.fill();
-      },
-      'Facebook': () => {
-        ctx.font = `bold ${s*2.2}px sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('f', cx+s*0.1, cy+s*0.1);
-      },
-      'Beat Saber': () => {
-        ctx.beginPath(); ctx.moveTo(cx-s*0.6, cy+s*0.8); ctx.lineTo(cx+s*0.3, cy-s*0.8); ctx.lineTo(cx+s*0.6, cy-s*0.5);
-        ctx.lineTo(cx-s*0.3, cy+s*0.8); ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.1, cy-s*0.1); ctx.lineTo(cx+s*0.6, cy-s*0.8); ctx.stroke();
-      },
-      'Messenger': () => {
-        ctx.beginPath();
-        ctx.moveTo(cx, cy+s); ctx.lineTo(cx-s*0.4, cy+s*0.5);
-        ctx.quadraticCurveTo(cx-s, cy+s*0.1, cx-s, cy-s*0.2);
-        ctx.quadraticCurveTo(cx-s, cy-s, cx, cy-s);
-        ctx.quadraticCurveTo(cx+s, cy-s, cx+s, cy-s*0.2);
-        ctx.quadraticCurveTo(cx+s, cy+s*0.5, cx+s*0.1, cy+s*0.7);
-        ctx.closePath(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.4, cy+s*0.1); ctx.lineTo(cx, cy-s*0.2); ctx.lineTo(cx+s*0.4, cy+s*0.1); ctx.stroke();
-      },
-      'Shop': () => {
-        ctx.beginPath(); ctx.moveTo(cx-s*0.8, cy-s*0.5); ctx.lineTo(cx-s*0.5, cy-s*0.5);
-        ctx.lineTo(cx-s*0.3, cy+s*0.7); ctx.lineTo(cx+s*0.8, cy+s*0.7); ctx.lineTo(cx+s*0.9, cy-s*0.1);
-        ctx.lineTo(cx-s*0.2, cy-s*0.1); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx-s*0.1, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
-      },
-      'Photos': () => {
-        ctx.strokeRect(cx-s*0.8, cy-s*0.6, s*1.6, s*1.2);
-        ctx.beginPath(); ctx.moveTo(cx-s*0.8, cy+s*0.3); ctx.lineTo(cx-s*0.2, cy-s*0.1);
-        ctx.lineTo(cx+s*0.2, cy+s*0.2); ctx.lineTo(cx+s*0.5, cy-s*0.05); ctx.lineTo(cx+s*0.8, cy+s*0.3); ctx.stroke();
-        ctx.beginPath(); ctx.arc(cx-s*0.35, cy-s*0.2, s*0.15, 0, Math.PI*2); ctx.fill();
-      },
-      'Spotify': () => {
-        ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
-        for (let i = 0; i < 3; i++) {
-          ctx.beginPath(); ctx.arc(cx, cy+s*0.3, s*(0.4+i*0.22), -2.2, -0.94); ctx.stroke();
-        }
-      },
-      'Max': () => {
-        ctx.font = `bold ${s*1.4}px sans-serif`;
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText('max', cx, cy+s*0.1);
-      },
-      'Sky': () => {
-        ctx.beginPath();
-        ctx.arc(cx-s*0.15, cy, s*0.45, Math.PI, 0);
-        ctx.arc(cx+s*0.4, cy, s*0.3, Math.PI+0.3, -0.1);
-        ctx.lineTo(cx-s*0.7, cy); ctx.arc(cx-s*0.5, cy, s*0.2, Math.PI, 0);
-        ctx.stroke();
-      },
-      'WhatsApp': () => {
-        ctx.beginPath(); ctx.arc(cx, cy-s*0.1, s*0.8, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.6); ctx.quadraticCurveTo(cx-s*0.8, cy+s*1, cx-s*0.1, cy+s*0.8); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy); ctx.quadraticCurveTo(cx-s*0.3, cy-s*0.35, cx, cy-s*0.35);
-        ctx.quadraticCurveTo(cx+s*0.3, cy-s*0.35, cx+s*0.3, cy);
-        ctx.quadraticCurveTo(cx+s*0.3, cy+s*0.2, cx+s*0.1, cy+s*0.25);
-        ctx.lineTo(cx-s*0.1, cy+s*0.25); ctx.stroke();
-      },
-      'FitXR': () => {
-        ctx.beginPath(); ctx.arc(cx, cy-s*0.5, s*0.25, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy-s*0.25); ctx.lineTo(cx, cy+s*0.5); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy); ctx.lineTo(cx+s*0.5, cy); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy+s*0.5); ctx.lineTo(cx-s*0.3, cy+s); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx, cy+s*0.5); ctx.lineTo(cx+s*0.3, cy+s); ctx.stroke();
-      },
-      'Explore': () => {
-        ctx.beginPath(); ctx.arc(cx, cy, s*0.85, 0, Math.PI*2); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(cx-s*0.15, cy+s*0.4); ctx.lineTo(cx-s*0.4, cy-s*0.15);
-        ctx.lineTo(cx+s*0.15, cy-s*0.4); ctx.lineTo(cx+s*0.4, cy+s*0.15); ctx.closePath(); ctx.fill();
-      },
-    };
-    if (iconDrawers[app.name]) iconDrawers[app.name]();
+    drawAppIcon(app.name, ctx, w/2, h/2, w * 0.35);
   }, 128, 128);
   const icon = new THREE.Mesh(
     new THREE.PlaneGeometry(TILE * 0.55, TILE * 0.55),
