@@ -424,7 +424,7 @@ for (let row = 0; row < rowLayout.length; row++) {
   // Label below
   const labelTex = canvasTex((ctx, w, h) => {
     ctx.fillStyle = 'rgba(255,255,255,0.9)';
-    ctx.font = '500 22px Inter, sans-serif';
+    ctx.font = '500 30px Inter, sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.shadowColor = 'rgba(0,0,0,0.5)';
@@ -432,10 +432,10 @@ for (let row = 0; row < rowLayout.length; row++) {
     ctx.fillText(app.name, w/2, h/2);
   }, 256, 48);
   const label = new THREE.Mesh(
-    new THREE.PlaneGeometry(TILE * 0.95, TILE * 0.17),
+    new THREE.PlaneGeometry(TILE * 1.1, TILE * 0.22),
     new THREE.MeshBasicMaterial({ map: labelTex, transparent: true, depthWrite: false })
   );
-  label.position.set(0, -TILE * 0.56, 0.01);
+  label.position.set(0, -TILE * 0.72, 0.01);
   group.add(label);
 
   allTiles.push({
