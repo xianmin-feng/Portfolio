@@ -820,7 +820,7 @@ function animate() {
       const easeOut = (cur, tgt) => cur + (tgt - cur) * (1 - Math.pow(0.0015, dt));
 
       // Background moves forward a little on hover
-      const targetBgZ = tile.hovered ? 0.1 : 0;
+      const targetBgZ = tile.hovered ? 0.25 : 0;
       tile.bg.position.z = easeOut(tile.bg.position.z, targetBgZ);
 
       // Icon lifts forward on hover
@@ -832,7 +832,7 @@ function animate() {
       tile.shadow.material.opacity = easeOut(tile.shadow.material.opacity, targetShadowOpacity);
 
       // Shadow stays on bg (moves with bg, not with icon)
-      const targetShadowZ = tile.hovered ? 0.11 : 0.005;
+      const targetShadowZ = tile.hovered ? tile.bg.position.z + 0.01 : 0.005;
       tile.shadow.position.z = easeOut(tile.shadow.position.z, targetShadowZ);
 
       // Shadow grows slightly as icon lifts higher
