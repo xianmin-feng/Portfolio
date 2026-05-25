@@ -754,10 +754,6 @@ function animate() {
       tile.shadow.scale.x += (shadowScale - tile.shadow.scale.x) * dt * speed;
       tile.shadow.scale.y += (shadowScale - tile.shadow.scale.y) * dt * speed;
 
-      // Slight scale up on hover
-      const sc = tile.hovered ? 1.05 : 1;
-      tile.currentScale += (sc - tile.currentScale) * dt * speed;
-      tile.group.scale.setScalar(tile.currentScale);
     }
   }
 
