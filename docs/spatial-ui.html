@@ -170,27 +170,10 @@ for (let i = 0; i < apps.length; i++) {
   group.position.set(x, y, 0);
 
   // --- LAYER 1: Colorful app tile background (stays at z=0) ---
-  const bgTex = canvasTex((ctx, w, h) => {
-    const m = 4, r = w * 0.22;
-    const grd = ctx.createLinearGradient(m, m, w-m, h-m);
-    grd.addColorStop(0, app.c1);
-    grd.addColorStop(1, app.c2);
-    ctx.beginPath();
-    ctx.roundRect(m, m, w-m*2, h-m*2, r);
-    ctx.fillStyle = grd;
-    ctx.fill();
-    // Subtle top shine
-    ctx.save();
-    ctx.beginPath();
-    ctx.roundRect(m, m, w-m*2, (h-m*2)*0.4, r);
-    ctx.clip();
-    ctx.fillStyle = 'rgba(255,255,255,0.12)';
-    ctx.fillRect(m, m, w-m*2, h*0.4);
-    ctx.restore();
-  });
+  const color1 = new THREE.Color(app.c1);
   const bg = new THREE.Mesh(
     roundedRectGeo(TILE, TILE, 0.18),
-    new THREE.MeshBasicMaterial({ map: bgTex })
+    new THREE.MeshBasicMaterial({ color: color1 })
   );
   bg.position.z = 0;
   group.add(bg);
