@@ -17,9 +17,6 @@
     padding: 8px 16px; border-radius: 20px; transition: background 0.2s;
   }
   .back-nav a:hover { background: rgba(0,0,0,0.4); }
-  .demo-title { position: fixed; top: 20px; right: 24px; z-index: 100; text-align: right; }
-  .demo-title h1 { font-size: 28px; font-weight: 300; color: rgba(255,255,255,0.95); text-shadow: 0 1px 6px rgba(0,0,0,0.3); letter-spacing: 2px; }
-  .demo-title p { font-size: 11px; color: rgba(255,255,255,0.6); text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
   .tab-switcher {
     position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); z-index: 100;
     display: flex; gap: 20px; background: none;
@@ -48,19 +45,13 @@
 <body>
 
 <div class="back-nav"><a href="index.html">&larr; Back to Portfolio</a></div>
-<div class="demo-title">
-  <h1 id="clock">12:00</h1>
-  <p>Interactive Three.js Demo</p>
-</div>
 <script>
-function updateClock() {
+function getTimeStr() {
   const now = new Date();
   const h = now.getHours() % 12 || 12;
   const m = String(now.getMinutes()).padStart(2, '0');
-  document.getElementById('clock').textContent = h + ':' + m;
+  return h + ':' + m;
 }
-updateClock();
-setInterval(updateClock, 1000);
 </script>
 
 <div class="tab-switcher">
@@ -410,6 +401,32 @@ const glowMesh = new THREE.Mesh(
 orbGroup.add(glowMesh);
 orbGroup.position.set(0, 2.5, 0.1);
 scene.add(orbGroup);
+
+// Clock above app grid
+const clockCanvas = document.createElement('canvas');
+clockCanvas.width = 256; clockCanvas.height = 64;
+const clockCtx = clockCanvas.getContext('2d');
+const clockTex = new THREE.CanvasTexture(clockCanvas);
+clockTex.minFilter = THREE.LinearFilter;
+function updateClockTexture() {
+  clockCtx.clearRect(0, 0, 256, 64);
+  clockCtx.fillStyle = 'rgba(255,255,255,0.9)';
+  clockCtx.font = '300 48px Inter, sans-serif';
+  clockCtx.textAlign = 'center';
+  clockCtx.textBaseline = 'middle';
+  clockCtx.shadowColor = 'rgba(0,0,0,0.3)';
+  clockCtx.shadowBlur = 6;
+  clockCtx.fillText(getTimeStr(), 128, 32);
+  clockTex.needsUpdate = true;
+}
+updateClockTexture();
+setInterval(updateClockTexture, 1000);
+const clockMesh = new THREE.Mesh(
+  new THREE.PlaneGeometry(2, 0.5),
+  new THREE.MeshBasicMaterial({ map: clockTex, transparent: true, depthWrite: false })
+);
+clockMesh.position.set(0, 2.8, 0);
+scene.add(clockMesh);
 
 // ===== SETTINGS BAR =====
 const settingsGroup = new THREE.Group();
