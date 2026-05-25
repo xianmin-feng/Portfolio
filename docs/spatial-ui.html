@@ -709,26 +709,31 @@ for (let i = 0; i < sysBarTabs.length; i++) {
     ctx.lineJoin = 'round';
     const cx = w/2, cy = h/2, s = w*0.35;
     if (sysBarTabs[i].tab === 'settings') {
-      // Gear (matching feather icon style)
-      ctx.beginPath(); ctx.arc(cx, cy, s*0.3, 0, Math.PI*2); ctx.stroke();
-      for (let j = 0; j < 8; j++) {
-        const a = (j/8)*Math.PI*2;
-        const inner = s*0.45, outer = s*0.65;
-        const a1 = a - 0.15, a2 = a + 0.15;
-        ctx.beginPath();
-        ctx.moveTo(cx+Math.cos(a1)*inner, cy+Math.sin(a1)*inner);
-        ctx.lineTo(cx+Math.cos(a1)*outer, cy+Math.sin(a1)*outer);
-        ctx.lineTo(cx+Math.cos(a2)*outer, cy+Math.sin(a2)*outer);
-        ctx.lineTo(cx+Math.cos(a2)*inner, cy+Math.sin(a2)*inner);
-        ctx.stroke();
+      // Gear - exact match of the feather/lucide SVG gear icon
+      // Inner circle
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.25, 0, Math.PI*2); ctx.stroke();
+      // Outer gear path using 8 notches
+      const teeth = 8, ri = s*0.42, ro = s*0.62, tw = 0.22;
+      ctx.beginPath();
+      for (let j = 0; j < teeth; j++) {
+        const a = (j/teeth)*Math.PI*2 - Math.PI/2;
+        const a1 = a - tw, a2 = a + tw;
+        const na = ((j+1)/teeth)*Math.PI*2 - Math.PI/2;
+        const na1 = na - tw;
+        if (j === 0) ctx.moveTo(cx+Math.cos(a1)*ro, cy+Math.sin(a1)*ro);
+        ctx.lineTo(cx+Math.cos(a2)*ro, cy+Math.sin(a2)*ro);
+        ctx.lineTo(cx+Math.cos(a2+0.05)*ri, cy+Math.sin(a2+0.05)*ri);
+        ctx.lineTo(cx+Math.cos(na1-0.05)*ri, cy+Math.sin(na1-0.05)*ri);
+        ctx.lineTo(cx+Math.cos(na1)*ro, cy+Math.sin(na1)*ro);
       }
+      ctx.closePath(); ctx.stroke();
     } else if (sysBarTabs[i].tab === 'apps') {
-      // 4 rounded squares grid
-      const sz = s*0.38, gap = s*0.12, r = s*0.08;
-      ctx.beginPath(); ctx.roundRect(cx-sz-gap/2, cy-sz-gap/2, sz, sz, r); ctx.stroke();
-      ctx.beginPath(); ctx.roundRect(cx+gap/2, cy-sz-gap/2, sz, sz, r); ctx.stroke();
-      ctx.beginPath(); ctx.roundRect(cx-sz-gap/2, cy+gap/2, sz, sz, r); ctx.stroke();
-      ctx.beginPath(); ctx.roundRect(cx+gap/2, cy+gap/2, sz, sz, r); ctx.stroke();
+      // 4 rounded rects - matching the lucide grid SVG
+      const sz = s*0.42, gap = s*0.16, r = s*0.1;
+      ctx.beginPath(); ctx.roundRect(cx-sz-gap/2, cy-sz-gap/2, sz, sz, r); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(cx+gap/2, cy-sz-gap/2, sz, sz, r); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(cx-sz-gap/2, cy+gap/2, sz, sz, r); ctx.fill();
+      ctx.beginPath(); ctx.roundRect(cx+gap/2, cy+gap/2, sz, sz, r); ctx.fill();
     } else {
       // Magnifying glass
       ctx.beginPath(); ctx.arc(cx-s*0.08, cy-s*0.08, s*0.4, 0, Math.PI*2); ctx.stroke();
