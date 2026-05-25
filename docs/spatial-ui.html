@@ -751,12 +751,16 @@ function animate() {
       const targetZ = tile.hovered ? tile.iconHoverZ : tile.iconRestZ;
       tile.icon.position.z = easeOut(tile.icon.position.z, targetZ);
 
-      // Shadow becomes visible on hover
-      const targetShadowOpacity = tile.hovered ? 0.6 : 0;
+      // Shadow becomes visible on hover, stays on bg surface
+      const targetShadowOpacity = tile.hovered ? 0.5 : 0;
       tile.shadow.material.opacity = easeOut(tile.shadow.material.opacity, targetShadowOpacity);
 
-      // Shadow grows slightly when icon lifts
-      const shadowScale = tile.hovered ? 1.15 : 1;
+      // Shadow stays on bg (moves with bg, not with icon)
+      const targetShadowZ = tile.hovered ? 0.11 : 0.005;
+      tile.shadow.position.z = easeOut(tile.shadow.position.z, targetShadowZ);
+
+      // Shadow grows slightly as icon lifts higher
+      const shadowScale = tile.hovered ? 1.2 : 1;
       tile.shadow.scale.x = easeOut(tile.shadow.scale.x, shadowScale);
       tile.shadow.scale.y = easeOut(tile.shadow.scale.y, shadowScale);
 
