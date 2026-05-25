@@ -284,20 +284,152 @@ scene.add(orbGroup);
 const settingsGroup = new THREE.Group();
 settingsGroup.visible = false;
 
+// Line icon drawing functions
+const lineIcons = {
+  brightness: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.arc(cx, cy, s*0.3, 0, Math.PI*2); ctx.stroke();
+    for (let i = 0; i < 8; i++) {
+      const a = (i/8)*Math.PI*2;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(a)*s*0.45, cy+Math.sin(a)*s*0.45);
+      ctx.lineTo(cx+Math.cos(a)*s*0.6, cy+Math.sin(a)*s*0.6);
+      ctx.stroke();
+    }
+  },
+  volume: (ctx, cx, cy, s) => {
+    ctx.beginPath();
+    ctx.moveTo(cx-s*0.3, cy-s*0.15); ctx.lineTo(cx-s*0.1, cy-s*0.15);
+    ctx.lineTo(cx+s*0.15, cy-s*0.4); ctx.lineTo(cx+s*0.15, cy+s*0.4);
+    ctx.lineTo(cx-s*0.1, cy+s*0.15); ctx.lineTo(cx-s*0.3, cy+s*0.15);
+    ctx.closePath(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx+s*0.2, cy, s*0.25, -0.8, 0.8); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx+s*0.2, cy, s*0.42, -0.6, 0.6); ctx.stroke();
+  },
+  grid: (ctx, cx, cy, s) => {
+    const g = s*0.25, o = cx-g, p = cy-g;
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) {
+      ctx.strokeRect(o+c*g*1.1, p+r*g*1.1, g*0.9, g*0.9);
+    }
+  },
+  wifi: (ctx, cx, cy, s) => {
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath(); ctx.arc(cx, cy+s*0.2, s*(0.2+i*0.18), -2.3, -0.84); ctx.stroke();
+    }
+    ctx.beginPath(); ctx.arc(cx, cy+s*0.25, s*0.05, 0, Math.PI*2); ctx.fill();
+  },
+  battery: (ctx, cx, cy, s) => {
+    ctx.strokeRect(cx-s*0.35, cy-s*0.2, s*0.6, s*0.4);
+    ctx.fillRect(cx+s*0.25, cy-s*0.1, s*0.08, s*0.2);
+    ctx.fillRect(cx-s*0.28, cy-s*0.13, s*0.35, s*0.26);
+  },
+  clock: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.arc(cx, cy, s*0.4, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx, cy-s*0.25); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx+s*0.18, cy+s*0.05); ctx.stroke();
+  },
+  home: (ctx, cx, cy, s) => {
+    ctx.beginPath();
+    ctx.moveTo(cx, cy-s*0.4); ctx.lineTo(cx+s*0.35, cy-s*0.05);
+    ctx.lineTo(cx+s*0.35, cy+s*0.35); ctx.lineTo(cx-s*0.35, cy+s*0.35);
+    ctx.lineTo(cx-s*0.35, cy-s*0.05); ctx.closePath(); ctx.stroke();
+  },
+  settings: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.arc(cx, cy, s*0.2, 0, Math.PI*2); ctx.stroke();
+    for (let i = 0; i < 6; i++) {
+      const a = (i/6)*Math.PI*2;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(a)*s*0.3, cy+Math.sin(a)*s*0.3);
+      ctx.lineTo(cx+Math.cos(a)*s*0.45, cy+Math.sin(a)*s*0.45);
+      ctx.stroke();
+    }
+  },
+  phone: (ctx, cx, cy, s) => {
+    ctx.strokeRect(cx-s*0.18, cy-s*0.35, s*0.36, s*0.7);
+    ctx.beginPath(); ctx.arc(cx, cy+s*0.25, s*0.04, 0, Math.PI*2); ctx.fill();
+  },
+  search: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.arc(cx-s*0.08, cy-s*0.08, s*0.25, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx+s*0.12, cy+s*0.12); ctx.lineTo(cx+s*0.35, cy+s*0.35); ctx.stroke();
+  },
+  arrowL: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.moveTo(cx+s*0.15, cy-s*0.3); ctx.lineTo(cx-s*0.15, cy); ctx.lineTo(cx+s*0.15, cy+s*0.3); ctx.stroke();
+  },
+  arrowR: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.moveTo(cx-s*0.15, cy-s*0.3); ctx.lineTo(cx+s*0.15, cy); ctx.lineTo(cx-s*0.15, cy+s*0.3); ctx.stroke();
+  },
+  camera: (ctx, cx, cy, s) => {
+    ctx.strokeRect(cx-s*0.35, cy-s*0.2, s*0.7, s*0.45);
+    ctx.beginPath(); ctx.arc(cx, cy+s*0.02, s*0.15, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-s*0.1, cy-s*0.2); ctx.lineTo(cx-s*0.05, cy-s*0.32);
+    ctx.lineTo(cx+s*0.05, cy-s*0.32); ctx.lineTo(cx+s*0.1, cy-s*0.2); ctx.stroke();
+  },
+  gamepad: (ctx, cx, cy, s) => {
+    ctx.beginPath();
+    ctx.moveTo(cx-s*0.35, cy); ctx.quadraticCurveTo(cx-s*0.35, cy-s*0.25, cx-s*0.15, cy-s*0.25);
+    ctx.lineTo(cx+s*0.15, cy-s*0.25); ctx.quadraticCurveTo(cx+s*0.35, cy-s*0.25, cx+s*0.35, cy);
+    ctx.quadraticCurveTo(cx+s*0.35, cy+s*0.25, cx+s*0.15, cy+s*0.25);
+    ctx.lineTo(cx-s*0.15, cy+s*0.25); ctx.quadraticCurveTo(cx-s*0.35, cy+s*0.25, cx-s*0.35, cy);
+    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-s*0.22, cy-s*0.08); ctx.lineTo(cx-s*0.22, cy+s*0.08); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy); ctx.lineTo(cx-s*0.14, cy); ctx.stroke();
+  },
+  person: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.arc(cx, cy-s*0.18, s*0.16, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(cx, cy+s*0.5, s*0.35, -2.6, -0.54); ctx.stroke();
+  },
+  globe: (ctx, cx, cy, s) => {
+    ctx.beginPath(); ctx.arc(cx, cy, s*0.35, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.ellipse(cx, cy, s*0.15, s*0.35, 0, 0, Math.PI*2); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx-s*0.35, cy); ctx.lineTo(cx+s*0.35, cy); ctx.stroke();
+  },
+  folder: (ctx, cx, cy, s) => {
+    ctx.beginPath();
+    ctx.moveTo(cx-s*0.35, cy-s*0.15); ctx.lineTo(cx-s*0.35, cy-s*0.3);
+    ctx.lineTo(cx-s*0.1, cy-s*0.3); ctx.lineTo(cx, cy-s*0.15);
+    ctx.lineTo(cx+s*0.35, cy-s*0.15); ctx.lineTo(cx+s*0.35, cy+s*0.3);
+    ctx.lineTo(cx-s*0.35, cy+s*0.3); ctx.closePath(); ctx.stroke();
+  },
+  star: (ctx, cx, cy, s) => {
+    ctx.beginPath();
+    for (let i = 0; i < 5; i++) {
+      const a = (i*4*Math.PI/5) - Math.PI/2;
+      const r = s * 0.38;
+      if (i === 0) ctx.moveTo(cx+r*Math.cos(a), cy+r*Math.sin(a));
+      else ctx.lineTo(cx+r*Math.cos(a), cy+r*Math.sin(a));
+    }
+    ctx.closePath(); ctx.stroke();
+  },
+};
+
+function makeIconTex(drawFn) {
+  return canvasTex((ctx, w, h) => {
+    ctx.strokeStyle = 'rgba(80, 70, 60, 0.55)';
+    ctx.fillStyle = 'rgba(80, 70, 60, 0.55)';
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    drawFn(ctx, w/2, h/2, w*0.4);
+  }, 64, 64);
+}
+
 const barData = [
-  { y: 0.65, pills: [
-    { w: 0.55, icons: ['☀'] }, { w: 0.55, icons: ['🔊'] }, { w: 0.55, icons: ['⬜'] },
-    { w: 0.55, icons: ['📡'] }, { w: 0.55, icons: ['🔋'] }, { w: 0.55, icons: ['⏰'] },
+  { y: 0.65, opacity: 0.18, pills: [
+    { w: 0.55, drawIcons: [lineIcons.brightness] },
+    { w: 0.55, drawIcons: [lineIcons.volume] },
+    { w: 0.55, drawIcons: [lineIcons.grid] },
+    { w: 0.55, drawIcons: [lineIcons.wifi] },
+    { w: 0.55, drawIcons: [lineIcons.battery] },
+    { w: 0.55, drawIcons: [lineIcons.clock] },
   ]},
-  { y: 0, pills: [
-    { w: 0.9, icons: ['◀'] },
-    { w: 2.2, icons: ['🏠','⚙','📱','🔍'] },
-    { w: 0.9, icons: ['▶'] },
+  { y: 0, opacity: 0.35, pills: [
+    { w: 0.9, drawIcons: [lineIcons.arrowL] },
+    { w: 2.2, drawIcons: [lineIcons.home, lineIcons.settings, lineIcons.phone, lineIcons.search] },
+    { w: 0.9, drawIcons: [lineIcons.arrowR] },
   ]},
-  { y: -0.65, pills: [
-    { w: 1.3, icons: ['📷','🎮'] },
-    { w: 1.3, icons: ['👤','🌐'] },
-    { w: 1.3, icons: ['📂','⭐'] },
+  { y: -0.65, opacity: 0.22, pills: [
+    { w: 1.3, drawIcons: [lineIcons.camera, lineIcons.gamepad] },
+    { w: 1.3, drawIcons: [lineIcons.person, lineIcons.globe] },
+    { w: 1.3, drawIcons: [lineIcons.folder, lineIcons.star] },
   ]},
 ];
 
@@ -309,21 +441,17 @@ for (const row of barData) {
     ox += pill.w + 0.12;
     const pillMesh = new THREE.Mesh(
       roundedRectGeo(pill.w, 0.42, 0.2),
-      new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.28, roughness: 0.3, clearcoat: 0.5 })
+      new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: row.opacity, roughness: 0.3, clearcoat: 0.5 })
     );
     pillMesh.position.set(px, row.y, 0);
     settingsGroup.add(pillMesh);
-    const iconCount = pill.icons.length;
+    const iconCount = pill.drawIcons.length;
     const spacing = pill.w / (iconCount + 1);
     for (let j = 0; j < iconCount; j++) {
       const ix = px - pill.w/2 + spacing * (j + 1);
-      const iTex = canvasTex((ctx, w, h) => {
-        ctx.font = '28px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillStyle = 'rgba(60,55,50,0.7)'; ctx.fillText(pill.icons[j], w/2, h/2);
-      }, 64, 64);
       const iMesh = new THREE.Mesh(
         new THREE.PlaneGeometry(0.25, 0.25),
-        new THREE.MeshBasicMaterial({ map: iTex, transparent: true, depthWrite: false })
+        new THREE.MeshBasicMaterial({ map: makeIconTex(pill.drawIcons[j]), transparent: true, depthWrite: false })
       );
       iMesh.position.set(ix, row.y, 0.01);
       settingsGroup.add(iMesh);
