@@ -165,92 +165,129 @@ function canvasTex(fn, w=256, h=256) {
   return t;
 }
 
-// Shared icon drawing function
+// Shared icon drawing function - clean bold style matching video
 function drawAppIcon(name, ctx, cx, cy, s) {
   const d = {
     'Browser': () => {
-      ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.ellipse(cx, cy, s*0.4, s, 0, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s, cy); ctx.lineTo(cx+s, cy); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx, cy-s); ctx.lineTo(cx, cy+s); ctx.stroke();
+      // Compass style
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.9, 0, Math.PI*2); ctx.stroke();
+      // Arrow pointing NE
+      ctx.beginPath();
+      ctx.moveTo(cx-s*0.15, cy+s*0.45);
+      ctx.lineTo(cx+s*0.45, cy-s*0.45);
+      ctx.lineTo(cx+s*0.15, cy-s*0.15);
+      ctx.lineTo(cx-s*0.45, cy+s*0.45);
+      ctx.closePath(); ctx.fill();
     },
     'Instagram': () => {
-      const r = s*0.3;
-      ctx.beginPath(); ctx.roundRect(cx-s, cy-s, s*2, s*2, r); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx, cy, s*0.45, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx+s*0.6, cy-s*0.6, s*0.12, 0, Math.PI*2); ctx.fill();
+      // Rounded rect + circle + dot
+      ctx.beginPath(); ctx.roundRect(cx-s*0.8, cy-s*0.8, s*1.6, s*1.6, s*0.35); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.4, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.arc(cx+s*0.5, cy-s*0.5, s*0.1, 0, Math.PI*2); ctx.fill();
     },
     'Facebook': () => {
-      ctx.font = `bold ${s*2.2}px sans-serif`;
+      ctx.font = `bold ${s*2.4}px 'Helvetica Neue', Arial, sans-serif`;
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('f', cx+s*0.1, cy+s*0.1);
+      ctx.fillText('f', cx+s*0.05, cy+s*0.08);
     },
     'Beat Saber': () => {
-      ctx.beginPath(); ctx.moveTo(cx-s*0.6, cy+s*0.8); ctx.lineTo(cx+s*0.3, cy-s*0.8); ctx.lineTo(cx+s*0.6, cy-s*0.5);
-      ctx.lineTo(cx-s*0.3, cy+s*0.8); ctx.closePath(); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.1, cy-s*0.1); ctx.lineTo(cx+s*0.6, cy-s*0.8); ctx.stroke();
+      // Two crossed sabers
+      ctx.beginPath(); ctx.moveTo(cx-s*0.7, cy+s*0.7); ctx.lineTo(cx+s*0.5, cy-s*0.9); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx+s*0.7, cy+s*0.7); ctx.lineTo(cx-s*0.5, cy-s*0.9); ctx.stroke();
+      // Handles
+      ctx.beginPath(); ctx.moveTo(cx-s*0.7, cy+s*0.7); ctx.lineTo(cx-s*0.85, cy+s*0.85); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx+s*0.7, cy+s*0.7); ctx.lineTo(cx+s*0.85, cy+s*0.85); ctx.stroke();
     },
     'Messenger': () => {
+      // Chat bubble
       ctx.beginPath();
-      ctx.moveTo(cx, cy+s); ctx.lineTo(cx-s*0.4, cy+s*0.5);
-      ctx.quadraticCurveTo(cx-s, cy+s*0.1, cx-s, cy-s*0.2);
-      ctx.quadraticCurveTo(cx-s, cy-s, cx, cy-s);
-      ctx.quadraticCurveTo(cx+s, cy-s, cx+s, cy-s*0.2);
-      ctx.quadraticCurveTo(cx+s, cy+s*0.5, cx+s*0.1, cy+s*0.7);
+      ctx.moveTo(cx-s*0.15, cy+s*0.85);
+      ctx.lineTo(cx-s*0.5, cy+s*0.45);
+      ctx.quadraticCurveTo(cx-s*0.85, cy+s*0.1, cx-s*0.85, cy-s*0.2);
+      ctx.quadraticCurveTo(cx-s*0.85, cy-s*0.85, cx, cy-s*0.85);
+      ctx.quadraticCurveTo(cx+s*0.85, cy-s*0.85, cx+s*0.85, cy-s*0.2);
+      ctx.quadraticCurveTo(cx+s*0.85, cy+s*0.45, cx, cy+s*0.45);
       ctx.closePath(); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.4, cy+s*0.1); ctx.lineTo(cx, cy-s*0.2); ctx.lineTo(cx+s*0.4, cy+s*0.1); ctx.stroke();
+      // Lightning bolt
+      ctx.beginPath();
+      ctx.moveTo(cx+s*0.15, cy-s*0.45);
+      ctx.lineTo(cx-s*0.15, cy+s*0.05);
+      ctx.lineTo(cx+s*0.05, cy+s*0.05);
+      ctx.lineTo(cx-s*0.15, cy+s*0.35);
+      ctx.stroke();
     },
     'Store': () => {
-      ctx.beginPath(); ctx.moveTo(cx-s*0.8, cy-s*0.5); ctx.lineTo(cx-s*0.5, cy-s*0.5);
-      ctx.lineTo(cx-s*0.3, cy+s*0.7); ctx.lineTo(cx+s*0.8, cy+s*0.7); ctx.lineTo(cx+s*0.9, cy-s*0.1);
-      ctx.lineTo(cx-s*0.2, cy-s*0.1); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx-s*0.1, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.arc(cx+s*0.55, cy+s*0.95, s*0.12, 0, Math.PI*2); ctx.stroke();
+      // Shopping bag
+      ctx.beginPath(); ctx.roundRect(cx-s*0.55, cy-s*0.3, s*1.1, s*1.15, s*0.1); ctx.stroke();
+      // Handle
+      ctx.beginPath(); ctx.arc(cx, cy-s*0.3, s*0.3, Math.PI, 0); ctx.stroke();
     },
     'TV': () => {
-      ctx.strokeRect(cx-s*0.85, cy-s*0.55, s*1.7, s*1.05);
-      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.5); ctx.lineTo(cx-s*0.3, cy+s*0.8); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx+s*0.3, cy+s*0.5); ctx.lineTo(cx+s*0.3, cy+s*0.8); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy+s*0.8); ctx.lineTo(cx+s*0.5, cy+s*0.8); ctx.stroke();
+      // Monitor
+      ctx.beginPath(); ctx.roundRect(cx-s*0.8, cy-s*0.6, s*1.6, s*1.0, s*0.1); ctx.stroke();
+      // Stand
+      ctx.beginPath(); ctx.moveTo(cx, cy+s*0.4); ctx.lineTo(cx, cy+s*0.7); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.4, cy+s*0.7); ctx.lineTo(cx+s*0.4, cy+s*0.7); ctx.stroke();
+      // Play triangle
+      ctx.beginPath();
+      ctx.moveTo(cx-s*0.15, cy-s*0.25); ctx.lineTo(cx-s*0.15, cy+s*0.15);
+      ctx.lineTo(cx+s*0.25, cy-s*0.05); ctx.closePath(); ctx.fill();
     },
     'Spotify': () => {
-      ctx.beginPath(); ctx.arc(cx, cy, s, 0, Math.PI*2); ctx.stroke();
+      // Circle with 3 sound waves
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.9, 0, Math.PI*2); ctx.stroke();
       for (let i = 0; i < 3; i++) {
-        ctx.beginPath(); ctx.arc(cx, cy+s*0.3, s*(0.4+i*0.22), -2.2, -0.94); ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cx, cy+s*0.35, s*(0.35+i*0.2), -2.1, -1.04);
+        ctx.stroke();
       }
     },
     'Max': () => {
-      ctx.font = `bold ${s*1.4}px sans-serif`;
+      ctx.font = `800 ${s*1.3}px 'Helvetica Neue', Arial, sans-serif`;
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('max', cx, cy+s*0.1);
+      ctx.fillText('max', cx, cy+s*0.05);
     },
     'Horizon Worlds': () => {
+      // Globe with horizon lines
       ctx.beginPath(); ctx.arc(cx, cy, s*0.85, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy-s*0.1); ctx.quadraticCurveTo(cx, cy-s*0.6, cx+s*0.5, cy-s*0.1); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.5, cy+s*0.2); ctx.quadraticCurveTo(cx, cy-s*0.3, cx+s*0.5, cy+s*0.2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.5); ctx.quadraticCurveTo(cx, cy+s*0.1, cx+s*0.3, cy+s*0.5); ctx.stroke();
+      ctx.beginPath(); ctx.ellipse(cx, cy, s*0.35, s*0.85, 0, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.85, cy); ctx.lineTo(cx+s*0.85, cy); ctx.stroke();
     },
     'Chats': () => {
+      // Two overlapping chat bubbles
       ctx.beginPath();
-      ctx.moveTo(cx-s*0.7, cy+s*0.8); ctx.lineTo(cx-s*0.8, cy-s*0.3);
-      ctx.quadraticCurveTo(cx-s*0.8, cy-s*0.8, cx, cy-s*0.8);
-      ctx.quadraticCurveTo(cx+s*0.8, cy-s*0.8, cx+s*0.8, cy-s*0.3);
-      ctx.quadraticCurveTo(cx+s*0.8, cy+s*0.2, cx, cy+s*0.2);
-      ctx.lineTo(cx-s*0.3, cy+s*0.2); ctx.closePath(); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.35, cy-s*0.25); ctx.lineTo(cx+s*0.35, cy-s*0.25); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.35, cy+s*0.0); ctx.lineTo(cx+s*0.2, cy+s*0.0); ctx.stroke();
+      ctx.roundRect(cx-s*0.75, cy-s*0.65, s*1.15, s*0.85, s*0.15);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.roundRect(cx-s*0.4, cy-s*0.15, s*1.15, s*0.85, s*0.15);
+      ctx.stroke();
+      // Lines in front bubble
+      ctx.beginPath(); ctx.moveTo(cx-s*0.15, cy+s*0.15); ctx.lineTo(cx+s*0.5, cy+s*0.15); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx-s*0.15, cy+s*0.4); ctx.lineTo(cx+s*0.3, cy+s*0.4); ctx.stroke();
     },
     'WhatsApp': () => {
-      ctx.beginPath(); ctx.arc(cx, cy-s*0.1, s*0.8, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy+s*0.6); ctx.quadraticCurveTo(cx-s*0.8, cy+s*1, cx-s*0.1, cy+s*0.8); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx-s*0.3, cy); ctx.quadraticCurveTo(cx-s*0.3, cy-s*0.35, cx, cy-s*0.35);
-      ctx.quadraticCurveTo(cx+s*0.3, cy-s*0.35, cx+s*0.3, cy);
-      ctx.quadraticCurveTo(cx+s*0.3, cy+s*0.2, cx+s*0.1, cy+s*0.25);
-      ctx.lineTo(cx-s*0.1, cy+s*0.25); ctx.stroke();
+      // Phone icon in circle
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.85, 0, Math.PI*2); ctx.stroke();
+      // Phone handset
+      ctx.beginPath();
+      ctx.moveTo(cx-s*0.35, cy+s*0.15);
+      ctx.quadraticCurveTo(cx-s*0.35, cy+s*0.45, cx-s*0.1, cy+s*0.45);
+      ctx.lineTo(cx+s*0.1, cy+s*0.45);
+      ctx.quadraticCurveTo(cx+s*0.35, cy+s*0.45, cx+s*0.35, cy+s*0.15);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx-s*0.35, cy+s*0.15);
+      ctx.quadraticCurveTo(cx-s*0.5, cy-s*0.2, cx-s*0.3, cy-s*0.4);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(cx+s*0.35, cy+s*0.15);
+      ctx.quadraticCurveTo(cx+s*0.5, cy-s*0.2, cx+s*0.3, cy-s*0.4);
+      ctx.stroke();
     },
     'XBox': () => {
-      ctx.beginPath(); ctx.arc(cx, cy, s*0.9, 0, Math.PI*2); ctx.stroke();
-      ctx.font = `bold ${s*1.2}px sans-serif`;
+      // Circle with bold X
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.85, 0, Math.PI*2); ctx.stroke();
+      ctx.font = `bold ${s*1.4}px 'Helvetica Neue', Arial, sans-serif`;
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
       ctx.fillText('X', cx, cy+s*0.05);
     },
