@@ -22,17 +22,19 @@
   .demo-title p { font-size: 11px; color: rgba(255,255,255,0.6); text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
   .tab-switcher {
     position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%); z-index: 100;
-    display: flex; gap: 4px; background: rgba(0,0,0,0.2); backdrop-filter: blur(20px);
-    border-radius: 12px; padding: 4px;
+    display: flex; gap: 20px; background: none;
+    padding: 4px;
   }
   .tab-btn {
-    padding: 10px 16px; border: none; background: transparent; color: rgba(255,255,255,0.5);
-    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
-    border-radius: 9px; cursor: pointer; transition: all 0.25s;
+    width: 44px; height: 44px; border: none;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    color: rgba(255,255,255,0.55);
+    border-radius: 50%; cursor: pointer; transition: all 0.25s;
     display: flex; align-items: center; justify-content: center;
   }
-  .tab-btn.active { background: rgba(255,255,255,0.2); color: #fff; }
-  .tab-btn:hover:not(.active) { color: rgba(255,255,255,0.85); }
+  .tab-btn.active { background: rgba(255,255,255,0.35); color: #fff; }
+  .tab-btn:hover:not(.active) { background: rgba(255,255,255,0.22); color: rgba(255,255,255,0.85); }
   .info-panel {
     position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
     background: rgba(0,0,0,0.3); backdrop-filter: blur(20px);
