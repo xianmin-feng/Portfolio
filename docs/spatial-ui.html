@@ -73,8 +73,8 @@ renderer.localClippingEnabled = true;
 container.appendChild(renderer.domElement);
 
 // Clipping planes: mask between header and system bar
-const clipTop = new THREE.Plane(new THREE.Vector3(0, -1, 0), 2.4);    // clips above y=2.4
-const clipBottom = new THREE.Plane(new THREE.Vector3(0, 1, 0), 2.4);  // clips below y=-2.4
+const clipTop = new THREE.Plane(new THREE.Vector3(0, -1, 0), 2.8);    // clips above y=2.8
+const clipBottom = new THREE.Plane(new THREE.Vector3(0, 1, 0), 2.8);  // clips below y=-2.8
 const clipPlanes = [clipTop, clipBottom];
 
 const controls = new OrbitControls(camera, renderer.domElement);
