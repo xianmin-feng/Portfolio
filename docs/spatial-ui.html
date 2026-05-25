@@ -150,21 +150,33 @@ const apps = [
   { name: 'Sky',        c1: '#81D4FA', c2: '#29B6F6', icon: '☁️' },
   { name: 'WhatsApp',   c1: '#25D366', c2: '#128C7E', icon: '📱' },
   { name: 'FitXR',      c1: '#76FF03', c2: '#64DD17', icon: '💪' },
+  { name: 'Explore',    c1: '#78909C', c2: '#546E7A', icon: '🧭' },
 ];
 
-// ===== APP GRID =====
+// ===== APP GRID (4-5-4 staggered) =====
 const appGridGroup = new THREE.Group();
 const allTiles = [];
 const TILE = 0.88;
 const GAP = 1.2;
-const COLS = 4, ROWS = 3;
 
-for (let i = 0; i < apps.length; i++) {
-  const col = i % COLS;
-  const row = Math.floor(i / COLS);
-  const x = (col - (COLS-1)/2) * GAP;
-  const y = ((ROWS-1)/2 - row) * GAP + 0.3;
-  const app = apps[i];
+// Row layout: 4, 5, 4
+const rowLayout = [
+  { count: 4, apps: apps.slice(0, 4) },
+  { count: 5, apps: apps.slice(4, 9) },
+  { count: 4, apps: apps.slice(9, 13) },
+];
+// Add one more app to fill 13
+if (apps.length < 13) apps.push({ name: 'Explore', c1: '#78909C', c2: '#546E7A', icon: '🔭' });
+
+let appIndex = 0;
+for (let row = 0; row < rowLayout.length; row++) {
+  const { count } = rowLayout[row];
+  for (let col = 0; col < count; col++) {
+    if (appIndex >= apps.length) break;
+    const x = (col - (count-1)/2) * GAP;
+    const y = (1 - row) * GAP + 0.3;
+    const app = apps[appIndex];
+    appIndex++;
 
   const group = new THREE.Group();
   group.position.set(x, y, 0);
@@ -222,22 +234,21 @@ for (let i = 0; i < apps.length; i++) {
   allTiles.push({
     group, bg, shadow, icon,
     hovered: false,
-    // At rest: icon at z=0.02, shadow at z=0.01
-    // On hover: icon lifts to z=0.45, shadow stays on bg surface at z=0.01 but becomes visible
     iconRestZ: 0.02,
     iconHoverZ: 0.45,
     currentScale: 1,
   });
   appGridGroup.add(group);
+  }
 }
 
-// Pagination dots
+// Pagination dots (vertical, right side)
 for (let i = 0; i < 3; i++) {
   const dot = new THREE.Mesh(
     new THREE.CircleGeometry(i === 0 ? 0.055 : 0.035, 16),
     new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: i === 0 ? 0.85 : 0.3 })
   );
-  dot.position.set((i-1) * 0.18, -2.2, 0);
+  dot.position.set(3.2, (1 - i) * 0.2 + 0.3, 0);
   appGridGroup.add(dot);
 }
 scene.add(appGridGroup);
