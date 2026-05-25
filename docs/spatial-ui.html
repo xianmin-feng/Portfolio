@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', sans-serif; overflow: hidden; background: #c4b5a3; }
+  body { font-family: 'Inter', sans-serif; overflow: hidden; background: #4a4039; }
   canvas { display: block; }
   .back-nav { position: fixed; top: 20px; left: 24px; z-index: 100; }
   .back-nav a {
@@ -68,7 +68,7 @@ camera.position.set(0, 0, 10);
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor(0xc4b5a3);
+renderer.setClearColor(0x4a4039);
 container.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -86,8 +86,8 @@ const bgPlane = new THREE.Mesh(
     fragmentShader: `
       varying vec2 vUv;
       void main() {
-        vec3 tl = vec3(0.58,0.52,0.44); vec3 tr = vec3(0.82,0.78,0.72);
-        vec3 bl = vec3(0.50,0.46,0.38); vec3 br = vec3(0.76,0.72,0.66);
+        vec3 tl = vec3(0.35,0.32,0.28); vec3 tr = vec3(0.48,0.44,0.40);
+        vec3 bl = vec3(0.25,0.23,0.21); vec3 br = vec3(0.40,0.37,0.34);
         vec3 col = mix(mix(bl,br,vUv.x), mix(tl,tr,vUv.x), vUv.y);
         float vig = 1.0 - smoothstep(0.4, 0.9, length(vUv - 0.5));
         col *= 0.88 + vig * 0.12;
