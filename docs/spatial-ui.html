@@ -700,36 +700,39 @@ for (let i = 0; i < sysBarTabs.length; i++) {
   circle.userData = { tabIndex: i, isTabBtn: true };
   btnGroup.add(circle);
 
-  // Icon
+  // Icon - using SVG rendered to canvas (matching previous HTML SVG icons)
   const iconTex = canvasTex((ctx, w, h) => {
     ctx.strokeStyle = 'rgba(255,255,255,0.85)';
     ctx.fillStyle = 'rgba(255,255,255,0.85)';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    const cx = w/2, cy = h/2, s = w*0.3;
+    const cx = w/2, cy = h/2, s = w*0.35;
     if (sysBarTabs[i].tab === 'settings') {
-      // Gear
-      ctx.beginPath(); ctx.arc(cx, cy, s*0.35, 0, Math.PI*2); ctx.stroke();
-      for (let j = 0; j < 6; j++) {
-        const a = (j/6)*Math.PI*2;
+      // Gear (matching feather icon style)
+      ctx.beginPath(); ctx.arc(cx, cy, s*0.3, 0, Math.PI*2); ctx.stroke();
+      for (let j = 0; j < 8; j++) {
+        const a = (j/8)*Math.PI*2;
+        const inner = s*0.45, outer = s*0.65;
+        const a1 = a - 0.15, a2 = a + 0.15;
         ctx.beginPath();
-        ctx.moveTo(cx+Math.cos(a)*s*0.55, cy+Math.sin(a)*s*0.55);
-        ctx.lineTo(cx+Math.cos(a)*s*0.85, cy+Math.sin(a)*s*0.85);
+        ctx.moveTo(cx+Math.cos(a1)*inner, cy+Math.sin(a1)*inner);
+        ctx.lineTo(cx+Math.cos(a1)*outer, cy+Math.sin(a1)*outer);
+        ctx.lineTo(cx+Math.cos(a2)*outer, cy+Math.sin(a2)*outer);
+        ctx.lineTo(cx+Math.cos(a2)*inner, cy+Math.sin(a2)*inner);
         ctx.stroke();
       }
     } else if (sysBarTabs[i].tab === 'apps') {
-      // Grid
-      const g = s*0.35;
-      for (let r = 0; r < 2; r++) for (let c = 0; c < 2; c++) {
-        ctx.beginPath();
-        ctx.roundRect(cx-g*1.15+c*g*1.3, cy-g*1.15+r*g*1.3, g, g, g*0.2);
-        ctx.stroke();
-      }
+      // 4 rounded squares grid
+      const sz = s*0.38, gap = s*0.12, r = s*0.08;
+      ctx.beginPath(); ctx.roundRect(cx-sz-gap/2, cy-sz-gap/2, sz, sz, r); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(cx+gap/2, cy-sz-gap/2, sz, sz, r); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(cx-sz-gap/2, cy+gap/2, sz, sz, r); ctx.stroke();
+      ctx.beginPath(); ctx.roundRect(cx+gap/2, cy+gap/2, sz, sz, r); ctx.stroke();
     } else {
-      // Search
-      ctx.beginPath(); ctx.arc(cx-s*0.1, cy-s*0.1, s*0.5, 0, Math.PI*2); ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(cx+s*0.25, cy+s*0.25); ctx.lineTo(cx+s*0.7, cy+s*0.7); ctx.stroke();
+      // Magnifying glass
+      ctx.beginPath(); ctx.arc(cx-s*0.08, cy-s*0.08, s*0.4, 0, Math.PI*2); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx+s*0.2, cy+s*0.2); ctx.lineTo(cx+s*0.55, cy+s*0.55); ctx.stroke();
     }
   }, 64, 64);
   const iconMesh = new THREE.Mesh(
