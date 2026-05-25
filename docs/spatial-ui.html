@@ -344,6 +344,22 @@ function drawAppIcon(name, ctx, cx, cy, s) {
   if (d[name]) d[name]();
 }
 
+// ===== Curved UI helper =====
+// Places an object on a cylinder surface: x maps to angle, y stays, z becomes depth
+const CURVE_RADIUS = 8; // radius of the cylinder
+function curvePosition(flatX, flatY, flatZ) {
+  const angle = flatX / CURVE_RADIUS;
+  const x = Math.sin(angle) * (CURVE_RADIUS + flatZ);
+  const z = -Math.cos(angle) * (CURVE_RADIUS + flatZ) + CURVE_RADIUS;
+  return { x, y: flatY, z, rotY: angle };
+}
+
+function applyCurve(obj, flatX, flatY, flatZ = 0) {
+  const pos = curvePosition(flatX, flatY, flatZ);
+  obj.position.set(pos.x, pos.y, pos.z);
+  obj.rotation.y = pos.rotY;
+}
+
 // App data
 const apps = [
   { name: 'Browser',       c1: '#5BC0EB', c2: '#3AA0D1' },
@@ -409,7 +425,7 @@ for (let page = 0; page < 2; page++) {
       appIndex++;
 
   const group = new THREE.Group();
-  group.position.set(x, y, 0);
+  applyCurve(group, x, y);
 
   // --- LAYER 1: Colorful app tile background (stays at z=0) ---
   const color1 = new THREE.Color(app.c1);
@@ -498,7 +514,7 @@ for (let i = 0; i < 2; i++) {
     new THREE.CircleGeometry(i === 0 ? 0.055 : 0.035, 16),
     new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: i === 0 ? 0.85 : 0.3 })
   );
-  dot.position.set(5, (0.5 - i) * 0.2 + 0.3, 0);
+  applyCurve(dot, 5, (0.5 - i) * 0.2 + 0.3);
   appGridGroup.add(dot);
   pageDots.push(dot);
 }
@@ -557,7 +573,7 @@ const clockMesh = new THREE.Mesh(
   new THREE.PlaneGeometry(1.3, 0.3),
   new THREE.MeshBasicMaterial({ map: clockTex, transparent: true, depthWrite: false })
 );
-clockMesh.position.set(0, 3.2, 0);
+applyCurve(clockMesh, 0, 3.2);
 scene.add(clockMesh);
 
 // ===== SETTINGS BAR =====
@@ -723,7 +739,7 @@ for (const row of barData) {
       roundedRectGeo(pill.w, 0.42, 0.2),
       new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: row.opacity, roughness: 0.3, clearcoat: 0.5 })
     );
-    pillMesh.position.set(px, row.y, 0);
+    applyCurve(pillMesh, px, row.y);
     settingsGroup.add(pillMesh);
     const iconCount = pill.drawIcons.length;
     const spacing = pill.w / (iconCount + 1);
@@ -733,7 +749,7 @@ for (const row of barData) {
         new THREE.PlaneGeometry(0.25, 0.25),
         new THREE.MeshBasicMaterial({ map: makeIconTex(pill.drawIcons[j]), transparent: true, depthWrite: false })
       );
-      iMesh.position.set(ix, row.y, 0.01);
+      applyCurve(iMesh, ix, row.y, 0.01);
       settingsGroup.add(iMesh);
     }
   }
@@ -743,7 +759,7 @@ for (let i = 0; i < 3; i++) {
     new THREE.CircleGeometry(i === 1 ? 0.055 : 0.035, 16),
     new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: i === 1 ? 0.85 : 0.3 })
   );
-  dot.position.set((i-1) * 0.18, -1.3, 0);
+  applyCurve(dot, (i-1) * 0.18, -1.3);
   settingsGroup.add(dot);
 }
 scene.add(settingsGroup);
@@ -756,7 +772,7 @@ const searchBar = new THREE.Mesh(
   roundedRectGeo(4.5, 0.48, 0.24),
   new THREE.MeshPhysicalMaterial({ color: 0xffffff, transparent: true, opacity: 0.22, roughness: 0.3, clearcoat: 0.5 })
 );
-searchBar.position.set(0, 1.2, 0);
+applyCurve(searchBar, 0, 1.2);
 searchGroup.add(searchBar);
 
 const sTex = canvasTex((ctx, w, h) => {
@@ -768,7 +784,7 @@ const sLabel = new THREE.Mesh(
   new THREE.PlaneGeometry(4, 0.35),
   new THREE.MeshBasicMaterial({ map: sTex, transparent: true, depthWrite: false })
 );
-sLabel.position.set(0, 1.2, 0.01);
+applyCurve(sLabel, 0, 1.2, 0.01);
 searchGroup.add(sLabel);
 
 const rTex = canvasTex((ctx, w, h) => {
@@ -780,7 +796,7 @@ const rMesh = new THREE.Mesh(
   new THREE.PlaneGeometry(1, 0.18),
   new THREE.MeshBasicMaterial({ map: rTex, transparent: true, depthWrite: false })
 );
-rMesh.position.set(-2, 0.55, 0);
+applyCurve(rMesh, -2, 0.55);
 searchGroup.add(rMesh);
 
 for (let i = 0; i < 6; i++) {
@@ -795,7 +811,7 @@ for (let i = 0; i < 6; i++) {
     ctx.fillText(app.icon, w/2, h/2+2);
   });
   const mesh = new THREE.Mesh(roundedRectGeo(0.6, 0.6, 0.12), new THREE.MeshBasicMaterial({ map: iTex }));
-  mesh.position.set(x, -0.05, 0);
+  applyCurve(mesh, x, -0.05);
   searchGroup.add(mesh);
   const lTex = canvasTex((ctx, w, h) => {
     ctx.fillStyle = 'rgba(255,255,255,0.75)'; ctx.font = '400 18px Inter, sans-serif';
@@ -807,7 +823,7 @@ for (let i = 0; i < 6; i++) {
     new THREE.PlaneGeometry(0.75, 0.14),
     new THREE.MeshBasicMaterial({ map: lTex, transparent: true, depthWrite: false })
   );
-  lMesh.position.set(x, -0.48, 0);
+  applyCurve(lMesh, x, -0.48);
   searchGroup.add(lMesh);
 }
 scene.add(searchGroup);
@@ -827,7 +843,7 @@ const sysBarTabs = [
 for (let i = 0; i < sysBarTabs.length; i++) {
   const x = (i - 1) * 0.666;
   const btnGroup = new THREE.Group();
-  btnGroup.position.set(x, 0, 0);
+  applyCurve(btnGroup, x, 0);
 
   // Circle button (acts as backing too - brighter when selected)
   const isActive = sysBarTabs[i].tab === 'apps';
