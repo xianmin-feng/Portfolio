@@ -700,7 +700,7 @@ for (let i = 0; i < sysBarTabs.length; i++) {
   const circleMat = new THREE.MeshPhysicalMaterial({
     color: 0xffffff,
     transparent: true,
-    opacity: isActive ? 0.4 : 0.15,
+    opacity: isActive ? 0.4 : 0,
     roughness: 0.3,
     clearcoat: 0.5,
   });
@@ -786,7 +786,7 @@ function switchTab(tab) {
   searchGroup.visible = tab === 'search';
   for (const btn of sysBarButtons) {
     btn.isActive = btn.tab === tab;
-    btn.circle.material.opacity = btn.isActive ? 0.4 : 0.15;
+    btn.circle.material.opacity = btn.isActive ? 0.4 : 0;
   }
 }
 
