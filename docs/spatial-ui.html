@@ -433,7 +433,7 @@ clockTex.minFilter = THREE.LinearFilter;
 function updateClockTexture() {
   clockCtx.clearRect(0, 0, 256, 64);
   clockCtx.fillStyle = 'rgba(255,255,255,0.9)';
-  clockCtx.font = '300 36px Inter, sans-serif';
+  clockCtx.font = '300 26px Inter, sans-serif';
   clockCtx.textAlign = 'center';
   clockCtx.textBaseline = 'middle';
   clockCtx.shadowColor = 'rgba(0,0,0,0.3)';
@@ -444,7 +444,7 @@ function updateClockTexture() {
 updateClockTexture();
 setInterval(updateClockTexture, 1000);
 const clockMesh = new THREE.Mesh(
-  new THREE.PlaneGeometry(1.5, 0.35),
+  new THREE.PlaneGeometry(1.1, 0.25),
   new THREE.MeshBasicMaterial({ map: clockTex, transparent: true, depthWrite: false })
 );
 clockMesh.position.set(0, 3.2, 0);
