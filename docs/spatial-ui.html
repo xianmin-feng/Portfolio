@@ -374,7 +374,7 @@ const appGridGroup = new THREE.Group();
 const allTiles = [];
 const TILE = 0.88;
 const GAP = TILE * 2;
-const PAGE_WIDTH = 10; // horizontal offset per page
+const PAGE_HEIGHT = 8; // vertical offset per page
 
 const pages = [
   { group: new THREE.Group(), startIndex: 0 },
@@ -383,14 +383,14 @@ const pages = [
 pages.forEach(p => appGridGroup.add(p.group));
 
 let currentPage = 0;
-let targetPageX = 0;
+let targetPageY = 0;
 
 // Row layout per page: 4, 5, 4
 const rowCounts = [4, 5, 4];
 
 for (let page = 0; page < 2; page++) {
   const pageGroup = pages[page].group;
-  pageGroup.position.x = page * PAGE_WIDTH;
+  pageGroup.position.y = -page * PAGE_HEIGHT;
   let appIndex = pages[page].startIndex;
 
   for (let row = 0; row < rowCounts.length; row++) {
@@ -500,7 +500,7 @@ for (let i = 0; i < 2; i++) {
 // Page switching
 function switchPage(page) {
   currentPage = page;
-  targetPageX = -page * PAGE_WIDTH;
+  targetPageY = page * PAGE_HEIGHT;
   for (let i = 0; i < pageDots.length; i++) {
     pageDots[i].geometry.dispose();
     pageDots[i].geometry = new THREE.CircleGeometry(i === page ? 0.055 : 0.035, 16);
@@ -1000,11 +1000,8 @@ function animate() {
   // Page slide animation
   if (appGridGroup.visible) {
     const pageEase = (cur, tgt) => cur + (tgt - cur) * (1 - Math.pow(0.003, dt));
-    const container = appGridGroup;
-    const currentX = pages[0].group.parent.position.x || 0;
-    // Move the whole grid content
-    pages[0].group.position.x = pageEase(pages[0].group.position.x, targetPageX);
-    pages[1].group.position.x = pageEase(pages[1].group.position.x, PAGE_WIDTH + targetPageX);
+    pages[0].group.position.y = pageEase(pages[0].group.position.y, targetPageY);
+    pages[1].group.position.y = pageEase(pages[1].group.position.y, -PAGE_HEIGHT + targetPageY);
   }
 
   // Float
