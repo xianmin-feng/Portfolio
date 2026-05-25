@@ -118,12 +118,21 @@ scene.add(dirLight);
 
 // Helpers
 function roundedRectGeo(w, h, r) {
+  // Squircle (superellipse) shape
   const s = new THREE.Shape();
-  const x = -w/2, y = -h/2;
-  s.moveTo(x+r,y); s.lineTo(x+w-r,y); s.quadraticCurveTo(x+w,y,x+w,y+r);
-  s.lineTo(x+w,y+h-r); s.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-  s.lineTo(x+r,y+h); s.quadraticCurveTo(x,y+h,x,y+h-r);
-  s.lineTo(x,y+r); s.quadraticCurveTo(x,y,x+r,y);
+  const n = 4; // superellipse exponent (higher = more square, 2 = circle)
+  const steps = 64;
+  const hw = w / 2, hh = h / 2;
+  for (let i = 0; i <= steps; i++) {
+    const t = (i / steps) * Math.PI * 2;
+    const cosT = Math.cos(t);
+    const sinT = Math.sin(t);
+    const px = hw * Math.sign(cosT) * Math.pow(Math.abs(cosT), 2 / n);
+    const py = hh * Math.sign(sinT) * Math.pow(Math.abs(sinT), 2 / n);
+    if (i === 0) s.moveTo(px, py);
+    else s.lineTo(px, py);
+  }
+  s.closePath();
   return new THREE.ShapeGeometry(s);
 }
 
