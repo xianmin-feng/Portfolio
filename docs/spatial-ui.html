@@ -687,7 +687,19 @@ for (let i = 0; i < sysBarTabs.length; i++) {
   const btnGroup = new THREE.Group();
   btnGroup.position.set(x, 0, 0);
 
-  // Circle background
+  // Backing for selected state
+  const backingMat = new THREE.MeshPhysicalMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: sysBarTabs[i].tab === 'apps' ? 0.3 : 0,
+    roughness: 0.3,
+    clearcoat: 0.5,
+  });
+  const backing = new THREE.Mesh(roundedRectGeo(0.75, 0.75, 0.15), backingMat);
+  backing.position.z = -0.01;
+  btnGroup.add(backing);
+
+  // Circle button
   const isActive = sysBarTabs[i].tab === 'apps';
   const circleMat = new THREE.MeshPhysicalMaterial({
     color: 0xffffff,
@@ -764,7 +776,7 @@ for (let i = 0; i < sysBarTabs.length; i++) {
   tooltip.position.set(0, 0.55, 0.01);
   btnGroup.add(tooltip);
 
-  sysBarButtons.push({ group: btnGroup, circle, tooltip, tab: sysBarTabs[i].tab, isActive });
+  sysBarButtons.push({ group: btnGroup, circle, backing, tooltip, tab: sysBarTabs[i].tab, isActive });
   sysBarGroup.add(btnGroup);
 }
 scene.add(sysBarGroup);
@@ -778,6 +790,7 @@ function switchTab(tab) {
   for (const btn of sysBarButtons) {
     btn.isActive = btn.tab === tab;
     btn.circle.material.opacity = btn.isActive ? 0.35 : 0.15;
+    btn.backing.material.opacity = btn.isActive ? 0.3 : 0;
   }
 }
 
