@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spatial UI Demo | Xianmin Feng</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0a0a1a;
+    color: #fff;
+    overflow: hidden;
+  }
+  #canvas-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+  canvas { display: block; }
+
+  /* Back link */
+  .back-nav {
+    position: fixed;
+    top: 20px;
+    left: 24px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .back-nav a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .back-nav a:hover { color: #fff; }
+
+  /* Info overlay */
+  .info-panel {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 14px 24px;
+    text-align: center;
+    z-index: 100;
+  }
+  .info-panel p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+  }
+  .info-panel strong {
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* Title */
+  .demo-title {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    z-index: 100;
+    text-align: right;
+  }
+  .demo-title h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.8);
+  }
+  .demo-title p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+</style>
+</head>
+<body>
+
+<div class="back-nav">
+  <a href="index.html">&larr; Back to Portfolio</a>
+</div>
+
+<div class="demo-title">
+  <h1>Spatial OS Navigator</h1>
+  <p>Interactive Three.js Demo</p>
+</div>
+
+<div id="canvas-container"></div>
+
+<div class="info-panel">
+  <p><strong>Hover</strong> over app tiles to see z-depth layers &nbsp;|&nbsp; <strong>Click</strong> system bar tabs to switch views &nbsp;|&nbsp; <strong>Drag</strong> to orbit</p>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.162.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ===== Setup =====
+const container = document.getElementById('canvas-container');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 0, 8);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x0a0a1a);
+renderer.shadowMap.enabled = true;
+container.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.enablePan = false;
+controls.minDistance = 4;
+controls.maxDistance = 14;
+
+// ===== Lighting =====
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambientLight);
+
+const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
+mainLight.position.set(5, 8, 5);
+mainLight.castShadow = true;
+scene.add(mainLight);
+
+const fillLight = new THREE.DirectionalLight(0x6366f1, 0.3);
+fillLight.position.set(-5, 3, -3);
+scene.add(fillLight);
+
+const backLight = new THREE.PointLight(0x818cf8, 0.5, 20);
+backLight.position.set(0, -2, -5);
+scene.add(backLight);
+
+// ===== Helpers =====
+function createRoundedRect(w, h, r, segments = 8) {
+  const shape = new THREE.Shape();
+  const x = -w / 2, y = -h / 2;
+  shape.moveTo(x + r, y);
+  shape.lineTo(x + w - r, y);
+  shape.quadraticCurveTo(x + w, y, x + w, y + r);
+  shape.lineTo(x + w, y + h - r);
+  shape.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  shape.lineTo(x + r, y + h);
+  shape.quadraticCurveTo(x, y + h, x, y + h - r);
+  shape.lineTo(x, y + r);
+  shape.quadraticCurveTo(x, y, x + r, y);
+  return new THREE.ShapeGeometry(shape, segments);
+}
+
+function createGlassMaterial(color = 0xffffff, opacity = 0.12) {
+  return new THREE.MeshPhysicalMaterial({
+    color,
+    transparent: true,
+    opacity,
+    roughness: 0.1,
+    metalness: 0.0,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.1,
+    side: THREE.DoubleSide,
+  });
+}
+
+// ===== App icon colors =====
+const appConfigs = [
+  { name: 'Browser', color: 0x4FC3F7, icon: '🌐' },
+  { name: 'Instagram', color: 0xE040FB, icon: '📷' },
+  { name: 'Facebook', color: 0x1877F2, icon: '👥' },
+  { name: 'Beat Saber', color: 0xF44336, icon: '⚔️' },
+  { name: 'Messenger', color: 0x0084FF, icon: '💬' },
+  { name: 'Shop', color: 0xFF9800, icon: '🛍️' },
+  { name: 'Photos', color: 0xAB47BC, icon: '🖼️' },
+  { name: 'Spotify', color: 0x1DB954, icon: '🎵' },
+  { name: 'Max', color: 0x002BE7, icon: '🎬' },
+  { name: 'Sky', color: 0x87CEEB, icon: '☁️' },
+  { name: 'WhatsApp', color: 0x25D366, icon: '📱' },
+  { name: 'FitXR', color: 0x76FF03, icon: '💪' },
+];
+
+// ===== System bar icon configs =====
+const settingsIcons = [
+  { symbol: '☀️', label: 'Brightness' },
+  { symbol: '🔊', label: 'Volume' },
+  { symbol: '📶', label: 'WiFi' },
+  { symbol: '🔋', label: 'Battery' },
+  { symbol: '⚙️', label: 'Settings' },
+];
+
+const searchIcons = [
+  { symbol: '🔍', label: 'Search' },
+  { symbol: '⏰', label: 'Recent' },
+  { symbol: '⭐', label: 'Favorites' },
+  { symbol: '📂', label: 'Files' },
+];
+
+// ===== Create app tile with 3 layers =====
+const tileSize = 0.85;
+const tileGap = 1.1;
+const cols = 4;
+const rows = 3;
+
+const appTilesGroup = new THREE.Group();
+const allTiles = [];
+
+for (let i = 0; i < appConfigs.length; i++) {
+  const col = i % cols;
+  const row = Math.floor(i / cols);
+  const x = (col - (cols - 1) / 2) * tileGap;
+  const y = ((rows - 1) / 2 - row) * tileGap + 0.5;
+
+  const tileGroup = new THREE.Group();
+  tileGroup.position.set(x, y, 0);
+
+  // Layer 1: Background (z = 0)
+  const bgGeo = createRoundedRect(tileSize, tileSize, 0.15);
+  const bgMat = createGlassMaterial(0xffffff, 0.08);
+  const bgMesh = new THREE.Mesh(bgGeo, bgMat);
+  bgMesh.position.z = 0;
+  tileGroup.add(bgMesh);
+
+  // Layer 2: Shadow (z = 0.02)
+  const shadowGeo = createRoundedRect(tileSize * 0.75, tileSize * 0.75, 0.12);
+  const shadowMat = new THREE.MeshBasicMaterial({
+    color: 0x000000,
+    transparent: true,
+    opacity: 0.3,
+  });
+  const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+  shadowMesh.position.z = 0.02;
+  tileGroup.add(shadowMesh);
+
+  // Layer 3: Icon (z = 0.05)
+  const iconGeo = createRoundedRect(tileSize * 0.7, tileSize * 0.7, 0.12);
+  const iconMat = new THREE.MeshPhysicalMaterial({
+    color: appConfigs[i].color,
+    transparent: true,
+    opacity: 0.9,
+    roughness: 0.2,
+    metalness: 0.1,
+    clearcoat: 0.8,
+  });
+  const iconMesh = new THREE.Mesh(iconGeo, iconMat);
+  iconMesh.position.z = 0.05;
+  tileGroup.add(iconMesh);
+
+  // Store references for animation
+  const tile = {
+    group: tileGroup,
+    bg: bgMesh,
+    shadow: shadowMesh,
+    icon: iconMesh,
+    hovered: false,
+    // Target z positions
+    shadowBaseZ: 0.02,
+    shadowHoverZ: 0.15,
+    iconBaseZ: 0.05,
+    iconHoverZ: 0.3,
+    // Current animated z
+    shadowCurrentZ: 0.02,
+    iconCurrentZ: 0.05,
+    // Scale
+    currentScale: 1,
+    targetScale: 1,
+  };
+  allTiles.push(tile);
+  appTilesGroup.add(tileGroup);
+}
+
+scene.add(appTilesGroup);
+
+// ===== System Bar =====
+const systemBarGroup = new THREE.Group();
+systemBarGroup.position.set(0, -2.3, 0);
+
+// Bar tabs
+const tabs = ['Settings', 'Apps', 'Search'];
+let activeTab = 1; // Apps is default
+
+const tabWidth = 1.6;
+const tabHeight = 0.45;
+const tabGap = 0.15;
+const totalTabWidth = tabs.length * tabWidth + (tabs.length - 1) * tabGap;
+
+const tabMeshes = [];
+const tabLabels = [];
+
+for (let i = 0; i < tabs.length; i++) {
+  const x = (i - 1) * (tabWidth + tabGap);
+
+  // Tab background
+  const tabGeo = createRoundedRect(tabWidth, tabHeight, 0.12);
+  const isActive = i === activeTab;
+  const tabMat = createGlassMaterial(
+    isActive ? 0x6366f1 : 0xffffff,
+    isActive ? 0.25 : 0.1
+  );
+  const tabMesh = new THREE.Mesh(tabGeo, tabMat);
+  tabMesh.position.set(x, 0, 0);
+  tabMesh.userData = { tabIndex: i, isTab: true };
+  systemBarGroup.add(tabMesh);
+  tabMeshes.push(tabMesh);
+
+  // Tab label using canvas texture
+  const canvas = document.createElement('canvas');
+  canvas.width = 256;
+  canvas.height = 64;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 256, 64);
+  ctx.fillStyle = isActive ? '#ffffff' : 'rgba(255,255,255,0.6)';
+  ctx.font = '500 24px Inter, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(tabs[i], 128, 32);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+
+  const labelGeo = new THREE.PlaneGeometry(tabWidth * 0.8, tabHeight * 0.6);
+  const labelMat = new THREE.MeshBasicMaterial({
+    map: texture,
+    transparent: true,
+    depthWrite: false,
+  });
+  const labelMesh = new THREE.Mesh(labelGeo, labelMat);
+  labelMesh.position.set(x, 0, 0.01);
+  systemBarGroup.add(labelMesh);
+  tabLabels.push({ mesh: labelMesh, canvas, ctx, texture });
+}
+
+// Active tab indicator
+const indicatorGeo = createRoundedRect(tabWidth, tabHeight, 0.12);
+const indicatorMat = new THREE.MeshBasicMaterial({
+  color: 0x6366f1,
+  transparent: true,
+  opacity: 0.15,
+});
+const indicator = new THREE.Mesh(indicatorGeo, indicatorMat);
+indicator.position.set(0, 0, -0.01);
+systemBarGroup.add(indicator);
+
+scene.add(systemBarGroup);
+
+// ===== Settings Panel =====
+const settingsGroup = new THREE.Group();
+settingsGroup.position.set(0, 0.5, 0);
+settingsGroup.visible = false;
+
+for (let i = 0; i < settingsIcons.length; i++) {
+  const x = (i - (settingsIcons.length - 1) / 2) * 1.2;
+
+  // Card background
+  const cardGeo = createRoundedRect(0.9, 0.9, 0.12);
+  const cardMat = createGlassMaterial(0xffffff, 0.1);
+  const cardMesh = new THREE.Mesh(cardGeo, cardMat);
+  cardMesh.position.set(x, 0, 0);
+  settingsGroup.add(cardMesh);
+
+  // Icon
+  const iconCanvas = document.createElement('canvas');
+  iconCanvas.width = 128;
+  iconCanvas.height = 128;
+  const iconCtx = iconCanvas.getContext('2d');
+  iconCtx.font = '64px serif';
+  iconCtx.textAlign = 'center';
+  iconCtx.textBaseline = 'middle';
+  iconCtx.fillText(settingsIcons[i].symbol, 64, 64);
+  const iconTex = new THREE.CanvasTexture(iconCanvas);
+
+  const iconPlane = new THREE.PlaneGeometry(0.5, 0.5);
+  const iconPlaneMat = new THREE.MeshBasicMaterial({ map: iconTex, transparent: true });
+  const iconPlaneMesh = new THREE.Mesh(iconPlane, iconPlaneMat);
+  iconPlaneMesh.position.set(x, 0.1, 0.02);
+  settingsGroup.add(iconPlaneMesh);
+
+  // Label
+  const labelCanvas = document.createElement('canvas');
+  labelCanvas.width = 192;
+  labelCanvas.height = 48;
+  const labelCtx = labelCanvas.getContext('2d');
+  labelCtx.fillStyle = 'rgba(255,255,255,0.6)';
+  labelCtx.font = '400 18px Inter, sans-serif';
+  labelCtx.textAlign = 'center';
+  labelCtx.textBaseline = 'middle';
+  labelCtx.fillText(settingsIcons[i].label, 96, 24);
+  const labelTex = new THREE.CanvasTexture(labelCanvas);
+
+  const labelPlane = new THREE.PlaneGeometry(0.7, 0.2);
+  const labelPlaneMat = new THREE.MeshBasicMaterial({ map: labelTex, transparent: true });
+  const labelPlaneMesh = new THREE.Mesh(labelPlane, labelPlaneMat);
+  labelPlaneMesh.position.set(x, -0.3, 0.02);
+  settingsGroup.add(labelPlaneMesh);
+}
+
+scene.add(settingsGroup);
+
+// ===== Search Panel =====
+const searchGroup = new THREE.Group();
+searchGroup.position.set(0, 0.5, 0);
+searchGroup.visible = false;
+
+// Search bar
+const searchBarGeo = createRoundedRect(4, 0.5, 0.15);
+const searchBarMat = createGlassMaterial(0xffffff, 0.1);
+const searchBarMesh = new THREE.Mesh(searchBarGeo, searchBarMat);
+searchBarMesh.position.set(0, 1, 0);
+searchGroup.add(searchBarMesh);
+
+// Search bar text
+const searchCanvas = document.createElement('canvas');
+searchCanvas.width = 512;
+searchCanvas.height = 64;
+const searchCtx = searchCanvas.getContext('2d');
+searchCtx.fillStyle = 'rgba(255,255,255,0.35)';
+searchCtx.font = '400 22px Inter, sans-serif';
+searchCtx.textAlign = 'left';
+searchCtx.textBaseline = 'middle';
+searchCtx.fillText('🔍  Search apps, settings, and more...', 20, 32);
+const searchTex = new THREE.CanvasTexture(searchCanvas);
+const searchTextGeo = new THREE.PlaneGeometry(3.6, 0.4);
+const searchTextMat = new THREE.MeshBasicMaterial({ map: searchTex, transparent: true });
+const searchTextMesh = new THREE.Mesh(searchTextGeo, searchTextMat);
+searchTextMesh.position.set(0, 1, 0.01);
+searchGroup.add(searchTextMesh);
+
+// Quick access icons
+for (let i = 0; i < searchIcons.length; i++) {
+  const x = (i - (searchIcons.length - 1) / 2) * 1.3;
+
+  const cardGeo = createRoundedRect(1, 0.8, 0.12);
+  const cardMat = createGlassMaterial(0xffffff, 0.08);
+  const cardMesh = new THREE.Mesh(cardGeo, cardMat);
+  cardMesh.position.set(x, -0.2, 0);
+  searchGroup.add(cardMesh);
+
+  const iconCanvas = document.createElement('canvas');
+  iconCanvas.width = 128;
+  iconCanvas.height = 128;
+  const iconCtx = iconCanvas.getContext('2d');
+  iconCtx.font = '56px serif';
+  iconCtx.textAlign = 'center';
+  iconCtx.textBaseline = 'middle';
+  iconCtx.fillText(searchIcons[i].symbol, 64, 64);
+  const iconTex = new THREE.CanvasTexture(iconCanvas);
+  const iconPlane = new THREE.PlaneGeometry(0.4, 0.4);
+  const iconMat = new THREE.MeshBasicMaterial({ map: iconTex, transparent: true });
+  const iconMesh = new THREE.Mesh(iconPlane, iconMat);
+  iconMesh.position.set(x, -0.1, 0.02);
+  searchGroup.add(iconMesh);
+
+  const labelCanvas = document.createElement('canvas');
+  labelCanvas.width = 192;
+  labelCanvas.height = 48;
+  const labelCtx = labelCanvas.getContext('2d');
+  labelCtx.fillStyle = 'rgba(255,255,255,0.5)';
+  labelCtx.font = '400 18px Inter, sans-serif';
+  labelCtx.textAlign = 'center';
+  labelCtx.textBaseline = 'middle';
+  labelCtx.fillText(searchIcons[i].label, 96, 24);
+  const labelTex = new THREE.CanvasTexture(labelCanvas);
+  const labelPlane = new THREE.PlaneGeometry(0.7, 0.2);
+  const labelMat = new THREE.MeshBasicMaterial({ map: labelTex, transparent: true });
+  const labelMesh = new THREE.Mesh(labelPlane, labelMat);
+  labelMesh.position.set(x, -0.45, 0.02);
+  searchGroup.add(labelMesh);
+}
+
+scene.add(searchGroup);
+
+// ===== Background particles =====
+const particlesGeo = new THREE.BufferGeometry();
+const particleCount = 200;
+const positions = new Float32Array(particleCount * 3);
+for (let i = 0; i < particleCount; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 20;
+  positions[i * 3 + 1] = (Math.random() - 0.5) * 15;
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 10 - 3;
+}
+particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+const particlesMat = new THREE.PointsMaterial({
+  color: 0x6366f1,
+  size: 0.02,
+  transparent: true,
+  opacity: 0.4,
+});
+const particles = new THREE.Points(particlesGeo, particlesMat);
+scene.add(particles);
+
+// ===== Tab switching =====
+function switchTab(index) {
+  activeTab = index;
+
+  // Update indicator position
+  const targetX = (index - 1) * (tabWidth + tabGap);
+  indicator.userData.targetX = targetX;
+
+  // Update tab visuals
+  for (let i = 0; i < tabMeshes.length; i++) {
+    const isActive = i === index;
+    tabMeshes[i].material.color.setHex(isActive ? 0x6366f1 : 0xffffff);
+    tabMeshes[i].material.opacity = isActive ? 0.25 : 0.1;
+
+    // Redraw label
+    const { canvas, ctx, texture } = tabLabels[i];
+    ctx.clearRect(0, 0, 256, 64);
+    ctx.fillStyle = isActive ? '#ffffff' : 'rgba(255,255,255,0.6)';
+    ctx.font = '500 24px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(tabs[i], 128, 32);
+    texture.needsUpdate = true;
+  }
+
+  // Show/hide panels
+  appTilesGroup.visible = index === 1;
+  settingsGroup.visible = index === 0;
+  searchGroup.visible = index === 2;
+}
+
+// ===== Raycasting =====
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+let hoveredTile = null;
+
+function onMouseMove(event) {
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+function onClick(event) {
+  raycaster.setFromCamera(mouse, camera);
+  const allTabMeshes = tabMeshes;
+  const intersects = raycaster.intersectObjects(allTabMeshes);
+  if (intersects.length > 0) {
+    const tab = intersects[0].object;
+    if (tab.userData.isTab) {
+      switchTab(tab.userData.tabIndex);
+    }
+  }
+}
+
+window.addEventListener('mousemove', onMouseMove);
+window.addEventListener('click', onClick);
+
+// ===== Animation =====
+const clock = new THREE.Clock();
+
+function animate() {
+  requestAnimationFrame(animate);
+  const delta = clock.getDelta();
+  const elapsed = clock.getElapsedTime();
+  const lerpSpeed = 8;
+
+  // Hover detection on app tiles
+  if (appTilesGroup.visible) {
+    raycaster.setFromCamera(mouse, camera);
+    const iconMeshes = allTiles.map(t => t.bg);
+    const intersects = raycaster.intersectObjects(iconMeshes);
+
+    // Reset all
+    for (const tile of allTiles) {
+      tile.hovered = false;
+    }
+
+    if (intersects.length > 0) {
+      const hitBg = intersects[0].object;
+      const tile = allTiles.find(t => t.bg === hitBg);
+      if (tile) {
+        tile.hovered = true;
+        document.body.style.cursor = 'pointer';
+      }
+    } else {
+      document.body.style.cursor = 'default';
+    }
+
+    // Animate tile layers
+    for (const tile of allTiles) {
+      const targetIconZ = tile.hovered ? tile.iconHoverZ : tile.iconBaseZ;
+      const targetShadowZ = tile.hovered ? tile.shadowHoverZ : tile.shadowBaseZ;
+      const targetScale = tile.hovered ? 1.08 : 1;
+      const targetShadowOpacity = tile.hovered ? 0.5 : 0.3;
+      const targetBgOpacity = tile.hovered ? 0.15 : 0.08;
+
+      tile.icon.position.z += (targetIconZ - tile.icon.position.z) * delta * lerpSpeed;
+      tile.shadow.position.z += (targetShadowZ - tile.shadow.position.z) * delta * lerpSpeed;
+      tile.shadow.material.opacity += (targetShadowOpacity - tile.shadow.material.opacity) * delta * lerpSpeed;
+      tile.bg.material.opacity += (targetBgOpacity - tile.bg.material.opacity) * delta * lerpSpeed;
+
+      tile.currentScale += (targetScale - tile.currentScale) * delta * lerpSpeed;
+      tile.group.scale.setScalar(tile.currentScale);
+    }
+  }
+
+  // Tab cursor
+  raycaster.setFromCamera(mouse, camera);
+  const tabIntersects = raycaster.intersectObjects(tabMeshes);
+  if (tabIntersects.length > 0) {
+    document.body.style.cursor = 'pointer';
+  }
+
+  // Animate indicator
+  if (indicator.userData.targetX !== undefined) {
+    indicator.position.x += (indicator.userData.targetX - indicator.position.x) * delta * lerpSpeed;
+  }
+
+  // Gentle float animation
+  appTilesGroup.position.y = Math.sin(elapsed * 0.5) * 0.05;
+  settingsGroup.position.y = 0.5 + Math.sin(elapsed * 0.5) * 0.05;
+  searchGroup.position.y = 0.5 + Math.sin(elapsed * 0.5) * 0.05;
+
+  // Rotate particles slowly
+  particles.rotation.y = elapsed * 0.02;
+
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+animate();
+
+// ===== Resize =====
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
+</body>
+</html>
