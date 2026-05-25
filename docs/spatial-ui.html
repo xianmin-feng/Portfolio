@@ -196,22 +196,12 @@ for (let i = 0; i < apps.length; i++) {
   group.add(bg);
 
   // --- LAYER 2: Icon shadow (cast onto colorful bg when icon lifts) ---
-  // Starts invisible, becomes visible on hover, sits between bg and icon
-  const shadowTex = canvasTex((ctx, w, h) => {
-    // Soft shadow blob
-    const cx = w/2, cy = h/2;
-    const grd = ctx.createRadialGradient(cx, cy, w*0.05, cx, cy, w*0.38);
-    grd.addColorStop(0, 'rgba(0,0,0,0.6)');
-    grd.addColorStop(0.6, 'rgba(0,0,0,0.25)');
-    grd.addColorStop(1, 'rgba(0,0,0,0)');
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, w, h);
-  });
+  // Starts fully invisible, fades in on hover
   const shadow = new THREE.Mesh(
-    new THREE.PlaneGeometry(TILE * 0.7, TILE * 0.7),
-    new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0, depthWrite: false })
+    roundedRectGeo(TILE * 0.45, TILE * 0.45, 0.08),
+    new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0, depthWrite: false })
   );
-  shadow.position.z = 0.01; // just above bg
+  shadow.position.z = 0.005;
   group.add(shadow);
 
   // --- LAYER 3: White icon/symbol (lifts forward on hover) ---
