@@ -344,9 +344,6 @@ function drawAppIcon(name, ctx, cx, cy, s) {
   if (d[name]) d[name]();
 }
 
-// ===== Curved UI =====
-// Apply curve to tile groups each frame based on their world x position
-const CURVE_RADIUS = 10;
 
 // App data
 const apps = [
@@ -414,7 +411,6 @@ for (let page = 0; page < 2; page++) {
 
   const group = new THREE.Group();
   group.position.set(x, y, 0);
-  group.userData.flatX = x;
 
   // --- LAYER 1: Colorful app tile background (stays at z=0) ---
   const color1 = new THREE.Color(app.c1);
@@ -1006,15 +1002,6 @@ function animate() {
       btn.circle.material.opacity += (targetCircleOp - btn.circle.material.opacity) * (1 - Math.pow(0.001, dt));
     }
     if (isHovered) document.body.style.cursor = 'pointer';
-  }
-
-  // Apply curve to all tile groups
-  for (const tile of allTiles) {
-    const flatX = tile.group.userData.flatX || 0;
-    const angle = flatX / CURVE_RADIUS;
-    tile.group.position.x = Math.sin(angle) * CURVE_RADIUS;
-    tile.group.position.z = -(Math.cos(angle) * CURVE_RADIUS - CURVE_RADIUS);
-    tile.group.rotation.y = angle;
   }
 
   // Page slide animation
