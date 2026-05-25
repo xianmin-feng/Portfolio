@@ -385,23 +385,7 @@ for (let i = 0; i < 3; i++) {
 }
 scene.add(appGridGroup);
 
-// Glowing orb
-const orbGroup = new THREE.Group();
-orbGroup.add(new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), new THREE.MeshBasicMaterial({ color: 0x6366f1 })));
-const glowTex = canvasTex((ctx, w, h) => {
-  const grd = ctx.createRadialGradient(w/2,h/2,w*0.08,w/2,h/2,w*0.45);
-  grd.addColorStop(0, 'rgba(99,102,241,0.7)');
-  grd.addColorStop(0.5, 'rgba(99,102,241,0.15)');
-  grd.addColorStop(1, 'rgba(99,102,241,0)');
-  ctx.fillStyle = grd; ctx.fillRect(0,0,w,h);
-});
-const glowMesh = new THREE.Mesh(
-  new THREE.PlaneGeometry(0.8, 0.8),
-  new THREE.MeshBasicMaterial({ map: glowTex, transparent: true, depthWrite: false })
-);
-orbGroup.add(glowMesh);
-orbGroup.position.set(0, 2.5, 0.1);
-scene.add(orbGroup);
+// (orb removed)
 
 // Clock above app grid
 const clockCanvas = document.createElement('canvas');
@@ -746,9 +730,6 @@ function animate() {
   settingsGroup.position.y = fy;
   searchGroup.position.y = fy;
 
-  // Orb pulse
-  orbGroup.scale.setScalar(1 + Math.sin(t * 2) * 0.08);
-  glowMesh.material.opacity = 0.5 + Math.sin(t * 1.5) * 0.15;
 
   controls.update();
   renderer.render(scene, camera);
