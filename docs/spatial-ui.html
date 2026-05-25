@@ -317,6 +317,14 @@ for (let row = 0; row < rowLayout.length; row++) {
   bg.position.z = 0;
   group.add(bg);
 
+  // Invisible hit plane (stays at z=0, used for stable raycasting)
+  const hitPlane = new THREE.Mesh(
+    roundedRectGeo(TILE, TILE, 0.18),
+    new THREE.MeshBasicMaterial({ visible: false })
+  );
+  hitPlane.position.z = 0;
+  group.add(hitPlane);
+
   // --- LAYER 2: Icon shadow (same shape as icon but blurred and dark) ---
   // Reuse the same drawing function but in black with blur
   const shadowTex = canvasTex((ctx, w, h) => {
@@ -369,7 +377,7 @@ for (let row = 0; row < rowLayout.length; row++) {
   group.add(label);
 
   allTiles.push({
-    group, bg, shadow, icon,
+    group, bg, shadow, icon, hitPlane,
     hovered: false,
     iconRestZ: 0.02,
     iconHoverZ: 0.45,
@@ -808,10 +816,10 @@ function animate() {
 
   if (appGridGroup.visible) {
     raycaster.setFromCamera(mouse, camera);
-    const hits = raycaster.intersectObjects(allTiles.map(t => t.bg));
+    const hits = raycaster.intersectObjects(allTiles.map(t => t.hitPlane));
     for (const tile of allTiles) tile.hovered = false;
     if (hits.length > 0) {
-      const tile = allTiles.find(t => t.bg === hits[0].object);
+      const tile = allTiles.find(t => t.hitPlane === hits[0].object);
       if (tile) { tile.hovered = true; document.body.style.cursor = 'pointer'; }
     } else { document.body.style.cursor = 'default'; }
 
