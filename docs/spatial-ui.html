@@ -740,19 +740,21 @@ function animate() {
     } else { document.body.style.cursor = 'default'; }
 
     for (const tile of allTiles) {
+      // Ease-out: fast start, smooth deceleration
+      const easeOut = (cur, tgt) => cur + (tgt - cur) * (1 - Math.pow(0.0015, dt));
+
       // Icon lifts forward on hover
       const targetZ = tile.hovered ? tile.iconHoverZ : tile.iconRestZ;
-      tile.icon.position.z += (targetZ - tile.icon.position.z) * dt * speed;
+      tile.icon.position.z = easeOut(tile.icon.position.z, targetZ);
 
-      // Shadow becomes visible on hover (cast onto the colorful bg)
+      // Shadow becomes visible on hover
       const targetShadowOpacity = tile.hovered ? 0.6 : 0;
-      tile.shadow.material.opacity += (targetShadowOpacity - tile.shadow.material.opacity) * dt * speed;
+      tile.shadow.material.opacity = easeOut(tile.shadow.material.opacity, targetShadowOpacity);
 
-      // Shadow stays on the bg surface (z=0.01), doesn't move
-      // Shadow gets slightly larger when icon is higher
+      // Shadow grows slightly when icon lifts
       const shadowScale = tile.hovered ? 1.15 : 1;
-      tile.shadow.scale.x += (shadowScale - tile.shadow.scale.x) * dt * speed;
-      tile.shadow.scale.y += (shadowScale - tile.shadow.scale.y) * dt * speed;
+      tile.shadow.scale.x = easeOut(tile.shadow.scale.x, shadowScale);
+      tile.shadow.scale.y = easeOut(tile.shadow.scale.y, shadowScale);
 
     }
   }
