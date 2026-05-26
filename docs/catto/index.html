@@ -7,6 +7,7 @@
 <meta name="description" content="Understand your cat like never before. AI reads their expressions, body language, and mood instantly.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -139,7 +140,7 @@
         </div>
         <img id="preview" class="preview-img" hidden>
         <video id="cameraFeed" class="preview-img" autoplay playsinline hidden></video>
-        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+        <input type="file" id="fileInput" accept="image/*" hidden>
       </div>
 
       <div class="upload-actions">
@@ -230,7 +231,7 @@
           </div>
           <div class="dresser-upload-row">
             <button class="btn btn-sm" id="dresserUploadBtn">📁 Choose Photo</button>
-            <input type="file" id="dresserFileInput" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+            <input type="file" id="dresserFileInput" accept="image/*" hidden>
           </div>
           <div class="accessory-shelf">
             <button class="acc-btn" data-acc="👑" title="Crown">👑</button>
@@ -384,6 +385,20 @@
 </footer>
 
 <script>
+// ===== HEIC conversion helper =====
+async function convertToJpeg(file) {
+  if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif') || file.type === 'image/heic' || file.type === 'image/heif') {
+    try {
+      const blob = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
+      return new File([blob], file.name.replace(/\.heic|\.heif/i, '.jpg'), { type: 'image/jpeg' });
+    } catch (err) {
+      alert('Failed to convert HEIC. Please try a JPG or PNG instead.');
+      return null;
+    }
+  }
+  return file;
+}
+
 // ===== Scroll reveal animations =====
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -474,19 +489,17 @@ function captureFromCamera() {
   analyzeMood();
 }
 
-function handleFile(file) {
-  if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
-    alert('HEIC format is not supported by browsers. Please use a JPG or PNG photo instead.\n\nTip: On iPhone, go to Settings > Camera > Formats > Most Compatible to save photos as JPG.');
-    return;
-  }
-  if (!file.type.startsWith('image/')) return;
+async function handleFile(file) {
+  const converted = await convertToJpeg(file);
+  if (!converted) return;
+  if (!converted.type.startsWith('image/')) return;
   const reader = new FileReader();
   reader.onload = e => {
     preview.src = e.target.result;
     preview.hidden = false; uploadContent.style.display = 'none';
     analyzeMood();
   };
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(converted);
 }
 
 document.getElementById('tryAgainBtn').addEventListener('click', () => {
@@ -514,20 +527,18 @@ const accBtns = document.querySelectorAll('.acc-btn');
 const placedAccessories = [];
 
 document.getElementById('dresserUploadBtn').addEventListener('click', () => dresserFileInput.click());
-dresserFileInput.addEventListener('change', e => {
+dresserFileInput.addEventListener('change', async e => {
   const file = e.target.files[0];
   if (!file) return;
-  if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
-    alert('HEIC format is not supported by browsers. Please use a JPG or PNG photo instead.\n\nTip: On iPhone, go to Settings > Camera > Formats > Most Compatible to save photos as JPG.');
-    return;
-  }
+  const converted = await convertToJpeg(file);
+  if (!converted) return;
   const reader = new FileReader();
   reader.onload = ev => {
     dresserImg.src = ev.target.result;
     dresserImg.style.display = 'block';
     dresserPlaceholder.style.display = 'none';
   };
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(converted);
 });
 
 accBtns.forEach(btn => {
