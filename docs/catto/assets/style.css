@@ -90,7 +90,7 @@ a { color: inherit; text-decoration: none; }
   font-family: 'DM Serif Display', serif;
   font-size: 22px; color: #007AFF; display: flex; align-items: center; gap: 5px;
 }
-.logo-icon { font-size: 18px; }
+.logo-icon { color: #007AFF; vertical-align: -3px; }
 .nav-links { display: flex; gap: 20px; align-items: center; }
 .nav-links a {
   font-size: 13px; font-weight: 600; color: #888;
@@ -185,7 +185,7 @@ a { color: inherit; text-decoration: none; }
 /* Floating emojis */
 .hero-floating { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
 .float-emoji {
-  position: absolute; font-size: 32px; opacity: 0.12;
+  position: absolute; opacity: 0.1; color: #007AFF;
   left: calc(50% + var(--x)); top: var(--y);
   animation: gentleFloat 8s ease-in-out infinite;
   animation-delay: var(--d);
@@ -233,9 +233,9 @@ a { color: inherit; text-decoration: none; }
   transform: scale(1.01);
   box-shadow: 0 12px 40px rgba(0,122,255,0.1);
 }
-.upload-cat { font-size: 56px; display: block; margin-bottom: 12px; animation: catBounce 2.5s ease-in-out infinite; }
+.upload-cat { display: block; margin-bottom: 12px; animation: catBounce 2.5s ease-in-out infinite; color: #007AFF; }
 @keyframes catBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-.upload-sparkle { position: absolute; font-size: 14px; animation: sparkle 2s ease-in-out infinite; }
+.upload-sparkle { position: absolute; animation: sparkle 2s ease-in-out infinite; color: #5AC8FA; }
 .s1 { top: -8px; right: -12px; animation-delay: 0s; }
 .s2 { top: 12px; left: -16px; animation-delay: 0.7s; }
 .s3 { bottom: 8px; right: -8px; animation-delay: 1.4s; }
@@ -275,13 +275,13 @@ a { color: inherit; text-decoration: none; }
 /* Loading */
 .loading-state { text-align: center; padding: 40px 20px; }
 .paw-loader { display: flex; gap: 14px; justify-content: center; margin-bottom: 16px; }
-.paw { font-size: 24px; animation: pawStep 1.2s ease-in-out infinite; }
+.paw { animation: pawStep 1.2s ease-in-out infinite; color: #007AFF; }
 .p1 { animation-delay: 0s; } .p2 { animation-delay: 0.2s; } .p3 { animation-delay: 0.4s; }
 @keyframes pawStep { 0%,100%{opacity:0.2;transform:translateY(0)} 50%{opacity:1;transform:translateY(-10px)} }
 .loading-text { font-size: 14px; color: #bbb; }
 
 /* Mood Result */
-.mood-emoji-lg { font-size: 72px; text-align: center; margin-bottom: 8px; }
+.mood-emoji-lg { text-align: center; margin-bottom: 8px; }
 .mood-name {
   font-family: 'DM Serif Display', serif;
   font-size: 28px; text-align: center; color: #2d2640; margin-bottom: 10px;
@@ -328,7 +328,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid rgba(255,255,255,0.6);
 }
 .dresser-placeholder { text-align: center; color: #ccc; }
-.dresser-placeholder span { font-size: 40px; display: block; margin-bottom: 6px; }
+.dresser-placeholder svg { display: block; margin: 0 auto 6px; }
 .dresser-placeholder p { font-size: 13px; }
 #dresserImg { width: 100%; max-height: 320px; object-fit: contain; display: block; border-radius: 16px; }
 
@@ -436,7 +436,7 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(160deg, #007AFF, #5AC8FA, #6DD5FA);
   border-radius: 32px; margin: 0 24px 40px; position: relative; z-index: 1;
 }
-.cta-emoji { font-size: 48px; margin-bottom: 16px; display: block; animation: catBounce 2.5s ease-in-out infinite; }
+.cta-emoji { margin-bottom: 16px; display: block; animation: catBounce 2.5s ease-in-out infinite; }
 .cta-content h2 {
   font-family: 'DM Serif Display', serif;
   font-size: 40px; color: #fff; margin-bottom: 12px; line-height: 1.15;
