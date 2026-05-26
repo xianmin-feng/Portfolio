@@ -7,7 +7,7 @@
 <meta name="description" content="Understand your cat like never before. AI reads their expressions, body language, and mood instantly.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -387,16 +387,23 @@
 <script>
 // ===== HEIC conversion helper =====
 async function convertToJpeg(file) {
-  if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif') || file.type === 'image/heic' || file.type === 'image/heif') {
-    try {
-      const blob = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
-      return new File([blob], file.name.replace(/\.heic|\.heif/i, '.jpg'), { type: 'image/jpeg' });
-    } catch (err) {
-      alert('Failed to convert HEIC. Please try a JPG or PNG instead.');
-      return null;
-    }
+  const isHeic = file.name.toLowerCase().endsWith('.heic') ||
+                 file.name.toLowerCase().endsWith('.heif') ||
+                 file.type === 'image/heic' ||
+                 file.type === 'image/heif' ||
+                 file.type === '';  // iOS sometimes sends empty type for HEIC
+  if (!isHeic) return file;
+  try {
+    const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.85 });
+    const blob = Array.isArray(result) ? result[0] : result;
+    return new File([blob], file.name.replace(/\.heic|\.heif/i, '.jpg'), { type: 'image/jpeg' });
+  } catch (err) {
+    console.error('HEIC conversion error:', err);
+    // Fallback: try reading as-is (some browsers/OS may have already converted)
+    if (file.size > 0) return file;
+    alert('Could not convert HEIC. Please try a JPG or PNG instead.');
+    return null;
   }
-  return file;
 }
 
 // ===== Scroll reveal animations =====
