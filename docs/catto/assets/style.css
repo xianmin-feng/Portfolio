@@ -10,21 +10,10 @@ body {
 a { color: inherit; text-decoration: none; }
 .container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
 
-/* ===== Animated Blob Background ===== */
-.blob-bg {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-}
-.blob {
-  position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.7;
-  animation: blobFloat 12s ease-in-out infinite;
-}
-.blob-1 { width: 400px; height: 400px; background: #d1e8ff; top: -100px; left: -100px; animation-delay: 0s; }
-.blob-2 { width: 350px; height: 350px; background: #e8d1ff; top: 30%; right: -80px; animation-delay: -4s; }
-.blob-3 { width: 300px; height: 300px; background: #d1f0e8; bottom: -50px; left: 30%; animation-delay: -8s; }
-@keyframes blobFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -30px) scale(1.05); }
-  66% { transform: translate(-20px, 20px) scale(0.95); }
+/* ===== Dynamic Blob Canvas ===== */
+#blobCanvas {
+  position: fixed; inset: 0; z-index: 0;
+  pointer-events: none; width: 100%; height: 100%;
 }
 
 /* ===== Glass Card ===== */
@@ -550,10 +539,6 @@ a { color: inherit; text-decoration: none; }
   .cta-content h2 { font-size: 28px; }
   .cta-content p { font-size: 15px; }
 
-  /* Blobs - smaller on mobile */
-  .blob-1 { width: 250px; height: 250px; }
-  .blob-2 { width: 200px; height: 200px; }
-  .blob-3 { width: 180px; height: 180px; }
 }
 
 /* Small phones */
