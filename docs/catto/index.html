@@ -208,6 +208,92 @@
   </div>
 </section>
 
+<!-- Cat Studio -->
+<section id="studio" class="section">
+  <div class="container">
+    <h2 class="section-title reveal">Cat Studio</h2>
+    <p class="section-sub reveal">Dress up your cat and imagine the impossible</p>
+
+    <div class="studio-grid">
+      <!-- Accessory Dresser -->
+      <div class="studio-card studio-dresser reveal-item">
+        <h3>👒 Dress Up Your Cat</h3>
+        <p class="studio-desc">Upload a photo, then tap accessories to try them on your cat</p>
+        <div class="dresser-area">
+          <div class="dresser-preview" id="dresserPreview">
+            <div class="dresser-placeholder" id="dresserPlaceholder">
+              <span>🐱</span>
+              <p>Upload a cat photo first</p>
+            </div>
+            <canvas id="dresserCanvas" hidden></canvas>
+            <img id="dresserImg" hidden>
+            <!-- Draggable accessories -->
+            <div class="accessory-draggable" id="activeAccessory" hidden></div>
+          </div>
+          <div class="dresser-upload-row">
+            <button class="btn btn-sm" id="dresserUploadBtn">📁 Choose Photo</button>
+            <input type="file" id="dresserFileInput" accept="image/*" hidden>
+          </div>
+          <div class="accessory-shelf">
+            <button class="acc-btn" data-acc="👑" title="Crown">👑</button>
+            <button class="acc-btn" data-acc="🎩" title="Top Hat">🎩</button>
+            <button class="acc-btn" data-acc="🧢" title="Cap">🧢</button>
+            <button class="acc-btn" data-acc="🎀" title="Bow">🎀</button>
+            <button class="acc-btn" data-acc="👓" title="Glasses">👓</button>
+            <button class="acc-btn" data-acc="🕶️" title="Sunglasses">🕶️</button>
+            <button class="acc-btn" data-acc="🦋" title="Bow Tie">🦋</button>
+            <button class="acc-btn" data-acc="🧣" title="Scarf">🧣</button>
+            <button class="acc-btn" data-acc="💎" title="Diamond">💎</button>
+            <button class="acc-btn" data-acc="🌸" title="Flower">🌸</button>
+            <button class="acc-btn" data-acc="⭐" title="Star">⭐</button>
+            <button class="acc-btn" data-acc="❤️" title="Heart">❤️</button>
+          </div>
+          <div class="dresser-actions">
+            <button class="btn btn-sm btn-outline" id="clearAccBtn">🗑 Clear All</button>
+            <button class="btn btn-sm btn-primary-sm" id="saveAccBtn">💾 Save Photo</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fun AI Features (Coming Soon) -->
+      <div class="studio-coming-soon">
+        <div class="studio-card coming-card reveal-item">
+          <div class="coming-preview">
+            <div class="coming-before">🐱</div>
+            <div class="coming-arrow">→</div>
+            <div class="coming-after">👶</div>
+          </div>
+          <h3>Kitten Machine</h3>
+          <p>What did your cat look like as a baby? AI generates an adorable kitten version of your adult cat.</p>
+          <span class="badge-soon">Coming soon</span>
+        </div>
+
+        <div class="studio-card coming-card reveal-item">
+          <div class="coming-preview">
+            <div class="coming-before">🐱</div>
+            <div class="coming-arrow">→</div>
+            <div class="coming-after">🧑</div>
+          </div>
+          <h3>Human Mode</h3>
+          <p>If your cat were a person, what would they look like? AI imagines your cat as a human based on their features and personality.</p>
+          <span class="badge-soon">Coming soon</span>
+        </div>
+
+        <div class="studio-card coming-card reveal-item">
+          <div class="coming-preview">
+            <div class="coming-before">🐱</div>
+            <div class="coming-arrow">→</div>
+            <div class="coming-after">🎨</div>
+          </div>
+          <h3>Art Styles</h3>
+          <p>Transform your cat into a Renaissance painting, anime character, pixel art, or watercolor masterpiece.</p>
+          <span class="badge-soon">Coming soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Features -->
 <section id="features" class="section">
   <div class="container">
@@ -415,6 +501,116 @@ document.getElementById('shareBtn').addEventListener('click', () => {
   const text = `My cat is feeling: ${name}! 🐱 Analyzed by Cattō AI`;
   if (navigator.share) navigator.share({ title: 'Cattō', text });
   else navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+});
+
+// ===== Cat Studio / Dresser =====
+const dresserPreview = document.getElementById('dresserPreview');
+const dresserPlaceholder = document.getElementById('dresserPlaceholder');
+const dresserImg = document.getElementById('dresserImg');
+const dresserFileInput = document.getElementById('dresserFileInput');
+const accBtns = document.querySelectorAll('.acc-btn');
+const placedAccessories = [];
+
+document.getElementById('dresserUploadBtn').addEventListener('click', () => dresserFileInput.click());
+dresserFileInput.addEventListener('change', e => {
+  if (!e.target.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    dresserImg.src = ev.target.result;
+    dresserImg.hidden = false;
+    dresserPlaceholder.hidden = true;
+  };
+  reader.readAsDataURL(e.target.files[0]);
+});
+
+accBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    if (dresserImg.hidden) { alert('Upload a cat photo first!'); return; }
+    const acc = document.createElement('div');
+    acc.className = 'placed-accessory';
+    acc.textContent = btn.dataset.acc;
+    acc.style.left = '50%';
+    acc.style.top = '30%';
+    acc.style.fontSize = '48px';
+    dresserPreview.appendChild(acc);
+    placedAccessories.push(acc);
+    makeDraggable(acc);
+  });
+});
+
+function makeDraggable(el) {
+  let startX, startY, origX, origY;
+  let isDragging = false;
+
+  el.addEventListener('mousedown', e => { startDrag(e.clientX, e.clientY); e.preventDefault(); });
+  el.addEventListener('touchstart', e => { startDrag(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); });
+
+  function startDrag(cx, cy) {
+    isDragging = true;
+    startX = cx; startY = cy;
+    const rect = el.getBoundingClientRect();
+    origX = rect.left - dresserPreview.getBoundingClientRect().left;
+    origY = rect.top - dresserPreview.getBoundingClientRect().top;
+    el.style.zIndex = 100;
+  }
+
+  window.addEventListener('mousemove', e => { if (isDragging) moveDrag(e.clientX, e.clientY); });
+  window.addEventListener('touchmove', e => { if (isDragging) moveDrag(e.touches[0].clientX, e.touches[0].clientY); });
+
+  function moveDrag(cx, cy) {
+    const dx = cx - startX, dy = cy - startY;
+    el.style.left = (origX + dx) + 'px';
+    el.style.top = (origY + dy) + 'px';
+    el.style.transform = 'none';
+  }
+
+  window.addEventListener('mouseup', () => { isDragging = false; el.style.zIndex = 10; });
+  window.addEventListener('touchend', () => { isDragging = false; el.style.zIndex = 10; });
+
+  // Pinch to resize on wheel
+  el.addEventListener('wheel', e => {
+    e.preventDefault();
+    const current = parseFloat(el.style.fontSize) || 48;
+    const newSize = Math.max(20, Math.min(120, current + (e.deltaY > 0 ? -4 : 4)));
+    el.style.fontSize = newSize + 'px';
+  });
+}
+
+document.getElementById('clearAccBtn').addEventListener('click', () => {
+  placedAccessories.forEach(a => a.remove());
+  placedAccessories.length = 0;
+});
+
+document.getElementById('saveAccBtn').addEventListener('click', () => {
+  const canvas = document.createElement('canvas');
+  const img = dresserImg;
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0);
+
+  const previewRect = dresserPreview.getBoundingClientRect();
+  const imgRect = img.getBoundingClientRect();
+  const scaleX = img.naturalWidth / imgRect.width;
+  const scaleY = img.naturalHeight / imgRect.height;
+  const offsetX = imgRect.left - previewRect.left;
+  const offsetY = imgRect.top - previewRect.top;
+
+  placedAccessories.forEach(acc => {
+    const accRect = acc.getBoundingClientRect();
+    const x = (accRect.left - imgRect.left) * scaleX;
+    const y = (accRect.top - imgRect.top) * scaleY;
+    const size = parseFloat(acc.style.fontSize) * scaleX;
+    ctx.font = size + 'px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(acc.textContent, x + accRect.width * scaleX / 2, y + accRect.height * scaleY / 2);
+  });
+
+  const link = document.createElement('a');
+  link.download = 'catto-dressed-up.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
 });
 
 // ===== AI Analysis =====
