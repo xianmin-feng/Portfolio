@@ -46,6 +46,7 @@
     <a href="#" class="logo"><svg class="logo-icon" width="20" height="20"><use href="#ico-cat"/></svg> cattō</a>
     <div class="nav-links">
       <a href="#how">How it works</a>
+      <a href="#speak">Speak</a>
       <a href="#features">Features</a>
       <a href="#app" class="nav-cta">Try free</a>
     </div>
@@ -204,6 +205,68 @@
   </div>
 </section>
 
+<!-- Speak to Cat -->
+<section id="speak" class="section">
+  <div class="container">
+    <h2 class="section-title reveal">Speak to your cat</h2>
+    <p class="section-sub reveal">Translate human words into cat language and play it to your cat</p>
+
+    <div class="speak-container reveal">
+      <div class="speak-card glass">
+        <div class="speak-phrases">
+          <button class="phrase-btn active" data-phrase="hello">
+            <span class="phrase-label">Hello</span>
+            <span class="phrase-cat">mrrp!</span>
+            <span class="phrase-desc">Short trill — a friendly greeting</span>
+          </button>
+          <button class="phrase-btn" data-phrase="love">
+            <span class="phrase-label">I love you</span>
+            <span class="phrase-cat">prrrrr... 😌</span>
+            <span class="phrase-desc">Slow purr with a slow blink</span>
+          </button>
+          <button class="phrase-btn" data-phrase="come">
+            <span class="phrase-label">Come here</span>
+            <span class="phrase-cat">mew mew mew!</span>
+            <span class="phrase-desc">Short repeated calls</span>
+          </button>
+          <button class="phrase-btn" data-phrase="food">
+            <span class="phrase-label">Food time</span>
+            <span class="phrase-cat">meoooow!</span>
+            <span class="phrase-desc">Long demanding meow</span>
+          </button>
+          <button class="phrase-btn" data-phrase="play">
+            <span class="phrase-label">Let's play</span>
+            <span class="phrase-cat">ek ek ek!</span>
+            <span class="phrase-desc">Excited chattering chirps</span>
+          </button>
+          <button class="phrase-btn" data-phrase="goodnight">
+            <span class="phrase-label">Good night</span>
+            <span class="phrase-cat">mmrrrrr...</span>
+            <span class="phrase-desc">Soft low purr — time to rest</span>
+          </button>
+        </div>
+
+        <div class="speak-player">
+          <div class="player-visual" id="playerVisual">
+            <svg width="40" height="40"><use href="#ico-cat"/></svg>
+          </div>
+          <div class="player-wave" id="playerWave">
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+          </div>
+          <button class="btn btn-primary btn-play" id="playBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Play to cat
+          </button>
+        </div>
+
+        <p class="speak-tip">Hold your phone near your cat and press play. Watch their ears!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Coming Soon -->
 <section class="section">
   <div class="container">
@@ -261,6 +324,103 @@
 </footer>
 
 <script>
+// ===== Speak to Cat =====
+let selectedPhrase = 'hello';
+const phraseBtns = document.querySelectorAll('.phrase-btn');
+const playBtn = document.getElementById('playBtn');
+const playerVisual = document.getElementById('playerVisual');
+const waveBars = document.querySelectorAll('.wave-bar');
+
+phraseBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    phraseBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedPhrase = btn.dataset.phrase;
+  });
+});
+
+// Synthesize cat sounds using Web Audio API
+function playMeow(type) {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+  function meow(startFreq, endFreq, duration, startTime, volume = 0.3) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(startFreq, ctx.currentTime + startTime);
+    osc.frequency.exponentialRampToValueAtTime(endFreq, ctx.currentTime + startTime + duration);
+    gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
+    gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + startTime + 0.05);
+    gain.gain.setValueAtTime(volume, ctx.currentTime + startTime + duration * 0.7);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+    osc.start(ctx.currentTime + startTime);
+    osc.stop(ctx.currentTime + startTime + duration);
+  }
+
+  function purr(duration, startTime) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const lfo = ctx.createOscillator();
+    const lfoGain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    lfo.connect(lfoGain); lfoGain.connect(gain.gain);
+    osc.type = 'sawtooth'; osc.frequency.value = 28;
+    lfo.frequency.value = 25; lfoGain.gain.value = 0.15;
+    gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
+    gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + startTime + 0.3);
+    gain.gain.setValueAtTime(0.12, ctx.currentTime + startTime + duration - 0.3);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+    osc.start(ctx.currentTime + startTime);
+    osc.stop(ctx.currentTime + startTime + duration);
+    lfo.start(ctx.currentTime + startTime);
+    lfo.stop(ctx.currentTime + startTime + duration);
+  }
+
+  function chirp(freq, duration, startTime) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, ctx.currentTime + startTime);
+    osc.frequency.exponentialRampToValueAtTime(freq * 1.8, ctx.currentTime + startTime + duration * 0.3);
+    osc.frequency.exponentialRampToValueAtTime(freq * 0.8, ctx.currentTime + startTime + duration);
+    gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
+    gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + startTime + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+    osc.start(ctx.currentTime + startTime);
+    osc.stop(ctx.currentTime + startTime + duration);
+  }
+
+  const sounds = {
+    hello: () => { meow(600, 900, 0.3, 0, 0.25); meow(800, 600, 0.15, 0.35, 0.15); return 0.6; },
+    love: () => { purr(2.5, 0); return 2.5; },
+    come: () => { meow(700, 500, 0.2, 0, 0.2); meow(700, 500, 0.2, 0.35, 0.2); meow(700, 500, 0.2, 0.7, 0.2); return 1.0; },
+    food: () => { meow(400, 800, 0.8, 0, 0.35); meow(500, 300, 0.4, 1.0, 0.2); return 1.5; },
+    play: () => { chirp(900, 0.1, 0); chirp(1000, 0.1, 0.15); chirp(1100, 0.1, 0.3); chirp(900, 0.1, 0.5); chirp(1000, 0.1, 0.65); return 0.8; },
+    goodnight: () => { purr(1.8, 0); meow(300, 250, 0.5, 1.9, 0.1); return 2.5; },
+  };
+
+  const duration = sounds[type]();
+
+  // Animate
+  playerVisual.classList.add('playing');
+  waveBars.forEach(b => b.classList.add('active'));
+  playBtn.disabled = true;
+  playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Playing...';
+
+  setTimeout(() => {
+    playerVisual.classList.remove('playing');
+    waveBars.forEach(b => b.classList.remove('active'));
+    playBtn.disabled = false;
+    playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg> Play to cat';
+    ctx.close();
+  }, duration * 1000 + 200);
+}
+
+playBtn.addEventListener('click', () => playMeow(selectedPhrase));
+
 // ===== HEIC helper =====
 async function convertToJpeg(file) {
   const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif') || file.type === 'image/heic' || file.type === 'image/heif' || file.type === '';
