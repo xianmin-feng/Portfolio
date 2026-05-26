@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cattō — AI Cat Mood Reader</title>
-<meta name="description" content="Understand your cat like never before. AI reads their expressions, body language, and mood instantly.">
+<meta name="description" content="Understand your cat like never before. AI reads their mood from a photo.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.3/dist/heic2any.min.js"></script>
@@ -12,81 +12,59 @@
 </head>
 <body>
 
-<!-- Floating paw prints background -->
-<div class="paw-bg" id="pawBg"></div>
+<!-- Animated blobs -->
+<div class="blob-bg"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
 
 <!-- Nav -->
-<nav class="nav" id="nav">
+<nav class="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">
-      <span class="logo-icon">🐱</span>
-      <span>cattō</span>
-    </a>
+    <a href="#" class="logo"><span class="logo-icon">🐱</span> cattō</a>
     <div class="nav-links">
       <a href="#how">How it works</a>
-      <a href="#studio">Cat Studio</a>
       <a href="#features">Features</a>
-      <a href="#try" class="nav-cta">Try free</a>
+      <a href="#app" class="nav-cta">Try free</a>
     </div>
   </div>
 </nav>
 
 <!-- Hero -->
 <section class="hero">
-  <div class="container">
-    <div class="hero-floating-emojis">
-      <span class="float-emoji" style="--delay:0s;--x:-30%;--y:20%">😺</span>
-      <span class="float-emoji" style="--delay:1.5s;--x:25%;--y:10%">🐾</span>
-      <span class="float-emoji" style="--delay:3s;--x:-20%;--y:60%">😸</span>
-      <span class="float-emoji" style="--delay:4.5s;--x:35%;--y:50%">😻</span>
-      <span class="float-emoji" style="--delay:2s;--x:40%;--y:75%">🐱</span>
-      <span class="float-emoji" style="--delay:5s;--x:-35%;--y:80%">😽</span>
-    </div>
-    <div class="hero-content reveal">
-      <div class="hero-badge">
-        <span class="badge-dot"></span>
-        AI-Powered Cat Translator
-      </div>
-      <h1>
-        <span class="hero-line">What is your cat</span>
-        <span class="hero-line gradient-text">really thinking?</span>
-      </h1>
-      <p class="hero-desc">Snap a photo. Our AI reads their ears, eyes, whiskers, and body language to tell you exactly how your cat feels. It's like having a cat whisperer in your pocket.</p>
-      <div class="hero-actions">
-        <a href="#try" class="btn btn-primary btn-lg">
-          <span>📸</span> Read my cat's mood
-        </a>
-        <a href="#how" class="btn btn-ghost btn-lg">See how it works</a>
-      </div>
-      <div class="hero-social-proof">
-        <div class="cat-avatars">
-          <span class="cat-av">😺</span>
-          <span class="cat-av">😸</span>
-          <span class="cat-av">😻</span>
-          <span class="cat-av">🐱</span>
-          <span class="cat-av">😼</span>
-        </div>
-        <p><strong>2,847</strong> cats analyzed today</p>
-      </div>
-    </div>
+  <div class="hero-floating">
+    <span class="float-emoji" style="--x:-32%;--y:18%;--d:0s">😺</span>
+    <span class="float-emoji" style="--x:28%;--y:12%;--d:1.5s">🐾</span>
+    <span class="float-emoji" style="--x:-22%;--y:65%;--d:3s">😸</span>
+    <span class="float-emoji" style="--x:36%;--y:55%;--d:4.5s">😻</span>
+    <span class="float-emoji" style="--x:-38%;--y:82%;--d:2s">😼</span>
   </div>
-  <div class="hero-wave">
-    <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C360,120 720,0 1080,64 C1260,96 1380,80 1440,64 L1440,120 L0,120Z" fill="#fff"/></svg>
+  <div class="container">
+    <div class="hero-badge reveal"><span class="badge-dot"></span>AI-Powered Cat Translator</div>
+    <h1 class="reveal"><span>What is your cat</span><br><span class="gradient-text">really thinking?</span></h1>
+    <p class="hero-desc reveal">Snap a photo. AI reads their ears, eyes, whiskers, and body language to decode exactly how your cat feels.</p>
+    <div class="hero-actions reveal">
+      <a href="#app" class="btn btn-primary btn-lg">📸 Read my cat's mood</a>
+      <a href="#how" class="btn btn-glass btn-lg">How it works</a>
+    </div>
+    <div class="hero-social-proof reveal">
+      <div class="cat-avatars">
+        <span class="cat-av">😺</span><span class="cat-av">😸</span><span class="cat-av">😻</span><span class="cat-av">🐱</span><span class="cat-av">😼</span>
+      </div>
+      <p><strong>2,847</strong> cats analyzed today</p>
+    </div>
   </div>
 </section>
 
-<!-- Mood showcase -->
-<section class="section mood-showcase">
+<!-- Mood pills -->
+<section class="section" style="padding-top:20px; padding-bottom:40px;">
   <div class="container">
-    <div class="mood-scroll">
-      <div class="mood-pill reveal-item">😺 Content</div>
-      <div class="mood-pill reveal-item">😸 Playful</div>
-      <div class="mood-pill reveal-item">😾 Annoyed</div>
-      <div class="mood-pill reveal-item">😻 Loving</div>
-      <div class="mood-pill reveal-item">🙀 Anxious</div>
-      <div class="mood-pill reveal-item">😼 Curious</div>
-      <div class="mood-pill reveal-item">😿 Hungry</div>
-      <div class="mood-pill reveal-item">😽 Sleepy</div>
+    <div class="mood-pills">
+      <div class="mood-pill reveal">😺 Content</div>
+      <div class="mood-pill reveal">😸 Playful</div>
+      <div class="mood-pill reveal">😾 Annoyed</div>
+      <div class="mood-pill reveal">😻 Loving</div>
+      <div class="mood-pill reveal">🙀 Anxious</div>
+      <div class="mood-pill reveal">😼 Curious</div>
+      <div class="mood-pill reveal">😿 Hungry</div>
+      <div class="mood-pill reveal">😽 Sleepy</div>
     </div>
   </div>
 </section>
@@ -97,198 +75,119 @@
     <h2 class="section-title reveal">How it works</h2>
     <p class="section-sub reveal">Three seconds from confused to connected</p>
     <div class="steps">
-      <div class="step reveal-item">
-        <div class="step-visual">📸</div>
-        <div class="step-connector"></div>
-        <h3>Snap</h3>
-        <p>Take a photo or upload one. Face, full body, mid-yawn — we'll figure it out.</p>
-      </div>
-      <div class="step reveal-item">
-        <div class="step-visual">🧠</div>
-        <div class="step-connector"></div>
-        <h3>Decode</h3>
-        <p>AI scans 15+ signals: ear tilt, pupil size, whisker angle, tail curve, posture.</p>
-      </div>
-      <div class="step reveal-item">
-        <div class="step-visual">💬</div>
-        <h3>Understand</h3>
-        <p>Get your cat's mood, what it means, and exactly how to respond. In seconds.</p>
-      </div>
+      <div class="step reveal"><div class="step-icon">📸</div><h3>Snap</h3><p>Take a photo or upload one. Face, full body, mid-yawn — we figure it out.</p></div>
+      <div class="step reveal"><div class="step-icon">🧠</div><h3>Decode</h3><p>AI scans 15+ signals: ear tilt, pupil size, whisker angle, tail curve, posture.</p></div>
+      <div class="step reveal"><div class="step-icon">💬</div><h3>Understand</h3><p>Get your cat's mood, what it means, and how to respond. In seconds.</p></div>
     </div>
   </div>
 </section>
 
-<!-- Demo / Try it -->
-<section id="try" class="section section-dark">
+<!-- App: Upload → Tabs (Mood / Dress Up) -->
+<section id="app" class="app-section">
   <div class="container">
-    <h2 class="section-title light reveal">Try it now</h2>
-    <p class="section-sub light reveal">No sign-up needed. Just your cat and a camera.</p>
+    <div class="app-container">
 
-    <div class="analyzer reveal">
-      <!-- Upload area -->
+      <!-- Upload -->
       <div class="upload-card" id="uploadArea">
-        <div class="upload-content" id="uploadContent">
-          <div class="upload-cat-animation">
+        <div id="uploadContent">
+          <div class="upload-cat-wrap">
             <span class="upload-cat">🐱</span>
             <span class="upload-sparkle s1">✨</span>
             <span class="upload-sparkle s2">✨</span>
             <span class="upload-sparkle s3">✨</span>
           </div>
           <p class="upload-text">Drop a cat photo here</p>
-          <p class="upload-hint">or click anywhere to browse</p>
-          <div class="upload-formats">JPG, PNG, WEBP up to 10MB</div>
+          <p class="upload-hint">or click to browse — JPG, PNG, HEIC</p>
         </div>
-        <img id="preview" class="preview-img" hidden>
-        <video id="cameraFeed" class="preview-img" autoplay playsinline hidden></video>
+        <img id="preview" class="preview-img" style="display:none">
+        <video id="cameraFeed" class="preview-img" autoplay playsinline style="display:none"></video>
         <input type="file" id="fileInput" accept="image/*" hidden>
       </div>
 
       <div class="upload-actions">
-        <button class="btn btn-action" id="cameraBtn">
-          <span>📷</span> Use Camera
-        </button>
-        <button class="btn btn-action" id="uploadBtn">
-          <span>📁</span> Upload Photo
-        </button>
+        <button class="btn btn-glass btn-sm" id="cameraBtn"><span>📷</span> Use Camera</button>
+        <button class="btn btn-glass btn-sm" id="uploadBtn"><span>📁</span> Upload Photo</button>
       </div>
 
-      <!-- Results -->
-      <div class="result-area" id="resultArea" hidden>
-        <div class="result-card">
-          <!-- Loading state -->
-          <div class="result-loading" id="resultLoading">
-            <div class="paw-loader">
-              <span class="paw p1">🐾</span>
-              <span class="paw p2">🐾</span>
-              <span class="paw p3">🐾</span>
+      <!-- Tabs (shown after upload) -->
+      <div id="tabsArea" style="display:none">
+        <div class="result-tabs">
+          <button class="tab-btn active" data-tab="mood">😺 Mood</button>
+          <button class="tab-btn" data-tab="dresser">👒 Dress Up</button>
+        </div>
+
+        <!-- Mood Panel -->
+        <div class="result-card glass" id="moodPanel">
+          <div class="result-panel active" id="moodTab">
+            <div class="loading-state" id="moodLoading">
+              <div class="paw-loader"><span class="paw p1">🐾</span><span class="paw p2">🐾</span><span class="paw p3">🐾</span></div>
+              <p class="loading-text" id="loadingText">Scanning whisker angles...</p>
             </div>
-            <p class="loading-text" id="loadingText">Scanning whisker angles...</p>
+            <div id="moodResult" style="display:none">
+              <div class="mood-emoji-lg" id="moodEmoji">😺</div>
+              <h3 class="mood-name" id="moodName">Content & Relaxed</h3>
+              <div class="confidence-wrap">
+                <div class="confidence-bar"><div class="confidence-fill" id="confidenceFill"></div></div>
+                <div class="confidence-label" id="moodConfidence">92%</div>
+              </div>
+              <p class="mood-desc" id="moodDesc"></p>
+              <div class="analysis-grid">
+                <div class="analysis-item"><div class="analysis-icon">👂</div><span class="analysis-label">Ears</span><span class="analysis-value" id="detailEars"></span></div>
+                <div class="analysis-item"><div class="analysis-icon">👁</div><span class="analysis-label">Eyes</span><span class="analysis-value" id="detailEyes"></span></div>
+                <div class="analysis-item"><div class="analysis-icon">🐈</div><span class="analysis-label">Body</span><span class="analysis-value" id="detailBody"></span></div>
+                <div class="analysis-item"><div class="analysis-icon">〰️</div><span class="analysis-label">Tail</span><span class="analysis-value" id="detailTail"></span></div>
+              </div>
+              <div class="tip-card" id="moodTip"></div>
+              <div class="result-actions">
+                <button class="btn btn-primary btn-sm" id="tryAgainBtn">🔄 Try another cat</button>
+                <button class="btn btn-soft btn-sm" id="shareBtn">📤 Share</button>
+              </div>
+            </div>
           </div>
-          <!-- Result content -->
-          <div class="result-content" id="resultContent" hidden>
-            <div class="mood-badge-large" id="moodEmoji">😺</div>
-            <h3 class="mood-name" id="moodName">Content & Relaxed</h3>
-            <div class="confidence-bar">
-              <div class="confidence-fill" id="confidenceFill"></div>
-              <span class="confidence-text" id="moodConfidence">92%</span>
+        </div>
+
+        <!-- Dresser Panel -->
+        <div class="result-card glass" id="dresserPanel" style="display:none">
+          <div class="result-panel active">
+            <div class="dresser-preview" id="dresserPreview">
+              <img id="dresserImg" style="display:none; width:100%; max-height:320px; object-fit:contain; border-radius:16px;">
+              <div class="dresser-placeholder" id="dresserPlaceholder"><span>🐱</span><p>Your cat appears here</p></div>
             </div>
-            <p class="mood-desc" id="moodDesc"></p>
-
-            <div class="analysis-grid">
-              <div class="analysis-item">
-                <div class="analysis-icon">👂</div>
-                <span class="analysis-label">Ears</span>
-                <span class="analysis-value" id="detailEars"></span>
-              </div>
-              <div class="analysis-item">
-                <div class="analysis-icon">👁</div>
-                <span class="analysis-label">Eyes</span>
-                <span class="analysis-value" id="detailEyes"></span>
-              </div>
-              <div class="analysis-item">
-                <div class="analysis-icon">🐈</div>
-                <span class="analysis-label">Body</span>
-                <span class="analysis-value" id="detailBody"></span>
-              </div>
-              <div class="analysis-item">
-                <div class="analysis-icon">〰️</div>
-                <span class="analysis-label">Tail</span>
-                <span class="analysis-value" id="detailTail"></span>
-              </div>
+            <div class="accessory-shelf">
+              <button class="acc-btn" data-acc="👑">👑</button>
+              <button class="acc-btn" data-acc="🎩">🎩</button>
+              <button class="acc-btn" data-acc="🧢">🧢</button>
+              <button class="acc-btn" data-acc="🎀">🎀</button>
+              <button class="acc-btn" data-acc="👓">👓</button>
+              <button class="acc-btn" data-acc="🕶️">🕶️</button>
+              <button class="acc-btn" data-acc="🦋">🦋</button>
+              <button class="acc-btn" data-acc="🧣">🧣</button>
+              <button class="acc-btn" data-acc="💎">💎</button>
+              <button class="acc-btn" data-acc="🌸">🌸</button>
+              <button class="acc-btn" data-acc="⭐">⭐</button>
+              <button class="acc-btn" data-acc="❤️">❤️</button>
             </div>
-
-            <div class="tip-card" id="moodTip"></div>
-
-            <div class="result-actions">
-              <button class="btn btn-primary" id="tryAgainBtn">🔄 Analyze another cat</button>
-              <button class="btn btn-share" id="shareBtn">📤 Share result</button>
+            <div class="dresser-actions">
+              <button class="btn btn-glass btn-sm" id="clearAccBtn">🗑 Clear</button>
+              <button class="btn btn-primary btn-sm" id="saveAccBtn">💾 Save Photo</button>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- Cat Studio -->
-<section id="studio" class="section">
+<!-- Coming Soon -->
+<section class="section">
   <div class="container">
-    <h2 class="section-title reveal">Cat Studio</h2>
-    <p class="section-sub reveal">Dress up your cat and imagine the impossible</p>
-
-    <div class="studio-grid">
-      <!-- Accessory Dresser -->
-      <div class="studio-card studio-dresser">
-        <h3>👒 Dress Up Your Cat</h3>
-        <p class="studio-desc">Upload a photo, then tap accessories to try them on your cat</p>
-        <div class="dresser-area">
-          <div class="dresser-preview" id="dresserPreview">
-            <div class="dresser-placeholder" id="dresserPlaceholder">
-              <span>🐱</span>
-              <p>Upload a cat photo first</p>
-            </div>
-            <img id="dresserImg" style="display:none; width:100%; max-height:350px; object-fit:contain; border-radius:12px;">
-          </div>
-          <div class="dresser-upload-row">
-            <button class="btn btn-sm" id="dresserUploadBtn">📁 Choose Photo</button>
-            <input type="file" id="dresserFileInput" accept="image/*" hidden>
-          </div>
-          <div class="accessory-shelf">
-            <button class="acc-btn" data-acc="👑" title="Crown">👑</button>
-            <button class="acc-btn" data-acc="🎩" title="Top Hat">🎩</button>
-            <button class="acc-btn" data-acc="🧢" title="Cap">🧢</button>
-            <button class="acc-btn" data-acc="🎀" title="Bow">🎀</button>
-            <button class="acc-btn" data-acc="👓" title="Glasses">👓</button>
-            <button class="acc-btn" data-acc="🕶️" title="Sunglasses">🕶️</button>
-            <button class="acc-btn" data-acc="🦋" title="Bow Tie">🦋</button>
-            <button class="acc-btn" data-acc="🧣" title="Scarf">🧣</button>
-            <button class="acc-btn" data-acc="💎" title="Diamond">💎</button>
-            <button class="acc-btn" data-acc="🌸" title="Flower">🌸</button>
-            <button class="acc-btn" data-acc="⭐" title="Star">⭐</button>
-            <button class="acc-btn" data-acc="❤️" title="Heart">❤️</button>
-          </div>
-          <div class="dresser-actions">
-            <button class="btn btn-sm btn-outline" id="clearAccBtn">🗑 Clear All</button>
-            <button class="btn btn-sm btn-primary-sm" id="saveAccBtn">💾 Save Photo</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fun AI Features (Coming Soon) -->
-      <div class="studio-coming-soon">
-        <div class="studio-card coming-card reveal-item">
-          <div class="coming-preview">
-            <div class="coming-before">🐱</div>
-            <div class="coming-arrow">→</div>
-            <div class="coming-after">👶</div>
-          </div>
-          <h3>Kitten Machine</h3>
-          <p>What did your cat look like as a baby? AI generates an adorable kitten version of your adult cat.</p>
-          <span class="badge-soon">Coming soon</span>
-        </div>
-
-        <div class="studio-card coming-card reveal-item">
-          <div class="coming-preview">
-            <div class="coming-before">🐱</div>
-            <div class="coming-arrow">→</div>
-            <div class="coming-after">🧑</div>
-          </div>
-          <h3>Human Mode</h3>
-          <p>If your cat were a person, what would they look like? AI imagines your cat as a human based on their features and personality.</p>
-          <span class="badge-soon">Coming soon</span>
-        </div>
-
-        <div class="studio-card coming-card reveal-item">
-          <div class="coming-preview">
-            <div class="coming-before">🐱</div>
-            <div class="coming-arrow">→</div>
-            <div class="coming-after">🎨</div>
-          </div>
-          <h3>Art Styles</h3>
-          <p>Transform your cat into a Renaissance painting, anime character, pixel art, or watercolor masterpiece.</p>
-          <span class="badge-soon">Coming soon</span>
-        </div>
-      </div>
+    <h2 class="section-title reveal">Coming soon</h2>
+    <p class="section-sub reveal">AI-powered features that will blow your mind</p>
+    <div class="coming-grid">
+      <div class="coming-card reveal"><div class="coming-preview"><div class="coming-before">🐱</div><div class="coming-arrow">→</div><div class="coming-after">👶</div></div><h3>Kitten Machine</h3><p>What did your cat look like as a baby? AI generates an adorable kitten version.</p><span class="badge-soon">Soon</span></div>
+      <div class="coming-card reveal"><div class="coming-preview"><div class="coming-before">🐱</div><div class="coming-arrow">→</div><div class="coming-after">🧑</div></div><h3>Human Mode</h3><p>If your cat were a person, what would they look like? AI imagines it.</p><span class="badge-soon">Soon</span></div>
+      <div class="coming-card reveal"><div class="coming-preview"><div class="coming-before">🐱</div><div class="coming-arrow">→</div><div class="coming-after">🎨</div></div><h3>Art Styles</h3><p>Your cat as a Renaissance painting, anime character, or pixel art.</p><span class="badge-soon">Soon</span></div>
     </div>
   </div>
 </section>
@@ -296,191 +195,98 @@
 <!-- Features -->
 <section id="features" class="section">
   <div class="container">
-    <h2 class="section-title reveal">Not just a mood reader</h2>
-    <p class="section-sub reveal">A whole toolkit for cat parents who care</p>
+    <h2 class="section-title reveal">Everything Cattō can do</h2>
+    <p class="section-sub reveal">A whole toolkit for cat parents</p>
     <div class="features-grid">
-      <div class="feature-card large reveal-item">
-        <div class="feature-badge">Core</div>
-        <div class="feature-icon-lg">😺</div>
-        <h3>AI Mood Reader</h3>
-        <p>Our vision AI analyzes 15+ facial and body signals — ear position, pupil dilation, whisker tension, tail posture, body angle — to determine your cat's emotional state with clinical accuracy.</p>
-      </div>
-      <div class="feature-card reveal-item">
-        <div class="feature-icon-sm">🎤</div>
-        <h3>Meow Translator</h3>
-        <p>Record a meow. AI classifies it into 12 categories: hunger, greeting, demand, distress, and more.</p>
-        <span class="badge-soon">Soon</span>
-      </div>
-      <div class="feature-card reveal-item">
-        <div class="feature-icon-sm">📊</div>
-        <h3>Mood Journal</h3>
-        <p>Track moods over time. Spot patterns. Know if your cat is stressed on Mondays (they probably are).</p>
-        <span class="badge-soon">Soon</span>
-      </div>
-      <div class="feature-card reveal-item">
-        <div class="feature-icon-sm">🃏</div>
-        <h3>Share Cards</h3>
-        <p>Auto-generate beautiful cards: "Luna is feeling: absolutely judging you." Perfect for Instagram.</p>
-        <span class="badge-soon">Soon</span>
-      </div>
-      <div class="feature-card reveal-item">
-        <div class="feature-icon-sm">📚</div>
-        <h3>Cat Body Language</h3>
-        <p>An illustrated encyclopedia of cat signals. Slow blink? Belly show? Airplane ears? We explain it all.</p>
-      </div>
-      <div class="feature-card reveal-item">
-        <div class="feature-icon-sm">🐕</div>
-        <h3>Dogs Too (Soon)</h3>
-        <p>Same AI magic, different species. Because dog owners also deserve to know what that tilted head means.</p>
-        <span class="badge-soon">Soon</span>
-      </div>
+      <div class="feature-card reveal"><div class="feature-icon">😺</div><h3>AI Mood Reader</h3><p>Analyzes 15+ facial and body signals to decode your cat's emotional state.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🎤</div><h3>Meow Translator</h3><p>Record a meow. AI classifies it: hunger, greeting, demand, distress.</p><span class="badge-soon">Soon</span></div>
+      <div class="feature-card reveal"><div class="feature-icon">📊</div><h3>Mood Journal</h3><p>Track moods over time. Know if your cat is stressed on Mondays.</p><span class="badge-soon">Soon</span></div>
+      <div class="feature-card reveal"><div class="feature-icon">🃏</div><h3>Share Cards</h3><p>"Luna is feeling: absolutely judging you." Auto-generated for social.</p><span class="badge-soon">Soon</span></div>
+      <div class="feature-card reveal"><div class="feature-icon">📚</div><h3>Body Language</h3><p>Illustrated guide to slow blinks, belly shows, airplane ears, and more.</p></div>
+      <div class="feature-card reveal"><div class="feature-icon">🐕</div><h3>Dogs Too</h3><p>Dog mood reading coming soon. Because they deserve it too.</p><span class="badge-soon">Soon</span></div>
     </div>
   </div>
 </section>
 
-<!-- Testimonial / Fun facts -->
-<section class="section section-facts">
+<!-- Facts -->
+<section class="section">
   <div class="container">
     <h2 class="section-title reveal">Cat facts our AI discovered</h2>
-    <div class="facts-grid">
-      <div class="fact-card reveal-item">
-        <span class="fact-num">73%</span>
-        <p>of cats give their owners a slow blink at least once a day — the cat equivalent of "I love you"</p>
-      </div>
-      <div class="fact-card reveal-item">
-        <span class="fact-num">89%</span>
-        <p>of "angry" cat faces are actually just concentration or sleepiness — cats are misunderstood</p>
-      </div>
-      <div class="fact-card reveal-item">
-        <span class="fact-num">12</span>
-        <p>distinct types of meow exist, each with a different meaning — from "feed me" to "I'm bored"</p>
-      </div>
+    <div class="facts-grid" style="margin-top:40px">
+      <div class="fact-card reveal"><span class="fact-num">73%</span><p>of cats slow-blink at their owner daily — the cat "I love you"</p></div>
+      <div class="fact-card reveal"><span class="fact-num">89%</span><p>of "angry" faces are actually concentration or sleepiness</p></div>
+      <div class="fact-card reveal"><span class="fact-num">12</span><p>distinct types of meow, each with a different meaning</p></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="section section-cta">
-  <div class="container cta-content reveal">
+<div class="section-cta">
+  <div class="cta-content">
     <span class="cta-emoji">🐱</span>
     <h2>Your cat has been<br>trying to talk to you.</h2>
-    <p>Now you can finally understand. No more guessing. No more "is that a happy face or an attack face?"</p>
-    <a href="#try" class="btn btn-primary btn-lg">Try Cattō — it's free</a>
+    <p>Stop guessing. Start understanding.</p>
+    <a href="#app" class="btn btn-lg">Try Cattō — it's free</a>
   </div>
-</section>
+</div>
 
 <!-- Footer -->
 <footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <span class="logo"><span class="logo-icon">🐱</span> cattō</span>
-      <p class="footer-tagline">AI that speaks cat.</p>
-    </div>
-    <div class="footer-links">
-      <a href="../index.html">Portfolio</a>
-      <a href="../nibi.html">Nibi</a>
-    </div>
-    <p class="footer-credit">Made with 🐱 by <a href="../index.html">Xianmin Feng</a></p>
-  </div>
+  <p>Made with 🐱 by <a href="../index.html">Xianmin Feng</a></p>
 </footer>
 
 <script>
-// ===== HEIC conversion helper =====
+// ===== HEIC helper =====
 async function convertToJpeg(file) {
-  const isHeic = file.name.toLowerCase().endsWith('.heic') ||
-                 file.name.toLowerCase().endsWith('.heif') ||
-                 file.type === 'image/heic' ||
-                 file.type === 'image/heif' ||
-                 file.type === '';  // iOS sometimes sends empty type for HEIC
+  const isHeic = file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif') || file.type === 'image/heic' || file.type === 'image/heif' || file.type === '';
   if (!isHeic) return file;
   try {
     const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.85 });
     const blob = Array.isArray(result) ? result[0] : result;
     return new File([blob], file.name.replace(/\.heic|\.heif/i, '.jpg'), { type: 'image/jpeg' });
   } catch (err) {
-    console.error('HEIC conversion error:', err);
-    // Fallback: try reading as-is (some browsers/OS may have already converted)
+    console.error('HEIC error:', err);
     if (file.size > 0) return file;
-    alert('Could not convert HEIC. Please try a JPG or PNG instead.');
     return null;
   }
 }
 
-// ===== Scroll reveal animations =====
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+// ===== Scroll reveal =====
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-document.querySelectorAll('.reveal, .reveal-item').forEach(el => observer.observe(el));
-
-// ===== Nav scroll effect =====
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// ===== Floating paw prints =====
-const pawBg = document.getElementById('pawBg');
-for (let i = 0; i < 15; i++) {
-  const paw = document.createElement('span');
-  paw.className = 'paw-float';
-  paw.textContent = '🐾';
-  paw.style.left = Math.random() * 100 + '%';
-  paw.style.animationDuration = (8 + Math.random() * 12) + 's';
-  paw.style.animationDelay = Math.random() * 10 + 's';
-  paw.style.fontSize = (12 + Math.random() * 16) + 'px';
-  paw.style.opacity = 0.06 + Math.random() * 0.06;
-  pawBg.appendChild(paw);
-}
-
-// ===== Upload & Camera =====
+// ===== Upload =====
 const uploadArea = document.getElementById('uploadArea');
 const uploadContent = document.getElementById('uploadContent');
 const fileInput = document.getElementById('fileInput');
 const preview = document.getElementById('preview');
 const cameraFeed = document.getElementById('cameraFeed');
-const resultArea = document.getElementById('resultArea');
-const resultLoading = document.getElementById('resultLoading');
-const resultContent = document.getElementById('resultContent');
-
-let cameraStream = null;
+const tabsArea = document.getElementById('tabsArea');
+let cameraStream = null, cameraActive = false;
+const cameraBtnEl = document.getElementById('cameraBtn');
+let currentImgSrc = '';
 
 uploadArea.addEventListener('click', () => {
-  if (!cameraFeed.hidden) captureFromCamera();
-  else fileInput.click();
+  if (cameraActive) { captureFromCamera(); return; }
+  if (preview.style.display !== 'none') return;
+  fileInput.click();
 });
 document.getElementById('uploadBtn').addEventListener('click', () => fileInput.click());
-
 uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
 uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
-uploadArea.addEventListener('drop', e => {
-  e.preventDefault(); uploadArea.classList.remove('dragover');
-  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
-});
-
+uploadArea.addEventListener('drop', e => { e.preventDefault(); uploadArea.classList.remove('dragover'); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
 fileInput.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
 
-const cameraBtnEl = document.getElementById('cameraBtn');
-let cameraActive = false;
-
 cameraBtnEl.addEventListener('click', async () => {
-  if (cameraActive) {
-    captureFromCamera();
-    return;
-  }
+  if (cameraActive) { captureFromCamera(); return; }
   try {
     cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-    cameraFeed.srcObject = cameraStream;
-    cameraFeed.hidden = false;
-    preview.hidden = true;
-    uploadContent.style.display = 'none';
-    cameraActive = true;
-    cameraBtnEl.innerHTML = '<span>📸</span> Capture Photo';
-    cameraBtnEl.classList.add('btn-capture');
-  } catch (err) { alert('Camera not available. Please upload a photo instead.'); }
+    cameraFeed.srcObject = cameraStream; cameraFeed.style.display = 'block';
+    preview.style.display = 'none'; uploadContent.style.display = 'none';
+    cameraActive = true; cameraBtnEl.innerHTML = '<span>📸</span> Capture';
+  } catch (err) { alert('Camera not available.'); }
 });
 
 function captureFromCamera() {
@@ -488,75 +294,75 @@ function captureFromCamera() {
   c.width = cameraFeed.videoWidth; c.height = cameraFeed.videoHeight;
   c.getContext('2d').drawImage(cameraFeed, 0, 0);
   if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; }
-  preview.src = c.toDataURL('image/jpeg');
-  preview.hidden = false; cameraFeed.hidden = true; uploadContent.style.display = 'none';
-  cameraActive = false;
-  cameraBtnEl.innerHTML = '<span>📷</span> Use Camera';
-  cameraBtnEl.classList.remove('btn-capture');
-  analyzeMood();
+  const src = c.toDataURL('image/jpeg');
+  showImage(src);
+  cameraActive = false; cameraBtnEl.innerHTML = '<span>📷</span> Use Camera';
+  cameraFeed.style.display = 'none';
 }
 
 async function handleFile(file) {
   const converted = await convertToJpeg(file);
   if (!converted) return;
-  if (!converted.type.startsWith('image/')) return;
   const reader = new FileReader();
-  reader.onload = e => {
-    preview.src = e.target.result;
-    preview.hidden = false; uploadContent.style.display = 'none';
-    analyzeMood();
-  };
+  reader.onload = e => showImage(e.target.result);
   reader.readAsDataURL(converted);
 }
 
+function showImage(src) {
+  currentImgSrc = src;
+  preview.src = src; preview.style.display = 'block';
+  uploadContent.style.display = 'none';
+  // Also set dresser image
+  document.getElementById('dresserImg').src = src;
+  document.getElementById('dresserImg').style.display = 'block';
+  document.getElementById('dresserPlaceholder').style.display = 'none';
+  // Show tabs and start analysis
+  tabsArea.style.display = 'block';
+  tabsArea.classList.add('jelly-in');
+  switchTab('mood');
+  analyzeMood();
+}
+
 document.getElementById('tryAgainBtn').addEventListener('click', () => {
-  preview.hidden = true; uploadContent.style.display = '';
-  resultArea.hidden = true; resultContent.hidden = true; resultLoading.hidden = false;
+  preview.style.display = 'none'; uploadContent.style.display = '';
+  tabsArea.style.display = 'none';
+  document.getElementById('moodResult').style.display = 'none';
+  document.getElementById('moodLoading').style.display = '';
   fileInput.value = '';
-  cameraActive = false;
-  cameraBtnEl.innerHTML = '<span>📷</span> Use Camera';
-  cameraBtnEl.classList.remove('btn-capture');
+  // Clear dresser
+  placedAccessories.forEach(a => a.remove()); placedAccessories.length = 0;
+  document.getElementById('dresserImg').style.display = 'none';
+  document.getElementById('dresserPlaceholder').style.display = '';
 });
 
 document.getElementById('shareBtn').addEventListener('click', () => {
   const name = document.getElementById('moodName').textContent;
   const text = `My cat is feeling: ${name}! 🐱 Analyzed by Cattō AI`;
   if (navigator.share) navigator.share({ title: 'Cattō', text });
-  else navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard!'));
+  else { navigator.clipboard.writeText(text); alert('Copied to clipboard!'); }
 });
 
-// ===== Cat Studio / Dresser =====
+// ===== Tabs =====
+const tabBtns = document.querySelectorAll('.tab-btn');
+function switchTab(tab) {
+  tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.getElementById('moodPanel').style.display = tab === 'mood' ? 'block' : 'none';
+  document.getElementById('dresserPanel').style.display = tab === 'dresser' ? 'block' : 'none';
+}
+tabBtns.forEach(b => b.addEventListener('click', () => switchTab(b.dataset.tab)));
+
+// ===== Dresser =====
 const dresserPreview = document.getElementById('dresserPreview');
-const dresserPlaceholder = document.getElementById('dresserPlaceholder');
-const dresserImg = document.getElementById('dresserImg');
-const dresserFileInput = document.getElementById('dresserFileInput');
-const accBtns = document.querySelectorAll('.acc-btn');
 const placedAccessories = [];
-
-document.getElementById('dresserUploadBtn').addEventListener('click', () => dresserFileInput.click());
-dresserFileInput.addEventListener('change', async e => {
-  const file = e.target.files[0];
-  if (!file) return;
-  const converted = await convertToJpeg(file);
-  if (!converted) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    dresserImg.src = ev.target.result;
-    dresserImg.style.display = 'block';
-    dresserPlaceholder.style.display = 'none';
-  };
-  reader.readAsDataURL(converted);
-});
-
-accBtns.forEach(btn => {
+document.querySelectorAll('.acc-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    if (dresserImg.style.display === 'none') { alert('Upload a cat photo first!'); return; }
+    btn.classList.add('jelly-pop');
+    setTimeout(() => btn.classList.remove('jelly-pop'), 400);
+    if (document.getElementById('dresserImg').style.display === 'none') return;
     const acc = document.createElement('div');
     acc.className = 'placed-accessory';
     acc.textContent = btn.dataset.acc;
-    acc.style.left = '50%';
-    acc.style.top = '30%';
-    acc.style.fontSize = '48px';
+    acc.style.cssText = 'left:50%;top:30%;font-size:48px;position:absolute;';
     dresserPreview.appendChild(acc);
     placedAccessories.push(acc);
     makeDraggable(acc);
@@ -564,134 +370,63 @@ accBtns.forEach(btn => {
 });
 
 function makeDraggable(el) {
-  let startX, startY, origX, origY;
-  let isDragging = false;
-
-  el.addEventListener('mousedown', e => { startDrag(e.clientX, e.clientY); e.preventDefault(); });
-  el.addEventListener('touchstart', e => { startDrag(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); });
-
-  function startDrag(cx, cy) {
-    isDragging = true;
-    startX = cx; startY = cy;
-    const rect = el.getBoundingClientRect();
-    origX = rect.left - dresserPreview.getBoundingClientRect().left;
-    origY = rect.top - dresserPreview.getBoundingClientRect().top;
-    el.style.zIndex = 100;
-  }
-
-  window.addEventListener('mousemove', e => { if (isDragging) moveDrag(e.clientX, e.clientY); });
-  window.addEventListener('touchmove', e => { if (isDragging) moveDrag(e.touches[0].clientX, e.touches[0].clientY); });
-
-  function moveDrag(cx, cy) {
-    const dx = cx - startX, dy = cy - startY;
-    el.style.left = (origX + dx) + 'px';
-    el.style.top = (origY + dy) + 'px';
-    el.style.transform = 'none';
-  }
-
-  window.addEventListener('mouseup', () => { isDragging = false; el.style.zIndex = 10; });
-  window.addEventListener('touchend', () => { isDragging = false; el.style.zIndex = 10; });
-
-  // Pinch to resize on wheel
-  el.addEventListener('wheel', e => {
-    e.preventDefault();
-    const current = parseFloat(el.style.fontSize) || 48;
-    const newSize = Math.max(20, Math.min(120, current + (e.deltaY > 0 ? -4 : 4)));
-    el.style.fontSize = newSize + 'px';
-  });
+  let sx, sy, ox, oy, dragging = false;
+  const start = (cx, cy) => { dragging = true; sx = cx; sy = cy; const r = el.getBoundingClientRect(), p = dresserPreview.getBoundingClientRect(); ox = r.left - p.left; oy = r.top - p.top; el.style.zIndex = 100; };
+  const move = (cx, cy) => { if (!dragging) return; el.style.left = (ox + cx - sx) + 'px'; el.style.top = (oy + cy - sy) + 'px'; el.style.transform = 'none'; };
+  const end = () => { dragging = false; el.style.zIndex = 10; };
+  el.addEventListener('mousedown', e => { start(e.clientX, e.clientY); e.preventDefault(); });
+  el.addEventListener('touchstart', e => { start(e.touches[0].clientX, e.touches[0].clientY); e.preventDefault(); }, { passive: false });
+  window.addEventListener('mousemove', e => move(e.clientX, e.clientY));
+  window.addEventListener('touchmove', e => move(e.touches[0].clientX, e.touches[0].clientY));
+  window.addEventListener('mouseup', end); window.addEventListener('touchend', end);
+  el.addEventListener('wheel', e => { e.preventDefault(); const s = parseFloat(el.style.fontSize) || 48; el.style.fontSize = Math.max(20, Math.min(120, s + (e.deltaY > 0 ? -4 : 4))) + 'px'; });
 }
 
-document.getElementById('clearAccBtn').addEventListener('click', () => {
-  placedAccessories.forEach(a => a.remove());
-  placedAccessories.length = 0;
-});
-
+document.getElementById('clearAccBtn').addEventListener('click', () => { placedAccessories.forEach(a => a.remove()); placedAccessories.length = 0; });
 document.getElementById('saveAccBtn').addEventListener('click', () => {
-  const canvas = document.createElement('canvas');
-  const img = dresserImg;
-  canvas.width = img.naturalWidth;
-  canvas.height = img.naturalHeight;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0);
-
-  const previewRect = dresserPreview.getBoundingClientRect();
-  const imgRect = img.getBoundingClientRect();
-  const scaleX = img.naturalWidth / imgRect.width;
-  const scaleY = img.naturalHeight / imgRect.height;
-  const offsetX = imgRect.left - previewRect.left;
-  const offsetY = imgRect.top - previewRect.top;
-
-  placedAccessories.forEach(acc => {
-    const accRect = acc.getBoundingClientRect();
-    const x = (accRect.left - imgRect.left) * scaleX;
-    const y = (accRect.top - imgRect.top) * scaleY;
-    const size = parseFloat(acc.style.fontSize) * scaleX;
-    ctx.font = size + 'px serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(acc.textContent, x + accRect.width * scaleX / 2, y + accRect.height * scaleY / 2);
-  });
-
-  const link = document.createElement('a');
-  link.download = 'catto-dressed-up.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
+  const img = document.getElementById('dresserImg');
+  const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight;
+  const ctx = c.getContext('2d'); ctx.drawImage(img, 0, 0);
+  const ir = img.getBoundingClientRect(); const sx = img.naturalWidth / ir.width; const sy = img.naturalHeight / ir.height;
+  placedAccessories.forEach(a => { const r = a.getBoundingClientRect(); const s = parseFloat(a.style.fontSize) * sx; ctx.font = s + 'px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(a.textContent, (r.left - ir.left + r.width / 2) * sx, (r.top - ir.top + r.height / 2) * sy); });
+  const link = document.createElement('a'); link.download = 'catto-dressed-up.png'; link.href = c.toDataURL('image/png'); link.click();
 });
 
 // ===== AI Analysis =====
 const moods = [
-  { emoji:'😺', name:'Content & Relaxed', desc:'Your cat is at peace. They feel safe, comfortable, and completely trust their environment (and you). This is a cat living their best life.', ears:'Forward & relaxed', eyes:'Half-closed, slow blinking', body:'Loose, melted into surface', tail:'Gently curved or tucked', tip:'💡 This is bonding time. Slow blink back at them — it\'s cat for "I love you too."', confidence:92 },
-  { emoji:'😼', name:'Curious & Alert', desc:'Something caught their attention. Your cat is locked in, processing, calculating. The prey drive might be activating — or they just heard a chip bag.', ears:'Perked forward, rotating', eyes:'Wide open, focused', body:'Upright, weight forward', tail:'Straight up, tip twitching', tip:'💡 Let them explore! This is a great time for puzzle feeders or a new toy.', confidence:88 },
-  { emoji:'😾', name:'Annoyed & Done', desc:'Your cat is overstimulated and sending clear "stop" signals. They\'re not angry — they\'re setting boundaries. Respect them or face the consequences.', ears:'Flattened sideways', eyes:'Narrowed, direct stare', body:'Tense, skin rippling', tail:'Lashing side to side', tip:'💡 Back off immediately. No petting. Let them come to you when they\'re ready.', confidence:85 },
-  { emoji:'🙀', name:'Anxious & Stressed', desc:'Something in the environment is bothering your cat. Could be a new smell, a loud noise, or that cucumber you put behind them (please don\'t do that).', ears:'Pulled flat against head', eyes:'Wide, dilated pupils', body:'Crouched, making themselves small', tail:'Puffed up or tucked tight', tip:'💡 Create a quiet safe space. Speak softly. A Feliway diffuser can help long-term.', confidence:79 },
-  { emoji:'😸', name:'Playful & Zoomy', desc:'The zoomies are imminent. Your cat has energy to burn and is looking for trouble — the fun kind. Furniture may be at risk.', ears:'Forward, alert', eyes:'Bright, pupils dilated', body:'Pounce-ready crouch', tail:'Puffed, twitching wildly', tip:'💡 Grab a wand toy NOW. 15 minutes of play prevents 3 hours of chaos.', confidence:91 },
-  { emoji:'😿', name:'Wants Attention', desc:'Your cat is being social. They want your presence, your touch, or your food. Probably your food. But also maybe just you.', ears:'Forward, tracking you', eyes:'Direct eye contact', body:'Following you everywhere', tail:'Upright with hooked tip', tip:'💡 Check food & water first. Then give 10 minutes of undivided attention.', confidence:86 },
-  { emoji:'😻', name:'Pure Love', desc:'Congratulations. Your cat actually likes you. Head bunts, purring, kneading — these are the highest honors a cat can bestow upon a human.', ears:'Relaxed, slightly forward', eyes:'Slow blinking, soft gaze', body:'Pressed against you, kneading', tail:'Wrapped around you', tip:'💡 You\'ve been chosen. Enjoy this. Slow blink back. Don\'t move. You\'re a pillow now.', confidence:95 },
+  { emoji:'😺', name:'Content & Relaxed', desc:'Your cat is at peace. They feel safe and trust you completely. This is a cat living their best life.', ears:'Forward & relaxed', eyes:'Half-closed, slow blinking', body:'Loose, melted posture', tail:'Gently curved', tip:'💡 Slow blink back — it\'s cat for "I love you too."', confidence:92 },
+  { emoji:'😼', name:'Curious & Alert', desc:'Something caught their attention. Your cat is locked in, processing. The prey drive might be activating — or they heard a chip bag.', ears:'Perked forward, rotating', eyes:'Wide open, focused', body:'Upright, weight forward', tail:'Straight up, twitching', tip:'💡 Let them explore! Great time for a puzzle feeder or new toy.', confidence:88 },
+  { emoji:'😾', name:'Annoyed & Done', desc:'Your cat has had enough. They\'re setting boundaries. Respect them or face consequences.', ears:'Flattened sideways', eyes:'Narrowed, staring', body:'Tense, skin rippling', tail:'Lashing side to side', tip:'💡 Back off. No petting. Let them come to you.', confidence:85 },
+  { emoji:'🙀', name:'Anxious & Stressed', desc:'Something in the environment is bothering your cat. Could be a new smell, loud noise, or that cucumber behind them.', ears:'Pulled flat against head', eyes:'Wide, dilated pupils', body:'Crouched low', tail:'Puffed up or tucked', tip:'💡 Create a quiet safe space. Speak softly. Avoid sudden movements.', confidence:79 },
+  { emoji:'😸', name:'Playful & Zoomy', desc:'The zoomies are imminent. Your cat has energy to burn. Furniture may be at risk.', ears:'Forward, alert', eyes:'Bright, pupils dilated', body:'Pounce-ready crouch', tail:'Puffed, twitching', tip:'💡 Grab a wand toy NOW. 15 min of play prevents 3 hours of chaos.', confidence:91 },
+  { emoji:'😿', name:'Wants Attention', desc:'Your cat wants company. They might be lonely, hungry, or just want quality time. Probably your food. But also you.', ears:'Forward, tracking you', eyes:'Direct eye contact', body:'Following you around', tail:'Upright with hooked tip', tip:'💡 Check food & water first. Then give 10 min of undivided attention.', confidence:86 },
+  { emoji:'😻', name:'Pure Love', desc:'Your cat actually likes you. Head bunts, purring, kneading — these are the highest honors a cat can bestow.', ears:'Relaxed, slightly forward', eyes:'Slow blinking, soft gaze', body:'Pressed against you, kneading', tail:'Wrapped around you', tip:'💡 You\'ve been chosen. Enjoy this. Don\'t move. You\'re a pillow now.', confidence:95 },
 ];
 
-const loadingMessages = [
-  'Scanning whisker angles...',
-  'Measuring pupil dilation...',
-  'Analyzing ear tilt vectors...',
-  'Calculating tail curvature...',
-  'Consulting the cat database...',
-  'Decoding feline body language...',
-  'Running mood classification...',
-  'Almost there... your cat is complex...',
-];
+const loadingMsgs = ['Scanning whisker angles...', 'Measuring pupil dilation...', 'Analyzing ear tilt vectors...', 'Calculating tail curvature...', 'Consulting the cat database...', 'Decoding feline body language...', 'Almost there...'];
 
 function analyzeMood() {
-  resultArea.hidden = false;
-  resultLoading.hidden = false;
-  resultContent.hidden = false;
-  resultContent.hidden = true;
-  resultArea.scrollIntoView({ behavior:'smooth', block:'center' });
-
-  let msgIdx = 0;
-  const loadingText = document.getElementById('loadingText');
-  const msgInterval = setInterval(() => {
-    msgIdx = (msgIdx + 1) % loadingMessages.length;
-    loadingText.textContent = loadingMessages[msgIdx];
-  }, 600);
-
+  document.getElementById('moodLoading').style.display = '';
+  document.getElementById('moodResult').style.display = 'none';
+  let i = 0;
+  const lt = document.getElementById('loadingText');
+  const iv = setInterval(() => { i = (i + 1) % loadingMsgs.length; lt.textContent = loadingMsgs[i]; }, 500);
   setTimeout(() => {
-    clearInterval(msgInterval);
-    const mood = moods[Math.floor(Math.random() * moods.length)];
-
-    document.getElementById('moodEmoji').textContent = mood.emoji;
-    document.getElementById('moodName').textContent = mood.name;
-    document.getElementById('moodConfidence').textContent = mood.confidence + '%';
-    document.getElementById('confidenceFill').style.width = mood.confidence + '%';
-    document.getElementById('moodDesc').textContent = mood.desc;
-    document.getElementById('detailEars').textContent = mood.ears;
-    document.getElementById('detailEyes').textContent = mood.eyes;
-    document.getElementById('detailBody').textContent = mood.body;
-    document.getElementById('detailTail').textContent = mood.tail;
-    document.getElementById('moodTip').textContent = mood.tip;
-
-    resultLoading.hidden = true;
-    resultContent.hidden = false;
-    resultContent.classList.add('animate-in');
+    clearInterval(iv);
+    const m = moods[Math.floor(Math.random() * moods.length)];
+    document.getElementById('moodEmoji').textContent = m.emoji;
+    document.getElementById('moodName').textContent = m.name;
+    document.getElementById('moodConfidence').textContent = m.confidence + '%';
+    document.getElementById('confidenceFill').style.width = m.confidence + '%';
+    document.getElementById('moodDesc').textContent = m.desc;
+    document.getElementById('detailEars').textContent = m.ears;
+    document.getElementById('detailEyes').textContent = m.eyes;
+    document.getElementById('detailBody').textContent = m.body;
+    document.getElementById('detailTail').textContent = m.tail;
+    document.getElementById('moodTip').textContent = m.tip;
+    document.getElementById('moodLoading').style.display = 'none';
+    document.getElementById('moodResult').style.display = 'block';
+    document.getElementById('moodResult').classList.add('jelly-in');
   }, 2500);
 }
 </script>
