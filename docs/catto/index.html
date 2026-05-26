@@ -139,7 +139,7 @@
         </div>
         <img id="preview" class="preview-img" hidden>
         <video id="cameraFeed" class="preview-img" autoplay playsinline hidden></video>
-        <input type="file" id="fileInput" accept="image/*" hidden>
+        <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
       </div>
 
       <div class="upload-actions">
@@ -230,7 +230,7 @@
           </div>
           <div class="dresser-upload-row">
             <button class="btn btn-sm" id="dresserUploadBtn">📁 Choose Photo</button>
-            <input type="file" id="dresserFileInput" accept="image/*" hidden>
+            <input type="file" id="dresserFileInput" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
           </div>
           <div class="accessory-shelf">
             <button class="acc-btn" data-acc="👑" title="Crown">👑</button>
@@ -475,6 +475,10 @@ function captureFromCamera() {
 }
 
 function handleFile(file) {
+  if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
+    alert('HEIC format is not supported by browsers. Please use a JPG or PNG photo instead.\n\nTip: On iPhone, go to Settings > Camera > Formats > Most Compatible to save photos as JPG.');
+    return;
+  }
   if (!file.type.startsWith('image/')) return;
   const reader = new FileReader();
   reader.onload = e => {
@@ -511,14 +515,19 @@ const placedAccessories = [];
 
 document.getElementById('dresserUploadBtn').addEventListener('click', () => dresserFileInput.click());
 dresserFileInput.addEventListener('change', e => {
-  if (!e.target.files[0]) return;
+  const file = e.target.files[0];
+  if (!file) return;
+  if (file.name.toLowerCase().endsWith('.heic') || file.name.toLowerCase().endsWith('.heif')) {
+    alert('HEIC format is not supported by browsers. Please use a JPG or PNG photo instead.\n\nTip: On iPhone, go to Settings > Camera > Formats > Most Compatible to save photos as JPG.');
+    return;
+  }
   const reader = new FileReader();
   reader.onload = ev => {
     dresserImg.src = ev.target.result;
     dresserImg.style.display = 'block';
     dresserPlaceholder.style.display = 'none';
   };
-  reader.readAsDataURL(e.target.files[0]);
+  reader.readAsDataURL(file);
 });
 
 accBtns.forEach(btn => {
