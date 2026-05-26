@@ -208,60 +208,48 @@
 <!-- Speak to Cat -->
 <section id="speak" class="section">
   <div class="container">
-    <h2 class="section-title reveal">Speak to your cat</h2>
-    <p class="section-sub reveal">Translate human words into cat language and play it to your cat</p>
+    <h2 class="section-title reveal">Talk to your cat</h2>
+    <p class="section-sub reveal">Learn how to communicate in cat language — with body, eyes, and voice</p>
 
     <div class="speak-container reveal">
       <div class="speak-card glass">
         <div class="speak-phrases">
-          <button class="phrase-btn active" data-phrase="hello">
-            <span class="phrase-label">Hello</span>
-            <span class="phrase-cat">mrrp!</span>
-            <span class="phrase-desc">Short trill — a friendly greeting</span>
-          </button>
-          <button class="phrase-btn" data-phrase="love">
-            <span class="phrase-label">I love you</span>
-            <span class="phrase-cat">prrrrr... 😌</span>
-            <span class="phrase-desc">Slow purr with a slow blink</span>
-          </button>
-          <button class="phrase-btn" data-phrase="come">
-            <span class="phrase-label">Come here</span>
-            <span class="phrase-cat">mew mew mew!</span>
-            <span class="phrase-desc">Short repeated calls</span>
-          </button>
-          <button class="phrase-btn" data-phrase="food">
-            <span class="phrase-label">Food time</span>
-            <span class="phrase-cat">meoooow!</span>
-            <span class="phrase-desc">Long demanding meow</span>
-          </button>
-          <button class="phrase-btn" data-phrase="play">
-            <span class="phrase-label">Let's play</span>
-            <span class="phrase-cat">ek ek ek!</span>
-            <span class="phrase-desc">Excited chattering chirps</span>
-          </button>
-          <button class="phrase-btn" data-phrase="goodnight">
-            <span class="phrase-label">Good night</span>
-            <span class="phrase-cat">mmrrrrr...</span>
-            <span class="phrase-desc">Soft low purr — time to rest</span>
-          </button>
+          <div class="phrase-card">
+            <span class="phrase-label">Say "Hello"</span>
+            <span class="phrase-how">Slow blink + soft high-pitched "hey"</span>
+            <span class="phrase-why">Cats greet with a slow blink and short trill. Mirror this by slowly closing your eyes at them and speaking softly.</span>
+          </div>
+          <div class="phrase-card">
+            <span class="phrase-label">Say "I love you"</span>
+            <span class="phrase-how">Slow blink 3 times</span>
+            <span class="phrase-why">The slow blink is the #1 proven way to tell your cat you love them. Studies show cats slow-blink back.</span>
+          </div>
+          <div class="phrase-card">
+            <span class="phrase-label">Say "Come here"</span>
+            <span class="phrase-how">Crouch low + extend hand + soft clicking</span>
+            <span class="phrase-why">Making yourself smaller is non-threatening. Extend a finger at their nose level — let them come to you.</span>
+          </div>
+          <div class="phrase-card">
+            <span class="phrase-label">Say "I trust you"</span>
+            <span class="phrase-how">Show your side + look away casually</span>
+            <span class="phrase-why">Direct eye contact is threatening. Looking away signals trust. Cats expose their side to show comfort.</span>
+          </div>
+          <div class="phrase-card">
+            <span class="phrase-label">Say "Let's play"</span>
+            <span class="phrase-how">Wiggle fingers behind an object</span>
+            <span class="phrase-why">Mimics prey hiding. Triggers their hunt instinct. Never use bare hands — always use a toy or object.</span>
+          </div>
+          <div class="phrase-card">
+            <span class="phrase-label">Say "You're safe"</span>
+            <span class="phrase-how">Sit nearby + don't move + breathe slowly</span>
+            <span class="phrase-why">Anxious cats need calm presence, not touch. Just being near them without forcing contact builds trust.</span>
+          </div>
         </div>
 
-        <div class="speak-player">
-          <div class="player-visual" id="playerVisual">
-            <svg width="40" height="40"><use href="#ico-cat"/></svg>
-          </div>
-          <div class="player-wave" id="playerWave">
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
-            <div class="wave-bar"></div>
-          </div>
-          <button class="btn btn-primary btn-play" id="playBtn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-            Play to cat
-          </button>
+        <div class="speak-footer">
+          <svg width="16" height="16" style="color:#007AFF"><use href="#ico-cat"/></svg>
+          <p>Real cat audio translator coming in the Cattō iOS app</p>
         </div>
-
-        <p class="speak-tip">Hold your phone near your cat and press play. Watch their ears!</p>
       </div>
     </div>
   </div>
@@ -324,131 +312,6 @@
 </footer>
 
 <script>
-// ===== Speak to Cat =====
-let selectedPhrase = 'hello';
-const phraseBtns = document.querySelectorAll('.phrase-btn');
-const playBtn = document.getElementById('playBtn');
-const playerVisual = document.getElementById('playerVisual');
-const waveBars = document.querySelectorAll('.wave-bar');
-
-phraseBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    phraseBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    selectedPhrase = btn.dataset.phrase;
-  });
-});
-
-// Realistic cat sounds using formant synthesis + harmonics + noise
-function playMeow(type) {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const master = ctx.createGain();
-  master.gain.value = 0.5;
-  master.connect(ctx.destination);
-
-  // Realistic meow: fundamental + harmonics + vibrato + noise
-  function catVoice(f0Start, f0End, dur, start, vol = 0.3) {
-    const t = ctx.currentTime + start;
-    // Fundamental + 3 harmonics
-    [1, 2, 3, 4].forEach((h, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const filter = ctx.createBiquadFilter();
-      osc.connect(filter); filter.connect(gain); gain.connect(master);
-      osc.type = i === 0 ? 'sawtooth' : 'sine';
-      osc.frequency.setValueAtTime(f0Start * h, t);
-      osc.frequency.exponentialRampToValueAtTime(f0End * h, t + dur);
-      // Formant filter (vowel-like resonance)
-      filter.type = 'bandpass'; filter.Q.value = 3;
-      filter.frequency.setValueAtTime(800 + i * 400, t);
-      filter.frequency.linearRampToValueAtTime(600 + i * 300, t + dur);
-      // Envelope
-      const v = vol * [1, 0.4, 0.2, 0.1][i];
-      gain.gain.setValueAtTime(0, t);
-      gain.gain.linearRampToValueAtTime(v, t + 0.04);
-      gain.gain.setValueAtTime(v * 0.9, t + dur * 0.6);
-      gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
-      // Vibrato
-      const vib = ctx.createOscillator();
-      const vibGain = ctx.createGain();
-      vib.connect(vibGain); vibGain.connect(osc.frequency);
-      vib.frequency.value = 5 + Math.random() * 2;
-      vibGain.gain.value = f0Start * 0.02;
-      vib.start(t); vib.stop(t + dur);
-      osc.start(t); osc.stop(t + dur);
-    });
-    // Breathiness (filtered noise)
-    const bufSize = ctx.sampleRate * dur;
-    const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
-    const data = buf.getChannelData(0);
-    for (let i = 0; i < bufSize; i++) data[i] = (Math.random() * 2 - 1) * 0.3;
-    const noise = ctx.createBufferSource();
-    const nFilter = ctx.createBiquadFilter();
-    const nGain = ctx.createGain();
-    noise.buffer = buf;
-    noise.connect(nFilter); nFilter.connect(nGain); nGain.connect(master);
-    nFilter.type = 'bandpass'; nFilter.frequency.value = f0Start * 2; nFilter.Q.value = 1;
-    nGain.gain.setValueAtTime(0, t);
-    nGain.gain.linearRampToValueAtTime(vol * 0.08, t + 0.05);
-    nGain.gain.exponentialRampToValueAtTime(0.001, t + dur);
-    noise.start(t); noise.stop(t + dur);
-  }
-
-  // Purr: low frequency rumble with amplitude modulation
-  function catPurr(dur, start) {
-    const t = ctx.currentTime + start;
-    const osc = ctx.createOscillator();
-    const osc2 = ctx.createOscillator();
-    const gain = ctx.createGain();
-    const lfo = ctx.createOscillator();
-    const lfoGain = ctx.createGain();
-    osc.connect(gain); osc2.connect(gain); gain.connect(master);
-    lfo.connect(lfoGain); lfoGain.connect(gain.gain);
-    osc.type = 'sawtooth'; osc.frequency.value = 26;
-    osc2.type = 'square'; osc2.frequency.value = 26.5;
-    lfo.frequency.value = 26; lfoGain.gain.value = 0.06;
-    gain.gain.setValueAtTime(0, t);
-    gain.gain.linearRampToValueAtTime(0.08, t + 0.4);
-    gain.gain.setValueAtTime(0.08, t + dur - 0.5);
-    gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
-    osc.start(t); osc.stop(t + dur);
-    osc2.start(t); osc2.stop(t + dur);
-    lfo.start(t); lfo.stop(t + dur);
-  }
-
-  // Chirp/trill: rapid frequency rise
-  function catChirp(freq, dur, start) {
-    const t = ctx.currentTime + start;
-    catVoice(freq, freq * 2.2, dur, start, 0.15);
-  }
-
-  const sounds = {
-    hello: () => { catVoice(500, 850, 0.35, 0, 0.25); catVoice(750, 500, 0.18, 0.4, 0.12); return 0.7; },
-    love: () => { catPurr(2.8, 0); return 2.8; },
-    come: () => { catVoice(650, 450, 0.22, 0, 0.2); catVoice(680, 470, 0.22, 0.38, 0.2); catVoice(700, 480, 0.25, 0.76, 0.22); return 1.1; },
-    food: () => { catVoice(350, 750, 0.9, 0, 0.35); catVoice(500, 280, 0.45, 1.1, 0.18); return 1.6; },
-    play: () => { catChirp(800, 0.12, 0); catChirp(950, 0.12, 0.18); catChirp(1050, 0.12, 0.36); catChirp(850, 0.12, 0.54); catChirp(1000, 0.15, 0.72); return 0.95; },
-    goodnight: () => { catPurr(2, 0); catVoice(280, 220, 0.6, 2.1, 0.08); return 2.8; },
-  };
-
-  const duration = sounds[type]();
-
-  // Animate
-  playerVisual.classList.add('playing');
-  waveBars.forEach(b => b.classList.add('active'));
-  playBtn.disabled = true;
-  playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg> Playing...';
-
-  setTimeout(() => {
-    playerVisual.classList.remove('playing');
-    waveBars.forEach(b => b.classList.remove('active'));
-    playBtn.disabled = false;
-    playBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="5 3 19 12 5 21 5 3"/></svg> Play to cat';
-    ctx.close();
-  }, duration * 1000 + 200);
-}
-
-playBtn.addEventListener('click', () => playMeow(selectedPhrase));
 
 // ===== HEIC helper =====
 async function convertToJpeg(file) {
