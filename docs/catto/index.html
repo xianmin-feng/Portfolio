@@ -226,10 +226,7 @@
               <span>🐱</span>
               <p>Upload a cat photo first</p>
             </div>
-            <canvas id="dresserCanvas" hidden></canvas>
-            <img id="dresserImg" hidden>
-            <!-- Draggable accessories -->
-            <div class="accessory-draggable" id="activeAccessory" hidden></div>
+            <img id="dresserImg" style="display:none; width:100%; max-height:350px; object-fit:contain; border-radius:12px;">
           </div>
           <div class="dresser-upload-row">
             <button class="btn btn-sm" id="dresserUploadBtn">📁 Choose Photo</button>
@@ -518,15 +515,15 @@ dresserFileInput.addEventListener('change', e => {
   const reader = new FileReader();
   reader.onload = ev => {
     dresserImg.src = ev.target.result;
-    dresserImg.hidden = false;
-    dresserPlaceholder.hidden = true;
+    dresserImg.style.display = 'block';
+    dresserPlaceholder.style.display = 'none';
   };
   reader.readAsDataURL(e.target.files[0]);
 });
 
 accBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    if (dresserImg.hidden) { alert('Upload a cat photo first!'); return; }
+    if (dresserImg.style.display === 'none') { alert('Upload a cat photo first!'); return; }
     const acc = document.createElement('div');
     acc.className = 'placed-accessory';
     acc.textContent = btn.dataset.acc;
