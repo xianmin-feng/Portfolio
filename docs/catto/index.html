@@ -357,13 +357,23 @@ uploadArea.addEventListener('drop', e => {
 
 fileInput.addEventListener('change', e => { if (e.target.files[0]) handleFile(e.target.files[0]); });
 
-document.getElementById('cameraBtn').addEventListener('click', async () => {
+const cameraBtnEl = document.getElementById('cameraBtn');
+let cameraActive = false;
+
+cameraBtnEl.addEventListener('click', async () => {
+  if (cameraActive) {
+    captureFromCamera();
+    return;
+  }
   try {
     cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
     cameraFeed.srcObject = cameraStream;
     cameraFeed.hidden = false;
     preview.hidden = true;
     uploadContent.style.display = 'none';
+    cameraActive = true;
+    cameraBtnEl.innerHTML = '<span>📸</span> Capture Photo';
+    cameraBtnEl.classList.add('btn-capture');
   } catch (err) { alert('Camera not available. Please upload a photo instead.'); }
 });
 
@@ -374,6 +384,9 @@ function captureFromCamera() {
   if (cameraStream) { cameraStream.getTracks().forEach(t => t.stop()); cameraStream = null; }
   preview.src = c.toDataURL('image/jpeg');
   preview.hidden = false; cameraFeed.hidden = true; uploadContent.style.display = 'none';
+  cameraActive = false;
+  cameraBtnEl.innerHTML = '<span>📷</span> Use Camera';
+  cameraBtnEl.classList.remove('btn-capture');
   analyzeMood();
 }
 
@@ -392,6 +405,9 @@ document.getElementById('tryAgainBtn').addEventListener('click', () => {
   preview.hidden = true; uploadContent.style.display = '';
   resultArea.hidden = true; resultContent.hidden = true; resultLoading.hidden = false;
   fileInput.value = '';
+  cameraActive = false;
+  cameraBtnEl.innerHTML = '<span>📷</span> Use Camera';
+  cameraBtnEl.classList.remove('btn-capture');
 });
 
 document.getElementById('shareBtn').addEventListener('click', () => {
