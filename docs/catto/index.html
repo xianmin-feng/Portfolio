@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cattō — AI Cat Mood Reader</title>
+<meta name="description" content="Understand your cat like never before. Upload a photo and AI reveals what your cat is feeling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">cattō</a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#try" class="nav-cta">Try now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">AI-Powered</div>
+    <h1>Understand your cat<br>like never before</h1>
+    <p class="hero-desc">Upload a photo of your cat and our AI instantly reads their facial expression, body language, and mood. Finally know what that look means.</p>
+    <a href="#try" class="btn btn-primary btn-lg">Read my cat's mood</a>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">😺</span><span class="stat-label">Mood Reader</span></div>
+      <div class="stat"><span class="stat-num">🎤</span><span class="stat-label">Meow Translator</span></div>
+      <div class="stat"><span class="stat-num">📊</span><span class="stat-label">Mood Journal</span></div>
+    </div>
+  </div>
+  <div class="hero-glow"></div>
+</section>
+
+<!-- How it works -->
+<section id="how" class="section">
+  <div class="container">
+    <h2 class="section-title">How it works</h2>
+    <p class="section-sub">Three simple steps to understand your feline friend</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-icon">📸</div>
+        <h3>Capture</h3>
+        <p>Take a photo or upload an image of your cat. Works with any angle — face, full body, or mid-meow.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-icon">🧠</div>
+        <h3>Analyze</h3>
+        <p>Our AI examines ear position, eye shape, whisker angle, tail posture, and body language in seconds.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-icon">💬</div>
+        <h3>Understand</h3>
+        <p>Get a detailed mood reading with emotion, confidence level, and tips on how to respond to your cat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Try it -->
+<section id="try" class="section section-dark">
+  <div class="container">
+    <h2 class="section-title light">Read your cat's mood</h2>
+    <p class="section-sub light">Upload a photo and let AI decode your cat's expression</p>
+
+    <div class="analyzer">
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-content" id="uploadContent">
+          <div class="upload-icon">🐱</div>
+          <p class="upload-text">Drop your cat photo here</p>
+          <p class="upload-hint">or click to browse</p>
+          <input type="file" id="fileInput" accept="image/*" hidden>
+        </div>
+        <img id="preview" class="preview-img" hidden>
+        <video id="cameraFeed" class="preview-img" autoplay playsinline hidden></video>
+      </div>
+
+      <div class="upload-actions">
+        <button class="btn btn-secondary" id="cameraBtn">📷 Use Camera</button>
+        <button class="btn btn-secondary" id="uploadBtn">📁 Upload Photo</button>
+      </div>
+
+      <div class="result-area" id="resultArea" hidden>
+        <div class="result-card">
+          <div class="result-loading" id="resultLoading">
+            <div class="spinner"></div>
+            <p>Analyzing your cat...</p>
+          </div>
+          <div class="result-content" id="resultContent" hidden>
+            <div class="mood-header">
+              <span class="mood-emoji" id="moodEmoji">😺</span>
+              <div>
+                <h3 class="mood-name" id="moodName">Happy</h3>
+                <p class="mood-confidence" id="moodConfidence">95% confidence</p>
+              </div>
+            </div>
+            <p class="mood-desc" id="moodDesc"></p>
+            <div class="mood-details">
+              <div class="mood-detail">
+                <span class="detail-label">Ears</span>
+                <span class="detail-value" id="detailEars"></span>
+              </div>
+              <div class="mood-detail">
+                <span class="detail-label">Eyes</span>
+                <span class="detail-value" id="detailEyes"></span>
+              </div>
+              <div class="mood-detail">
+                <span class="detail-label">Body</span>
+                <span class="detail-value" id="detailBody"></span>
+              </div>
+              <div class="mood-detail">
+                <span class="detail-label">Tail</span>
+                <span class="detail-value" id="detailTail"></span>
+              </div>
+            </div>
+            <div class="mood-tip" id="moodTip"></div>
+            <button class="btn btn-primary" id="tryAgainBtn">Analyze another photo</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="section">
+  <div class="container">
+    <h2 class="section-title">What Cattō can do</h2>
+    <p class="section-sub">More than just a mood reader</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">😺</div>
+        <h3>Mood Reader</h3>
+        <p>AI analyzes 15+ facial and body signals to determine your cat's emotional state with high accuracy.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎤</div>
+        <h3>Meow Translator</h3>
+        <p>Record your cat's meow and get an AI interpretation of what they're likely trying to communicate.</p>
+        <span class="coming-soon">Coming soon</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Mood Journal</h3>
+        <p>Track your cat's moods over time. Spot patterns, identify stressors, and understand their routine.</p>
+        <span class="coming-soon">Coming soon</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🃏</div>
+        <h3>Share Cards</h3>
+        <p>Generate beautiful mood cards to share on social media. "Luna is feeling: judging you."</p>
+        <span class="coming-soon">Coming soon</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Body Language Guide</h3>
+        <p>Learn what tail positions, ear angles, and eye shapes mean with our illustrated cat behavior guide.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🐕</div>
+        <h3>Dogs Too</h3>
+        <p>Dog mood reading coming soon. Same AI magic, different species.</p>
+        <span class="coming-soon">Coming soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section-cta">
+  <div class="container cta-content">
+    <h2>Stop guessing.<br>Start understanding.</h2>
+    <p>Your cat has been trying to tell you something. Now you can finally listen.</p>
+    <a href="#try" class="btn btn-primary btn-lg">Try Cattō free</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <span class="logo">cattō</span>
+    <p>Made with 🐱 by <a href="../index.html">Xianmin Feng</a></p>
+  </div>
+</footer>
+
+<script>
+// ===== Upload & Camera =====
+const uploadArea = document.getElementById('uploadArea');
+const uploadContent = document.getElementById('uploadContent');
+const fileInput = document.getElementById('fileInput');
+const preview = document.getElementById('preview');
+const cameraFeed = document.getElementById('cameraFeed');
+const resultArea = document.getElementById('resultArea');
+const resultLoading = document.getElementById('resultLoading');
+const resultContent = document.getElementById('resultContent');
+const cameraBtn = document.getElementById('cameraBtn');
+const uploadBtn = document.getElementById('uploadBtn');
+const tryAgainBtn = document.getElementById('tryAgainBtn');
+
+let cameraStream = null;
+
+uploadArea.addEventListener('click', () => {
+  if (!cameraFeed.hidden) captureFromCamera();
+  else fileInput.click();
+});
+uploadBtn.addEventListener('click', () => fileInput.click());
+
+uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+uploadArea.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadArea.classList.remove('dragover');
+  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+});
+
+fileInput.addEventListener('change', e => {
+  if (e.target.files[0]) handleFile(e.target.files[0]);
+});
+
+cameraBtn.addEventListener('click', async () => {
+  try {
+    cameraStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+    cameraFeed.srcObject = cameraStream;
+    cameraFeed.hidden = false;
+    preview.hidden = true;
+    uploadContent.style.display = 'none';
+    cameraBtn.textContent = '📸 Capture';
+    cameraBtn.onclick = captureFromCamera;
+  } catch (err) {
+    alert('Camera access denied. Please upload a photo instead.');
+  }
+});
+
+function captureFromCamera() {
+  const canvas = document.createElement('canvas');
+  canvas.width = cameraFeed.videoWidth;
+  canvas.height = cameraFeed.videoHeight;
+  canvas.getContext('2d').drawImage(cameraFeed, 0, 0);
+  stopCamera();
+  preview.src = canvas.toDataURL('image/jpeg');
+  preview.hidden = false;
+  cameraFeed.hidden = true;
+  uploadContent.style.display = 'none';
+  analyzeMood();
+}
+
+function stopCamera() {
+  if (cameraStream) {
+    cameraStream.getTracks().forEach(t => t.stop());
+    cameraStream = null;
+  }
+  cameraBtn.textContent = '📷 Use Camera';
+  cameraBtn.onclick = null;
+  cameraBtn.addEventListener('click', arguments.callee);
+}
+
+function handleFile(file) {
+  if (!file.type.startsWith('image/')) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    preview.src = e.target.result;
+    preview.hidden = false;
+    uploadContent.style.display = 'none';
+    analyzeMood();
+  };
+  reader.readAsDataURL(file);
+}
+
+tryAgainBtn.addEventListener('click', () => {
+  preview.hidden = true;
+  uploadContent.style.display = '';
+  resultArea.hidden = true;
+  resultContent.hidden = true;
+  resultLoading.hidden = false;
+  fileInput.value = '';
+});
+
+// ===== AI Analysis (simulated for demo) =====
+const moods = [
+  {
+    emoji: '😺', name: 'Content & Relaxed',
+    desc: 'Your cat is feeling calm and comfortable in their environment. They trust you and feel safe.',
+    ears: 'Forward, relaxed position', eyes: 'Half-closed, slow blinking', body: 'Loose, relaxed posture', tail: 'Gently curved or wrapped',
+    tip: '💡 Tip: This is a great time for gentle petting. Slow blinks back at your cat to strengthen your bond.',
+    confidence: 92
+  },
+  {
+    emoji: '😼', name: 'Curious & Alert',
+    desc: 'Something has caught your cat\'s attention. They\'re engaged and interested in their surroundings.',
+    ears: 'Perked up, rotating forward', eyes: 'Wide open, pupils normal', body: 'Upright, leaning forward', tail: 'Straight up with slight curve',
+    tip: '💡 Tip: Your cat is in exploration mode. Let them investigate — they might appreciate a new toy right now.',
+    confidence: 88
+  },
+  {
+    emoji: '😾', name: 'Annoyed & Overstimulated',
+    desc: 'Your cat has had enough. They\'re showing early signs of irritation and need some space.',
+    ears: 'Flattened or turned sideways', eyes: 'Narrowed, staring', body: 'Tense, tail flicking', tail: 'Lashing side to side',
+    tip: '💡 Tip: Give your cat space immediately. Stop petting and let them come to you when ready.',
+    confidence: 85
+  },
+  {
+    emoji: '🙀', name: 'Anxious & Uncertain',
+    desc: 'Your cat is feeling stressed or uncertain about something in their environment.',
+    ears: 'Pulled back slightly', eyes: 'Wide, dilated pupils', body: 'Crouched low, ready to flee', tail: 'Tucked close to body',
+    tip: '💡 Tip: Speak softly, avoid sudden movements. Create a quiet safe space for your cat to retreat to.',
+    confidence: 79
+  },
+  {
+    emoji: '😸', name: 'Playful & Energetic',
+    desc: 'Your cat is in a playful mood and ready for action! They have energy to burn.',
+    ears: 'Forward and alert', eyes: 'Wide, bright, pupils dilated', body: 'Crouched in pounce position', tail: 'Puffed up or twitching',
+    tip: '💡 Tip: Grab a wand toy or laser pointer! This is the perfect time for interactive play.',
+    confidence: 91
+  },
+  {
+    emoji: '😿', name: 'Seeking Attention',
+    desc: 'Your cat wants your company. They might be lonely, hungry, or just want some quality time.',
+    ears: 'Forward, attentive', eyes: 'Looking directly at you', body: 'Following you, rubbing against things', tail: 'Upright with hooked tip',
+    tip: '💡 Tip: Check food/water first, then give them some dedicated attention. They just want to be near you.',
+    confidence: 86
+  },
+  {
+    emoji: '😽', name: 'Affectionate & Loving',
+    desc: 'Your cat is showing love! Head bunting, slow blinks, and purring are all signs of deep trust.',
+    ears: 'Relaxed, slightly forward', eyes: 'Slow blinking, soft gaze', body: 'Pressed against you, kneading', tail: 'Gently swaying, wrapped around you',
+    tip: '💡 Tip: Slow blink back! This is cat language for "I love you." Enjoy this bonding moment.',
+    confidence: 94
+  },
+];
+
+function analyzeMood() {
+  resultArea.hidden = false;
+  resultLoading.hidden = false;
+  resultContent.hidden = true;
+  resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Simulate AI processing
+  setTimeout(() => {
+    const mood = moods[Math.floor(Math.random() * moods.length)];
+    document.getElementById('moodEmoji').textContent = mood.emoji;
+    document.getElementById('moodName').textContent = mood.name;
+    document.getElementById('moodConfidence').textContent = mood.confidence + '% confidence';
+    document.getElementById('moodDesc').textContent = mood.desc;
+    document.getElementById('detailEars').textContent = mood.ears;
+    document.getElementById('detailEyes').textContent = mood.eyes;
+    document.getElementById('detailBody').textContent = mood.body;
+    document.getElementById('detailTail').textContent = mood.tail;
+    document.getElementById('moodTip').textContent = mood.tip;
+
+    resultLoading.hidden = true;
+    resultContent.hidden = false;
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
