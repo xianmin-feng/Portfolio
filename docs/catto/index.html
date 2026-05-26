@@ -339,67 +339,96 @@ phraseBtns.forEach(btn => {
   });
 });
 
-// Synthesize cat sounds using Web Audio API
+// Realistic cat sounds using formant synthesis + harmonics + noise
 function playMeow(type) {
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const master = ctx.createGain();
+  master.gain.value = 0.5;
+  master.connect(ctx.destination);
 
-  function meow(startFreq, endFreq, duration, startTime, volume = 0.3) {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(startFreq, ctx.currentTime + startTime);
-    osc.frequency.exponentialRampToValueAtTime(endFreq, ctx.currentTime + startTime + duration);
-    gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
-    gain.gain.linearRampToValueAtTime(volume, ctx.currentTime + startTime + 0.05);
-    gain.gain.setValueAtTime(volume, ctx.currentTime + startTime + duration * 0.7);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
-    osc.start(ctx.currentTime + startTime);
-    osc.stop(ctx.currentTime + startTime + duration);
+  // Realistic meow: fundamental + harmonics + vibrato + noise
+  function catVoice(f0Start, f0End, dur, start, vol = 0.3) {
+    const t = ctx.currentTime + start;
+    // Fundamental + 3 harmonics
+    [1, 2, 3, 4].forEach((h, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const filter = ctx.createBiquadFilter();
+      osc.connect(filter); filter.connect(gain); gain.connect(master);
+      osc.type = i === 0 ? 'sawtooth' : 'sine';
+      osc.frequency.setValueAtTime(f0Start * h, t);
+      osc.frequency.exponentialRampToValueAtTime(f0End * h, t + dur);
+      // Formant filter (vowel-like resonance)
+      filter.type = 'bandpass'; filter.Q.value = 3;
+      filter.frequency.setValueAtTime(800 + i * 400, t);
+      filter.frequency.linearRampToValueAtTime(600 + i * 300, t + dur);
+      // Envelope
+      const v = vol * [1, 0.4, 0.2, 0.1][i];
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(v, t + 0.04);
+      gain.gain.setValueAtTime(v * 0.9, t + dur * 0.6);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+      // Vibrato
+      const vib = ctx.createOscillator();
+      const vibGain = ctx.createGain();
+      vib.connect(vibGain); vibGain.connect(osc.frequency);
+      vib.frequency.value = 5 + Math.random() * 2;
+      vibGain.gain.value = f0Start * 0.02;
+      vib.start(t); vib.stop(t + dur);
+      osc.start(t); osc.stop(t + dur);
+    });
+    // Breathiness (filtered noise)
+    const bufSize = ctx.sampleRate * dur;
+    const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufSize; i++) data[i] = (Math.random() * 2 - 1) * 0.3;
+    const noise = ctx.createBufferSource();
+    const nFilter = ctx.createBiquadFilter();
+    const nGain = ctx.createGain();
+    noise.buffer = buf;
+    noise.connect(nFilter); nFilter.connect(nGain); nGain.connect(master);
+    nFilter.type = 'bandpass'; nFilter.frequency.value = f0Start * 2; nFilter.Q.value = 1;
+    nGain.gain.setValueAtTime(0, t);
+    nGain.gain.linearRampToValueAtTime(vol * 0.08, t + 0.05);
+    nGain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    noise.start(t); noise.stop(t + dur);
   }
 
-  function purr(duration, startTime) {
+  // Purr: low frequency rumble with amplitude modulation
+  function catPurr(dur, start) {
+    const t = ctx.currentTime + start;
     const osc = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
     const gain = ctx.createGain();
     const lfo = ctx.createOscillator();
     const lfoGain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
+    osc.connect(gain); osc2.connect(gain); gain.connect(master);
     lfo.connect(lfoGain); lfoGain.connect(gain.gain);
-    osc.type = 'sawtooth'; osc.frequency.value = 28;
-    lfo.frequency.value = 25; lfoGain.gain.value = 0.15;
-    gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
-    gain.gain.linearRampToValueAtTime(0.12, ctx.currentTime + startTime + 0.3);
-    gain.gain.setValueAtTime(0.12, ctx.currentTime + startTime + duration - 0.3);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
-    osc.start(ctx.currentTime + startTime);
-    osc.stop(ctx.currentTime + startTime + duration);
-    lfo.start(ctx.currentTime + startTime);
-    lfo.stop(ctx.currentTime + startTime + duration);
+    osc.type = 'sawtooth'; osc.frequency.value = 26;
+    osc2.type = 'square'; osc2.frequency.value = 26.5;
+    lfo.frequency.value = 26; lfoGain.gain.value = 0.06;
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.08, t + 0.4);
+    gain.gain.setValueAtTime(0.08, t + dur - 0.5);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    osc.start(t); osc.stop(t + dur);
+    osc2.start(t); osc2.stop(t + dur);
+    lfo.start(t); lfo.stop(t + dur);
   }
 
-  function chirp(freq, duration, startTime) {
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    osc.connect(gain); gain.connect(ctx.destination);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, ctx.currentTime + startTime);
-    osc.frequency.exponentialRampToValueAtTime(freq * 1.8, ctx.currentTime + startTime + duration * 0.3);
-    osc.frequency.exponentialRampToValueAtTime(freq * 0.8, ctx.currentTime + startTime + duration);
-    gain.gain.setValueAtTime(0, ctx.currentTime + startTime);
-    gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + startTime + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
-    osc.start(ctx.currentTime + startTime);
-    osc.stop(ctx.currentTime + startTime + duration);
+  // Chirp/trill: rapid frequency rise
+  function catChirp(freq, dur, start) {
+    const t = ctx.currentTime + start;
+    catVoice(freq, freq * 2.2, dur, start, 0.15);
   }
 
   const sounds = {
-    hello: () => { meow(600, 900, 0.3, 0, 0.25); meow(800, 600, 0.15, 0.35, 0.15); return 0.6; },
-    love: () => { purr(2.5, 0); return 2.5; },
-    come: () => { meow(700, 500, 0.2, 0, 0.2); meow(700, 500, 0.2, 0.35, 0.2); meow(700, 500, 0.2, 0.7, 0.2); return 1.0; },
-    food: () => { meow(400, 800, 0.8, 0, 0.35); meow(500, 300, 0.4, 1.0, 0.2); return 1.5; },
-    play: () => { chirp(900, 0.1, 0); chirp(1000, 0.1, 0.15); chirp(1100, 0.1, 0.3); chirp(900, 0.1, 0.5); chirp(1000, 0.1, 0.65); return 0.8; },
-    goodnight: () => { purr(1.8, 0); meow(300, 250, 0.5, 1.9, 0.1); return 2.5; },
+    hello: () => { catVoice(500, 850, 0.35, 0, 0.25); catVoice(750, 500, 0.18, 0.4, 0.12); return 0.7; },
+    love: () => { catPurr(2.8, 0); return 2.8; },
+    come: () => { catVoice(650, 450, 0.22, 0, 0.2); catVoice(680, 470, 0.22, 0.38, 0.2); catVoice(700, 480, 0.25, 0.76, 0.22); return 1.1; },
+    food: () => { catVoice(350, 750, 0.9, 0, 0.35); catVoice(500, 280, 0.45, 1.1, 0.18); return 1.6; },
+    play: () => { catChirp(800, 0.12, 0); catChirp(950, 0.12, 0.18); catChirp(1050, 0.12, 0.36); catChirp(850, 0.12, 0.54); catChirp(1000, 0.15, 0.72); return 0.95; },
+    goodnight: () => { catPurr(2, 0); catVoice(280, 220, 0.6, 2.1, 0.08); return 2.8; },
   };
 
   const duration = sounds[type]();
