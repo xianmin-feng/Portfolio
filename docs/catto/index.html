@@ -214,41 +214,83 @@
     <div class="speak-container reveal">
       <div class="speak-card glass">
         <div class="speak-phrases">
-          <div class="phrase-card">
-            <span class="phrase-label">Say "Hello"</span>
-            <span class="phrase-how">Slow blink + soft high-pitched "hey"</span>
-            <span class="phrase-why">Cats greet with a slow blink and short trill. Mirror this by slowly closing your eyes at them and speaking softly.</span>
+          <div class="phrase-card" data-sound="assets/sounds/meow-hello.mp3">
+            <div class="phrase-top">
+              <div>
+                <span class="phrase-label">Say "Hello"</span>
+                <span class="phrase-how">Short rising trill — mrrp!</span>
+              </div>
+              <button class="play-sound-btn" aria-label="Play sound">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+              </button>
+            </div>
+            <span class="phrase-why">Cats greet with a slow blink and short trill. Mirror this by slowly closing your eyes at them.</span>
           </div>
-          <div class="phrase-card">
-            <span class="phrase-label">Say "I love you"</span>
-            <span class="phrase-how">Slow blink 3 times</span>
+          <div class="phrase-card" data-sound="assets/sounds/purr-love.mp3">
+            <div class="phrase-top">
+              <div>
+                <span class="phrase-label">Say "I love you"</span>
+                <span class="phrase-how">Gentle purr — prrrrr...</span>
+              </div>
+              <button class="play-sound-btn" aria-label="Play sound">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+              </button>
+            </div>
             <span class="phrase-why">The slow blink is the #1 proven way to tell your cat you love them. Studies show cats slow-blink back.</span>
           </div>
-          <div class="phrase-card">
-            <span class="phrase-label">Say "Come here"</span>
-            <span class="phrase-how">Crouch low + extend hand + soft clicking</span>
-            <span class="phrase-why">Making yourself smaller is non-threatening. Extend a finger at their nose level — let them come to you.</span>
+          <div class="phrase-card" data-sound="assets/sounds/meow-come.mp3">
+            <div class="phrase-top">
+              <div>
+                <span class="phrase-label">Say "Come here"</span>
+                <span class="phrase-how">Repeated short calls — mew mew mew!</span>
+              </div>
+              <button class="play-sound-btn" aria-label="Play sound">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+              </button>
+            </div>
+            <span class="phrase-why">Crouch low, extend a finger at nose level. Let them come to you — never force it.</span>
           </div>
-          <div class="phrase-card">
-            <span class="phrase-label">Say "I trust you"</span>
-            <span class="phrase-how">Show your side + look away casually</span>
-            <span class="phrase-why">Direct eye contact is threatening. Looking away signals trust. Cats expose their side to show comfort.</span>
+          <div class="phrase-card" data-sound="assets/sounds/meow-food.mp3">
+            <div class="phrase-top">
+              <div>
+                <span class="phrase-label">Say "Food time"</span>
+                <span class="phrase-how">Long demanding meow — meoooow!</span>
+              </div>
+              <button class="play-sound-btn" aria-label="Play sound">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+              </button>
+            </div>
+            <span class="phrase-why">Cats use their loudest, longest meow when demanding food. They trained us, not the other way around.</span>
           </div>
-          <div class="phrase-card">
-            <span class="phrase-label">Say "Let's play"</span>
-            <span class="phrase-how">Wiggle fingers behind an object</span>
-            <span class="phrase-why">Mimics prey hiding. Triggers their hunt instinct. Never use bare hands — always use a toy or object.</span>
+          <div class="phrase-card" data-sound="assets/sounds/chirp-play.mp3">
+            <div class="phrase-top">
+              <div>
+                <span class="phrase-label">Say "Let's play"</span>
+                <span class="phrase-how">Excited chirps — ek ek ek!</span>
+              </div>
+              <button class="play-sound-btn" aria-label="Play sound">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+              </button>
+            </div>
+            <span class="phrase-why">Wiggle a toy behind an object to trigger their prey drive. Never use bare hands.</span>
           </div>
-          <div class="phrase-card">
-            <span class="phrase-label">Say "You're safe"</span>
-            <span class="phrase-how">Sit nearby + don't move + breathe slowly</span>
-            <span class="phrase-why">Anxious cats need calm presence, not touch. Just being near them without forcing contact builds trust.</span>
+          <div class="phrase-card" data-sound="assets/sounds/purr-night.mp3">
+            <div class="phrase-top">
+              <div>
+                <span class="phrase-label">Say "Good night"</span>
+                <span class="phrase-how">Soft low purr — mmrrrrr...</span>
+              </div>
+              <button class="play-sound-btn" aria-label="Play sound">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21"/></svg>
+              </button>
+            </div>
+            <span class="phrase-why">Sit nearby, breathe slowly. Your calm presence tells them it's safe to rest.</span>
           </div>
         </div>
 
         <div class="speak-footer">
           <svg width="16" height="16" style="color:#007AFF"><use href="#ico-cat"/></svg>
-          <p>Real cat audio translator coming in the Cattō iOS app</p>
+          <p>Hold your phone near your cat and press play — watch their ears!</p>
         </div>
       </div>
     </div>
@@ -312,6 +354,21 @@
 </footer>
 
 <script>
+
+// ===== Play cat sounds =====
+let currentAudio = null;
+document.querySelectorAll('.play-sound-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const card = btn.closest('.phrase-card');
+    const soundUrl = card.dataset.sound;
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    currentAudio = new Audio(soundUrl);
+    btn.classList.add('playing');
+    currentAudio.play();
+    currentAudio.onended = () => { btn.classList.remove('playing'); currentAudio = null; };
+  });
+});
 
 // ===== HEIC helper =====
 async function convertToJpeg(file) {
