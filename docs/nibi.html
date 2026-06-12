@@ -32,7 +32,8 @@
     <div class="subpage-meta">
       <span>iOS</span>
       <span>SwiftUI</span>
-      <span>Multi-LLM AI</span>
+      <span>AI-Native Design</span>
+      <span>Multi-LLM Integration</span>
       <span>Personal Project</span>
     </div>
   </div>
@@ -56,17 +57,17 @@
 
       <div class="case-block">
         <h3>The Problem</h3>
-        <p>Every week starts with good intentions -- drink more water, sleep better, manage stress, take breaks. By midweek, most of it is forgotten. Existing tools felt either too cold (habit trackers that feel like spreadsheets) or too disconnected (chatbots that know nothing about your day). Nothing bridged the gap between tracking and understanding.</p>
+        <p>Health apps generate more data than ever -- sleep scores, heart rate graphs, step counts, stress metrics -- but most of it creates noise, not clarity. Users are overwhelmed with dashboards they don't act on. Chatbots offer generic advice with zero awareness of the person behind the screen. The core problem isn't a lack of data. It's a lack of <em>calm intelligence</em>: the ability to filter what matters, surface it at the right moment, and communicate it in a way that feels human.</p>
       </div>
 
       <div class="case-block">
         <h3>The Insight</h3>
-        <p>Wellness isn't a dashboard problem -- it's a relationship problem. People don't need more charts and red warning icons. They need something that <em>notices</em> when they haven't had water in hours, <em>knows</em> they slept poorly, and responds with warmth instead of judgment. The tool should feel less like a spreadsheet and more like a conversation.</p>
+        <p>The best health experiences don't ask users to interpret data -- they <em>anticipate</em> needs and act on their behalf. Instead of a dashboard that says "your sleep was 5.2 hours," the system should notice the pattern, connect it to today's elevated stress, and offer a relevant nudge -- without the user asking. The interaction model should be <em>ambient and agentic</em>: proactive, context-aware, and gentle enough to avoid notification fatigue.</p>
       </div>
 
       <div class="case-block">
         <h3>The Solution</h3>
-        <p>Nibi is a lightweight iOS companion that connects daily wellness tracking with context-aware AI conversations. Ask "How am I doing today?" and instead of a generic response, Nibi knows you only slept 5 hours, your stress is high, and you've only had 2 glasses of water. Every response is grounded in your actual data.</p>
+        <p>Nibi is an AI-native iOS wellness companion that transforms raw health data into personalized, context-aware interactions. Rather than presenting charts, Nibi assembles a real-time picture of your day -- sleep, stress, hydration, movement, heart rate -- and uses it to power every experience: an AI companion that already knows how you're doing before you say a word, ambient nudges that surface at the right moment, and a generative UI layer where the avatar, colors, and score all adapt to your current state.</p>
         <p>The name "Nibi" comes from the Japanese word for "you" -- because the app is entirely about you. Your habits, your mood, your pace.</p>
         <div class="case-features">
           <div class="case-feature">
@@ -78,16 +79,16 @@
             <span>One number (0-100) summarizing your day, with weekly trends</span>
           </div>
           <div class="case-feature">
-            <strong>AI Chat</strong>
-            <span>Context-aware companion that knows your data before you say anything</span>
+            <strong>Context-Aware AI</strong>
+            <span>Agentic companion that assembles your health context and responds with personalized insight</span>
           </div>
           <div class="case-feature">
-            <strong>Smart Nudges</strong>
-            <span>Gentle reminders for hydration, movement, and wind-down</span>
+            <strong>Ambient Nudges</strong>
+            <span>Proactive, well-timed prompts for hydration, movement, and wind-down -- not notification spam</span>
           </div>
           <div class="case-feature">
-            <strong>Living Avatar</strong>
-            <span>Expressions that react to your wellness score -- happy, concerned, encouraging</span>
+            <strong>Generative Avatar</strong>
+            <span>Expressions, mood, and body language dynamically driven by your wellness data</span>
           </div>
           <div class="case-feature">
             <strong>Guided Breathing</strong>
@@ -114,20 +115,20 @@
       <div class="case-block">
         <h3>Design Process</h3>
 
-        <h4>Color as Emotional Language</h4>
-        <p>Each mood maps to a color that cascades across the entire UI -- avatar, score, check-in buttons. Users glance at their screen and <em>see</em> how they feel without reading a single label. The same logic extends to metrics: hydration is blue, movement is orange, sleep is purple. The dashboard becomes scannable, reducing cognitive load.</p>
+        <h4>Calm Intelligence: Data In, Clarity Out</h4>
+        <p>Nibi tracks 13 metrics daily but never shows a wall of numbers. A single wellness score (0-100) distills everything into one glanceable signal. Mood-mapped colors cascade across the UI so users <em>see</em> their state without reading labels. The design philosophy: filter health data into actionable insight while preventing cognitive overload.</p>
 
-        <h4>Reducing Friction in Daily Check-Ins</h4>
-        <p>One question per screen. Nine metrics, but no dense forms -- just large tap targets, a progress bar that fills as you go, and adaptive encouragement. A catch-up feature with preset templates handles missed days, so a broken streak doesn't feel like failure.</p>
+        <h4>Agentic Interactions Beyond the Chat Box</h4>
+        <p>The AI doesn't wait for users to ask questions. Ambient nudges anticipate needs -- hydration reminders when intake is low, wind-down prompts when stress is high. The avatar's expression shifts based on wellness data, creating a passive feedback loop. These aren't notifications; they're <em>ambient interactions</em> that surface at the right moment without demanding attention.</p>
 
-        <h4>Designing an Emotional Companion</h4>
-        <p>The avatar breathes, blinks, and glances around on independent rhythms -- never looping predictably. Its expression responds to your wellness data: smiling when you're thriving, concerned when you're struggling. Users don't need a stats page to know how they're doing. The avatar <em>shows</em> them.</p>
+        <h4>Probabilistic UX: Honest Health Communication</h4>
+        <p>Health data is inherently uncertain. The wellness score uses fixed denominators so logging one metric can't inflate the number -- the system stays honest about what it doesn't know. Each metric contributes a weighted portion, and the score label ("Excellent," "Fair," "Getting started") communicates confidence without false precision.</p>
 
-        <h4>Conversational AI That Knows You</h4>
-        <p>Before every conversation, the app injects your full context -- mood, sleep, stress, hydration, streak, weekly trends. Ask "How am I doing?" and the response references your actual day. The AI personality is warm and playful, never clinical. The goal: make users feel <em>seen</em>, not assessed.</p>
+        <h4>Generative UI Driven by Health Data</h4>
+        <p>The interface isn't static -- it's generated from the user's state. The avatar's expression, the color palette, the AI's tone, and the dashboard layout all adapt in real time. Ask "How am I doing?" and the AI assembles mood, sleep, stress, hydration, streak, and weekly trends into a personalized response. Every surface is a <em>reflection</em> of the user, not a template.</p>
 
-        <h4>Guided Breathing as Interaction Design</h4>
-        <p>The 4-7-8 breathing visuals <em>become</em> the breath: a soft orb expands on inhale, holds, and contracts on exhale. The screen shifts to a dark, minimal palette to signal a mode change -- this is a calming space, not a productivity tool. Progress indicators stay subtle so users stay present.</p>
+        <h4>Designing for Presence: Guided Breathing</h4>
+        <p>The 4-7-8 breathing exercise is an interaction design problem: guiding physical behavior through a screen. The visuals <em>become</em> the breath -- a soft orb expands on inhale, holds, and contracts on exhale. The screen shifts to a dark, minimal palette to signal a mode change. Progress stays subtle so users stay present, not monitoring.</p>
       </div>
 
       <div class="case-block">
