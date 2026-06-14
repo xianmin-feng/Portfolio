@@ -634,8 +634,13 @@ img { max-width: 100%; display: block; }
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-auto-flow: dense;
   gap: 16px;
   margin-top: 40px;
+}
+.gallery-item.featured {
+  grid-column: span 2;
+  grid-row: span 2;
 }
 .gallery-item {
   aspect-ratio: 1 / 1;
