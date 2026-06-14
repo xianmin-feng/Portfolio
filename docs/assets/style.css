@@ -81,12 +81,6 @@ img { max-width: 100%; display: block; }
   font-size: 22px;
   font-weight: 500;
   color: #1a1a2e;
-  margin-bottom: 6px;
-}
-.hero-subtitle {
-  font-size: 15px;
-  font-weight: 400;
-  color: #6366f1;
   margin-bottom: 20px;
 }
 .hero-desc {
