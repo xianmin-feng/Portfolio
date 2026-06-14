@@ -71,12 +71,16 @@
         <p>The name "Nibi" comes from the Japanese word for "you" -- because the app is entirely about you. Your habits, your mood, your pace.</p>
         <div class="case-features">
           <div class="case-feature">
-            <strong>Daily Check-In</strong>
-            <span>Mood, sleep, hydration, stress, movement -- under 2 minutes</span>
+            <strong>Frictionless Logging</strong>
+            <span>Tap-to-adjust cards on Home plus a Quick Log sheet for one-screen entry -- a full day in under 30 seconds</span>
           </div>
           <div class="case-feature">
             <strong>Wellness Score</strong>
-            <span>One number (0-100) summarizing your day, with weekly trends</span>
+            <span>One number (0-100) summarizing your day, with a delta vs yesterday and weekly trends</span>
+          </div>
+          <div class="case-feature">
+            <strong>Weight &amp; 21-Day Program</strong>
+            <span>Daily weigh-ins with a trend sparkline, "Day X / 21" progress, and change-over-time framing ("1.2 kg in 5 days")</span>
           </div>
           <div class="case-feature">
             <strong>Context-Aware AI</strong>
@@ -93,10 +97,6 @@
           <div class="case-feature">
             <strong>Guided Breathing</strong>
             <span>4-7-8 method with animated visuals and ambient meditation audio</span>
-          </div>
-          <div class="case-feature">
-            <strong>Home Screen Widget</strong>
-            <span>Today's score + one-tap water logging without opening the app</span>
           </div>
         </div>
       </div>
@@ -115,8 +115,8 @@
       <div class="case-block">
         <h3>Design Process</h3>
 
-        <h4>Information Architecture: Five Tabs, Clear Purpose</h4>
-        <p>The app is organized into five distinct modes -- Home, Chat, Check-In, Breathe, and Settings -- each with a single clear purpose. Home is the dashboard: one score, today's trends, and the avatar. Chat is for conversation. Check-In is for input. Breathe is for calm. There's no feature buried three levels deep. Users always know where they are and what they can do.</p>
+        <h4>Information Architecture: Four Tabs, Clear Purpose</h4>
+        <p>The app is organized into four distinct modes -- Home, Chat, Breathe, and Settings -- each with a single clear purpose. Home is both dashboard <em>and</em> input surface: today's score, weight trend, and one-tap logging on every metric card -- no separate check-in flow needed. Chat is for conversation. Breathe is for calm. There's no feature buried three levels deep. Users always know where they are and what they can do.</p>
 
         <h4>Calm Intelligence: Data In, Clarity Out</h4>
         <p>Nibi tracks 13 metrics daily but never shows a wall of numbers. A single wellness score (0-100) distills everything into one glanceable signal. Mood-mapped colors cascade across the UI so users <em>see</em> their state without reading labels. The design philosophy: filter health data into actionable insight while preventing cognitive overload.</p>
@@ -141,6 +141,19 @@
 
         <h4>Designing for Presence: Guided Breathing</h4>
         <p>The 4-7-8 breathing exercise is an interaction design problem: guiding physical behavior through a screen. The visuals <em>become</em> the breath -- a soft orb expands on inhale, holds, and contracts on exhale. The screen shifts to a dark, minimal palette to signal a mode change. Progress stays subtle so users stay present, not monitoring.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>What Real Use Taught Me</h3>
+        <p>The first build was only the starting point. Using Nibi every day surfaced friction the design hadn't anticipated. Six iterations stand out:</p>
+        <ul class="case-list">
+          <li><strong>Replaced the 9-step check-in wizard.</strong> The original flow lived in a separate Check-In tab with sliders for mood, sleep, water, meals, movement, stress, habits, heart rate, and notes -- 60-90 seconds per day. I collapsed it into in-place adjusters on each Home card and a single-screen Quick Log sheet with chip strips. A full day now takes ~6 taps. The Check-In tab became redundant; the dashboard absorbed its role.</li>
+          <li><strong>Made invisible tap zones discoverable.</strong> Each card used an undocumented quadrant gesture (top-right = +, bottom-right = &minus;). New users had no signal that the right side was tappable. I added faint <code>+</code> / <code>&minus;</code> glyphs on the right edge of every card -- visible enough to telegraph the interaction, light enough not to clutter. They brighten on tap, reusing the existing flash animation.</li>
+          <li><strong>Gave the score felt meaning.</strong> "73/100" alone doesn't motivate -- is that good? Better than yesterday? I added a delta-vs-yesterday badge (<em>&uarr; 8</em>) and a 5-dot completion bar showing how many of today's core metrics are logged. When the 5th dot fills, a success haptic + toast fires once per day. Same data, much more felt progress.</li>
+          <li><strong>Reframed weight for a 21-day program.</strong> Daily weigh-ins surfaced a question: what makes "&darr; 1.2 kg" feel like real progress? I added a "Day 5 / 21" pill and switched the framing from "from start" to "in 5 days" -- time-anchored deltas, not raw totals.</li>
+          <li><strong>Removed the heart rate card.</strong> Its tap zones triggered an Apple Health sync that silently failed without a paired Apple Watch. Manual entry didn't fit the +/&minus; model. Heart rate moved into Quick Log (manual BPM field + optional sync button), and a heart rate banner now appears at the top only when there's data. The grid became 5 cards that all work the same way.</li>
+          <li><strong>Cut the day-1 silence.</strong> The streak banner originally hid until day 2 -- new users finished their first log and got nothing back. I added a Day 1 banner ("Day 1 logged! Come back tomorrow to start a streak.") at the exact moment users decide whether they'll return.</li>
+        </ul>
       </div>
 
       <div class="case-block">
@@ -173,8 +186,8 @@
             <span class="case-tech-value">Keychain Services</span>
           </div>
           <div class="case-tech-row">
-            <span class="case-tech-label">Widget</span>
-            <span class="case-tech-value">WidgetKit + AppIntents</span>
+            <span class="case-tech-label">Intents</span>
+            <span class="case-tech-value">AppIntents (Siri shortcuts)</span>
           </div>
         </div>
       </div>
