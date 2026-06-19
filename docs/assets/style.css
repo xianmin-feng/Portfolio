@@ -137,6 +137,7 @@ img { max-width: 100%; display: block; }
 /* ===== Sections ===== */
 .section { padding: 100px 0; }
 .section-alt { background: #f8f9fc; }
+.section.section-case { padding: 60px 0; }
 .section-dark {
   background: #1a1a2e;
   color: #fff;
@@ -472,6 +473,17 @@ img { max-width: 100%; display: block; }
 }
 .case-block-split .case-split-content h3 {
   margin-top: 0;
+}
+.section-numeral {
+  display: block;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  color: #6366f1;
+  opacity: 0.22;
+  letter-spacing: -2px;
+  margin-bottom: 10px;
+  font-variant-numeric: tabular-nums;
 }
 @media (max-width: 900px) {
   .case-block-split {

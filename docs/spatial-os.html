@@ -44,17 +44,22 @@
   </div>
 </section>
 
-<!-- Case Study -->
+<!-- Summary -->
 <section class="section">
   <div class="container">
     <div class="case-study">
-
       <div class="case-block">
         <h3>Summary</h3>
         <p>As the owner of the Navigator on Horizon OS &mdash; one of Meta's most-used VR surfaces &mdash; I led design and prototyping of how users orient themselves every time they put on a headset. Working in code instead of mockups, I shaped the motion language, visual treatment, and structural decisions through dozens of in-headset prototypes that drove leadership reviews and engineering implementation.</p>
         <p>This case study walks through four moments along that evolution: an early exploration of how the Navigator should feel, the Aura demo that became the next-generation Horizon OS visual language, an iteration on hover-and-cast parallax for the People tab, and a contextual exit pattern for getting users back from immersive apps.</p>
       </div>
+    </div>
+  </div>
+</section>
 
+<!-- Section 1 -->
+<section class="section section-case">
+  <div class="container">
       <div class="case-block case-block-split">
         <div class="case-split-media">
           <div class="subpage-video-container">
@@ -64,7 +69,8 @@
           </div>
         </div>
         <div class="case-split-content">
-          <h3>1. Navigator Homepage &mdash; Motion Exploration</h3>
+          <span class="section-numeral">01</span>
+          <h3>Navigator Homepage &mdash; Motion Exploration</h3>
           <p>Early on, the question wasn't &ldquo;what should the Navigator look like&rdquo; &mdash; it was &ldquo;how should it feel?&rdquo; This is the exploration of motion language: timing, easing, focus transitions, and the cushion between states. Working in code meant every variation could be put on a headset and judged in the body, not on a screen.</p>
           <p>The exploration focused on the Navigator homepage, with the Meta AI tab as the focal point. The goal: simplify the Navigator and system bar while making them feel more alive and visually engaging. I introduced a dynamic motion language to evolve the Horizon OS homepage past static layout &mdash; toward something that reacts, anticipates, and breathes.</p>
           <p>A few specific design moves I was testing:</p>
@@ -74,7 +80,12 @@
           <p>The underlying thinking: the homepage isn't a static layout to navigate around. It's a system with intent, where each surface anticipates, responds, and paces itself to the user's attention.</p>
         </div>
       </div>
+  </div>
+</section>
 
+<!-- Section 2 -->
+<section class="section section-case section-alt">
+  <div class="container">
       <div class="case-block case-block-split reverse">
         <div class="case-split-media">
           <div class="subpage-video-container">
@@ -84,7 +95,8 @@
           </div>
         </div>
         <div class="case-split-content">
-          <h3>2. Aura Demo</h3>
+          <span class="section-numeral">02</span>
+          <h3>Aura Demo</h3>
           <p>The Aura demo introduced a new visual design language for the next generation of Horizon OS &mdash; tested end-to-end across the Navigator, the system bar, and the multi-panel window surfaces.</p>
           <p><strong>A unified visual language across surfaces.</strong> A frosted-glass treatment runs through every panel &mdash; Navigator, Quick Controls, Library, Search &mdash; built on a shared shader system so consistency is baked into the rendering pipeline rather than enforced by convention. The result reads as one system, not a collection of screens.</p>
           <p><strong>A three-layer motion model on the Navigator.</strong> The home surface breaks into three depth layers: a solid color base, the icon layer that pops forward, and a cast shadow that grounds the icon back onto the base. I tweaked the timing, distance, and depth of all three relationships until the motion felt right in the body, not just on paper &mdash; landing the version that earned leadership sign-off.</p>
@@ -93,7 +105,12 @@
           <p>The demo went through multiple rounds of executive and leadership review and was accepted as the visual direction for the next generation of Horizon OS.</p>
         </div>
       </div>
+  </div>
+</section>
 
+<!-- Section 3 -->
+<section class="section section-case">
+  <div class="container">
       <div class="case-block case-block-split">
         <div class="case-split-media">
           <div class="subpage-video-container">
@@ -103,7 +120,8 @@
           </div>
         </div>
         <div class="case-split-content">
-          <h3>3. Navigator People Tab &mdash; Motion Iteration</h3>
+          <span class="section-numeral">03</span>
+          <h3>Navigator People Tab &mdash; Motion Iteration</h3>
           <p>Iteration on the motion language for hover interactions inside the Navigator &mdash; and a snapshot of the system bar before its later simplification.</p>
           <p><strong>Hover that creates depth.</strong> When the user's gaze lands on a person, the portrait lifts off its white background circle, which stays stationary. As the portrait rises, a soft opaque shadow casts onto the circle below &mdash; a small parallax move that does outsized work. In VR, the feeling of <em>something being above the surface</em> is what tells your body the interaction is real. The shadow isn't decoration; it's the depth cue that makes the lift legible.</p>
           <p><strong>A reusable motion atom.</strong> The same hover-and-cast model applies to the Apps tab inside the Navigator. Once the language was right on one tab, it became a shared atom &mdash; every focusable tile could express interactive intent the same way, reinforcing the sense of a single system.</p>
@@ -112,7 +130,12 @@
           <p>The two halves of this video tell the same story at different scales: a single hover and a six-button bar both needed iteration to earn their place. The motion atom survived; the button count didn't.</p>
         </div>
       </div>
+  </div>
+</section>
 
+<!-- Section 4 -->
+<section class="section section-case section-alt">
+  <div class="container">
       <div class="case-block case-block-split reverse">
         <div class="case-split-media">
           <div class="subpage-video-container">
@@ -122,21 +145,24 @@
           </div>
         </div>
         <div class="case-split-content">
-          <h3>4. Navigator System Bar &mdash; Quit from Immersive App</h3>
+          <span class="section-numeral">04</span>
+          <h3>Navigator System Bar &mdash; Quit from Immersive App</h3>
           <p>Designing the exit. The video walks through the transition between MR and immersive environments &mdash; specifically, how a user finds their way back when they're inside an immersive app.</p>
           <p><strong>A contextual button in the persistent surface.</strong> When the user enters an immersive app &mdash; Beat Saber, for example &mdash; a new CTA appears on the right side of the system bar. The bar is the OS's most persistent surface, which makes it the right place to host the exit: always reachable, never hidden in a menu the user has to remember how to summon.</p>
           <p><strong>Hover to preview the action.</strong> Approaching the button doesn't immediately quit. On hover, it expands to show what it will close &mdash; &ldquo;Close Beat Saber&rdquo; &mdash; letting the user confirm intent before committing. In immersive contexts, accidental quits are expensive: you lose state, lose immersion, and have to rebuild both.</p>
           <p>Quitting an immersive app isn't a UI action &mdash; it's a transition between two realities. This was one of several explorations of that handoff: the CTA stays visible the whole time, previews itself before activation, and routes the user predictably back to the MR home. The exit, treated as design rather than as a click target.</p>
         </div>
       </div>
+  </div>
+</section>
 
-    </div>
-
+<!-- CTAs -->
+<section class="section">
+  <div class="container">
     <div class="case-cta">
       <a href="spatial-ui.html" class="btn btn-primary">Try Interactive Demo &rarr;</a>
       <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
     </div>
-
   </div>
 </section>
 
