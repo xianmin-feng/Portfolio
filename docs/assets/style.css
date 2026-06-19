@@ -469,7 +469,7 @@ img { max-width: 100%; display: block; }
   min-width: 0;
 }
 .case-block-split .case-split-media {
-  padding-top: 74px; /* match section-numeral height + margin so video aligns with H3 */
+  padding-top: 116px; /* align video with first paragraph row (numeral + H3 + spacing) */
 }
 .case-block-split .case-split-media .subpage-video-container {
   margin-bottom: 0;
