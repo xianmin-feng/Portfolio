@@ -426,18 +426,25 @@ img { max-width: 100%; display: block; }
 }
 .subpage-meta {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.subpage-meta::-webkit-scrollbar {
+  display: none;
 }
 .subpage-meta span {
-  font-size: 12px;
+  flex-shrink: 0;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   color: #6366f1;
   background: #ededff;
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: 4px;
+  white-space: nowrap;
 }
 .subpage-video-container {
   display: flex;
