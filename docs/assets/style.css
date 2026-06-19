@@ -404,6 +404,9 @@ img { max-width: 100%; display: block; }
 .subpage-hero + .section {
   padding-top: 40px;
 }
+.section.section-video {
+  padding: 100px 0;
+}
 .back-link {
   display: inline-block;
   font-size: 14px;
