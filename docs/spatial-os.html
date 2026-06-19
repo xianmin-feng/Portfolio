@@ -48,7 +48,7 @@
 <section class="section">
   <div class="container">
     <div class="case-study">
-      <div class="case-block case-summary">
+      <div class="case-block case-summary fade-in-up">
         <span class="case-summary-label">Summary</span>
         <p>As the owner of the Navigator on Horizon OS &mdash; one of Meta's most-used VR surfaces &mdash; I led design and prototyping of how users orient themselves every time they put on a headset. Working in code instead of mockups, I shaped the motion language, visual treatment, and structural decisions through dozens of in-headset prototypes that drove leadership reviews and engineering implementation.</p>
         <p>This case study walks through four moments along that evolution: an early exploration of how the Navigator should feel, the Aura demo that became the next-generation Horizon OS visual language, an iteration on hover-and-cast parallax for the People tab, and a contextual exit pattern for getting users back from immersive apps.</p>
@@ -60,7 +60,7 @@
 <!-- Section 1 -->
 <section class="section section-case">
   <div class="container">
-      <div class="case-block case-block-split">
+      <div class="case-block case-block-split fade-in-up">
         <div class="case-split-media">
           <div class="subpage-video-container">
             <video class="subpage-video" controls playsinline>
@@ -83,10 +83,17 @@
   </div>
 </section>
 
+<!-- Pull Quote 1 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">How should it feel?</blockquote>
+  </div>
+</section>
+
 <!-- Section 2 -->
 <section class="section section-case section-alt">
   <div class="container">
-      <div class="case-block case-block-split reverse">
+      <div class="case-block case-block-split reverse fade-in-up">
         <div class="case-split-media">
           <div class="subpage-video-container">
             <video class="subpage-video" controls playsinline>
@@ -111,7 +118,7 @@
 <!-- Section 3 -->
 <section class="section section-case">
   <div class="container">
-      <div class="case-block case-block-split">
+      <div class="case-block case-block-split fade-in-up">
         <div class="case-split-media">
           <div class="subpage-video-container">
             <video class="subpage-video" controls playsinline>
@@ -133,10 +140,17 @@
   </div>
 </section>
 
+<!-- Pull Quote 2 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">The motion atom survived; the button count didn't.</blockquote>
+  </div>
+</section>
+
 <!-- Section 4 -->
 <section class="section section-case section-alt">
   <div class="container">
-      <div class="case-block case-block-split reverse">
+      <div class="case-block case-block-split reverse fade-in-up">
         <div class="case-split-media">
           <div class="subpage-video-container">
             <video class="subpage-video" controls playsinline>
@@ -156,6 +170,19 @@
   </div>
 </section>
 
+<!-- Closing Thoughts -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Closing Thoughts</span>
+        <p>What I take from this work: motion language isn't decoration &mdash; it's the difference between a system that feels alive and one that feels assembled. The patterns that shipped weren't the cleverest moves I tried; they were the ones that survived weekly playtests and still felt right in the body.</p>
+        <p>Three-layer parallax, frosted-glass continuity, hover-to-preview restraint &mdash; each one earned its place not by being novel, but by being honest about what it was doing for the user.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTAs -->
 <section class="section">
   <div class="container">
@@ -172,6 +199,28 @@
     <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.fade-in-up').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in-up').forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
 
 </body>
 </html>
