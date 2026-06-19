@@ -452,6 +452,9 @@ img { max-width: 100%; display: block; }
   justify-content: flex-start;
   margin-bottom: 24px;
 }
+.subpage-video-container.centered {
+  justify-content: center;
+}
 
 /* Case Study: zigzag (side-by-side video + text) */
 .case-block-split {
