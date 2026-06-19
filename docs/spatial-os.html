@@ -55,63 +55,79 @@
         <p>This case study walks through four moments along that evolution: an early exploration of how the Navigator should feel, the Aura demo that became the next-generation Horizon OS visual language, an iteration on hover-and-cast parallax for the People tab, and a contextual exit pattern for getting users back from immersive apps.</p>
       </div>
 
-      <div class="case-block">
-        <h3>1. Navigator Homepage &mdash; Motion Exploration</h3>
-        <div class="subpage-video-container">
-          <video class="subpage-video" controls playsinline>
-            <source src="assets/navigator-motion.mp4" type="video/mp4">
-          </video>
+      <div class="case-block case-block-split">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/navigator-motion.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
-        <p>Early on, the question wasn't &ldquo;what should the Navigator look like&rdquo; &mdash; it was &ldquo;how should it feel?&rdquo; This is the exploration of motion language: timing, easing, focus transitions, and the cushion between states. Working in code meant every variation could be put on a headset and judged in the body, not on a screen.</p>
-        <p>The exploration focused on the Navigator homepage, with the Meta AI tab as the focal point. The goal: simplify the Navigator and system bar while making them feel more alive and visually engaging. I introduced a dynamic motion language to evolve the Horizon OS homepage past static layout &mdash; toward something that reacts, anticipates, and breathes.</p>
-        <p>A few specific design moves I was testing:</p>
-        <p><strong>Progressive disclosure from top to bottom.</strong> The Meta AI surface doesn't appear all at once &mdash; it reveals from the top, letting the user's eye follow the structure as it builds. The reveal itself becomes part of the welcome, instead of dumping a full panel into view.</p>
-        <p><strong>A loading state that signals, not stalls.</strong> Before the real content arrives, a soft blue placeholder fills the card frame &mdash; a skeleton that says &ldquo;something is coming&rdquo; rather than leaving the user staring at empty space. Loading becomes a deliberate moment in the experience, not a gap in it.</p>
-        <p><strong>Tab switching that respects state.</strong> The system bar's adjacent tabs &mdash; Library and People &mdash; each carry their own behaviors. When the user switches away from Meta AI, the AI <em>pauses</em> &mdash; conceptually as much as visually. An inactive tab shouldn't keep working in the background; the motion language reinforces it.</p>
-        <p>The underlying thinking: the homepage isn't a static layout to navigate around. It's a system with intent, where each surface anticipates, responds, and paces itself to the user's attention.</p>
+        <div class="case-split-content">
+          <h3>1. Navigator Homepage &mdash; Motion Exploration</h3>
+          <p>Early on, the question wasn't &ldquo;what should the Navigator look like&rdquo; &mdash; it was &ldquo;how should it feel?&rdquo; This is the exploration of motion language: timing, easing, focus transitions, and the cushion between states. Working in code meant every variation could be put on a headset and judged in the body, not on a screen.</p>
+          <p>The exploration focused on the Navigator homepage, with the Meta AI tab as the focal point. The goal: simplify the Navigator and system bar while making them feel more alive and visually engaging. I introduced a dynamic motion language to evolve the Horizon OS homepage past static layout &mdash; toward something that reacts, anticipates, and breathes.</p>
+          <p>A few specific design moves I was testing:</p>
+          <p><strong>Progressive disclosure from top to bottom.</strong> The Meta AI surface doesn't appear all at once &mdash; it reveals from the top, letting the user's eye follow the structure as it builds. The reveal itself becomes part of the welcome, instead of dumping a full panel into view.</p>
+          <p><strong>A loading state that signals, not stalls.</strong> Before the real content arrives, a soft blue placeholder fills the card frame &mdash; a skeleton that says &ldquo;something is coming&rdquo; rather than leaving the user staring at empty space. Loading becomes a deliberate moment in the experience, not a gap in it.</p>
+          <p><strong>Tab switching that respects state.</strong> The system bar's adjacent tabs &mdash; Library and People &mdash; each carry their own behaviors. When the user switches away from Meta AI, the AI <em>pauses</em> &mdash; conceptually as much as visually. An inactive tab shouldn't keep working in the background; the motion language reinforces it.</p>
+          <p>The underlying thinking: the homepage isn't a static layout to navigate around. It's a system with intent, where each surface anticipates, responds, and paces itself to the user's attention.</p>
+        </div>
       </div>
 
-      <div class="case-block">
-        <h3>2. Aura Demo</h3>
-        <div class="subpage-video-container">
-          <video class="subpage-video" controls playsinline>
-            <source src="assets/navigator-aura.mp4" type="video/mp4">
-          </video>
+      <div class="case-block case-block-split reverse">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/navigator-aura.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
-        <p>The Aura demo introduced a new visual design language for the next generation of Horizon OS &mdash; tested end-to-end across the Navigator, the system bar, and the multi-panel window surfaces.</p>
-        <p><strong>A unified visual language across surfaces.</strong> A frosted-glass treatment runs through every panel &mdash; Navigator, Quick Controls, Library, Search &mdash; built on a shared shader system so consistency is baked into the rendering pipeline rather than enforced by convention. The result reads as one system, not a collection of screens.</p>
-        <p><strong>A three-layer motion model on the Navigator.</strong> The home surface breaks into three depth layers: a solid color base, the icon layer that pops forward, and a cast shadow that grounds the icon back onto the base. I tweaked the timing, distance, and depth of all three relationships until the motion felt right in the body, not just on paper &mdash; landing the version that earned leadership sign-off.</p>
-        <p><strong>Stacking for multi-panel use.</strong> Open Store, Chats, Browser, TV &mdash; and instead of scattering across space, the panels stack on top of each other. Multi-panel work becomes spatially compact, organized, and easy to recover from.</p>
-        <p><strong>On/off transitions that breathe.</strong> When the Navigator surfaces, the world behind it blurs softly; when it dismisses, the blur fades back in step. The transition is the connection between modes, not a cut between them.</p>
-        <p>The demo went through multiple rounds of executive and leadership review and was accepted as the visual direction for the next generation of Horizon OS.</p>
+        <div class="case-split-content">
+          <h3>2. Aura Demo</h3>
+          <p>The Aura demo introduced a new visual design language for the next generation of Horizon OS &mdash; tested end-to-end across the Navigator, the system bar, and the multi-panel window surfaces.</p>
+          <p><strong>A unified visual language across surfaces.</strong> A frosted-glass treatment runs through every panel &mdash; Navigator, Quick Controls, Library, Search &mdash; built on a shared shader system so consistency is baked into the rendering pipeline rather than enforced by convention. The result reads as one system, not a collection of screens.</p>
+          <p><strong>A three-layer motion model on the Navigator.</strong> The home surface breaks into three depth layers: a solid color base, the icon layer that pops forward, and a cast shadow that grounds the icon back onto the base. I tweaked the timing, distance, and depth of all three relationships until the motion felt right in the body, not just on paper &mdash; landing the version that earned leadership sign-off.</p>
+          <p><strong>Stacking for multi-panel use.</strong> Open Store, Chats, Browser, TV &mdash; and instead of scattering across space, the panels stack on top of each other. Multi-panel work becomes spatially compact, organized, and easy to recover from.</p>
+          <p><strong>On/off transitions that breathe.</strong> When the Navigator surfaces, the world behind it blurs softly; when it dismisses, the blur fades back in step. The transition is the connection between modes, not a cut between them.</p>
+          <p>The demo went through multiple rounds of executive and leadership review and was accepted as the visual direction for the next generation of Horizon OS.</p>
+        </div>
       </div>
 
-      <div class="case-block">
-        <h3>3. Navigator People Tab &mdash; Motion Iteration</h3>
-        <div class="subpage-video-container">
-          <video class="subpage-video" controls playsinline>
-            <source src="assets/navigator-people-tab.mp4" type="video/mp4">
-          </video>
+      <div class="case-block case-block-split">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/navigator-people-tab.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
-        <p>Iteration on the motion language for hover interactions inside the Navigator &mdash; and a snapshot of the system bar before its later simplification.</p>
-        <p><strong>Hover that creates depth.</strong> When the user's gaze lands on a person, the portrait lifts off its white background circle, which stays stationary. As the portrait rises, a soft opaque shadow casts onto the circle below &mdash; a small parallax move that does outsized work. In VR, the feeling of <em>something being above the surface</em> is what tells your body the interaction is real. The shadow isn't decoration; it's the depth cue that makes the lift legible.</p>
-        <p><strong>A reusable motion atom.</strong> The same hover-and-cast model applies to the Apps tab inside the Navigator. Once the language was right on one tab, it became a shared atom &mdash; every focusable tile could express interactive intent the same way, reinforcing the sense of a single system.</p>
-        <p><strong>The system bar &mdash; earlier form.</strong> The version shown here held six buttons: Profile, People, Library, Quick Settings, Notifications, and Meta AI &mdash; plus a contextual battery-saver icon on the right when the user was inside an immersive app. It worked, but it was busy: too many entry points competing for the same persistent surface.</p>
-        <p><strong>Why it simplified.</strong> Through later iterations &mdash; the version shown in the Aura section above &mdash; the system bar was reduced to three primary buttons. Every persistent surface taxes attention, and the system bar is the most persistent surface in the OS. Each button removed isn't a feature lost; it's a tax repaid to the user.</p>
-        <p>The two halves of this video tell the same story at different scales: a single hover and a six-button bar both needed iteration to earn their place. The motion atom survived; the button count didn't.</p>
+        <div class="case-split-content">
+          <h3>3. Navigator People Tab &mdash; Motion Iteration</h3>
+          <p>Iteration on the motion language for hover interactions inside the Navigator &mdash; and a snapshot of the system bar before its later simplification.</p>
+          <p><strong>Hover that creates depth.</strong> When the user's gaze lands on a person, the portrait lifts off its white background circle, which stays stationary. As the portrait rises, a soft opaque shadow casts onto the circle below &mdash; a small parallax move that does outsized work. In VR, the feeling of <em>something being above the surface</em> is what tells your body the interaction is real. The shadow isn't decoration; it's the depth cue that makes the lift legible.</p>
+          <p><strong>A reusable motion atom.</strong> The same hover-and-cast model applies to the Apps tab inside the Navigator. Once the language was right on one tab, it became a shared atom &mdash; every focusable tile could express interactive intent the same way, reinforcing the sense of a single system.</p>
+          <p><strong>The system bar &mdash; earlier form.</strong> The version shown here held six buttons: Profile, People, Library, Quick Settings, Notifications, and Meta AI &mdash; plus a contextual battery-saver icon on the right when the user was inside an immersive app. It worked, but it was busy: too many entry points competing for the same persistent surface.</p>
+          <p><strong>Why it simplified.</strong> Through later iterations &mdash; the version shown in the Aura section above &mdash; the system bar was reduced to three primary buttons. Every persistent surface taxes attention, and the system bar is the most persistent surface in the OS. Each button removed isn't a feature lost; it's a tax repaid to the user.</p>
+          <p>The two halves of this video tell the same story at different scales: a single hover and a six-button bar both needed iteration to earn their place. The motion atom survived; the button count didn't.</p>
+        </div>
       </div>
 
-      <div class="case-block">
-        <h3>4. Navigator System Bar &mdash; Quit from Immersive App</h3>
-        <div class="subpage-video-container">
-          <video class="subpage-video" controls playsinline>
-            <source src="assets/system-bar-quit.mp4" type="video/mp4">
-          </video>
+      <div class="case-block case-block-split reverse">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/system-bar-quit.mp4" type="video/mp4">
+            </video>
+          </div>
         </div>
-        <p>Designing the exit. The video walks through the transition between MR and immersive environments &mdash; specifically, how a user finds their way back when they're inside an immersive app.</p>
-        <p><strong>A contextual button in the persistent surface.</strong> When the user enters an immersive app &mdash; Beat Saber, for example &mdash; a new CTA appears on the right side of the system bar. The bar is the OS's most persistent surface, which makes it the right place to host the exit: always reachable, never hidden in a menu the user has to remember how to summon.</p>
-        <p><strong>Hover to preview the action.</strong> Approaching the button doesn't immediately quit. On hover, it expands to show what it will close &mdash; &ldquo;Close Beat Saber&rdquo; &mdash; letting the user confirm intent before committing. In immersive contexts, accidental quits are expensive: you lose state, lose immersion, and have to rebuild both.</p>
-        <p>Quitting an immersive app isn't a UI action &mdash; it's a transition between two realities. This was one of several explorations of that handoff: the CTA stays visible the whole time, previews itself before activation, and routes the user predictably back to the MR home. The exit, treated as design rather than as a click target.</p>
+        <div class="case-split-content">
+          <h3>4. Navigator System Bar &mdash; Quit from Immersive App</h3>
+          <p>Designing the exit. The video walks through the transition between MR and immersive environments &mdash; specifically, how a user finds their way back when they're inside an immersive app.</p>
+          <p><strong>A contextual button in the persistent surface.</strong> When the user enters an immersive app &mdash; Beat Saber, for example &mdash; a new CTA appears on the right side of the system bar. The bar is the OS's most persistent surface, which makes it the right place to host the exit: always reachable, never hidden in a menu the user has to remember how to summon.</p>
+          <p><strong>Hover to preview the action.</strong> Approaching the button doesn't immediately quit. On hover, it expands to show what it will close &mdash; &ldquo;Close Beat Saber&rdquo; &mdash; letting the user confirm intent before committing. In immersive contexts, accidental quits are expensive: you lose state, lose immersion, and have to rebuild both.</p>
+          <p>Quitting an immersive app isn't a UI action &mdash; it's a transition between two realities. This was one of several explorations of that handoff: the CTA stays visible the whole time, previews itself before activation, and routes the user predictably back to the MR home. The exit, treated as design rather than as a click target.</p>
+        </div>
       </div>
 
     </div>
