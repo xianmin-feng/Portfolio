@@ -439,6 +439,7 @@ img { max-width: 100%; display: block; }
 .subpage-video-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 24px;
 }
 .subpage-video {
   max-height: 600px;
