@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spatial OS Navigation & System Bar — Xianmin Feng</title>
+<meta name="description" content="Case study: prototyping foundational system UI for Horizon OS — System Bar, Navigator, Window Continuity, and Settings.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">XF</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="subpage-hero">
+  <div class="container">
+    <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
+    <h1 class="subpage-title">Spatial OS Navigation &amp; System Bar</h1>
+    <p class="subpage-subtitle">Prototyping foundational system UI for the next-generation Horizon OS &mdash; System Bar, Navigator, Window Continuity, and Settings shipped to production.</p>
+    <div class="subpage-meta">
+      <span>Horizon OS</span>
+      <span>System UI</span>
+      <span>Unity 3D</span>
+      <span>C#</span>
+      <span>VR / MR</span>
+      <span>Shipped Product</span>
+    </div>
+  </div>
+</section>
+
+<!-- Case Study -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+
+      <div class="case-block">
+        <h3>Overview</h3>
+        <p>At Meta, I prototyped foundational system features for the next-generation Horizon OS &mdash; the surfaces users see and touch every time they put on a headset. The work covered four interconnected pillars: <strong>Navigator</strong>, <strong>System Bar</strong>, <strong>Window Continuity</strong>, and <strong>Settings</strong>. Each one shipped to production and shaped navigation consistency across the platform.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>System Bar</h3>
+        <div class="subpage-video-container">
+          <video class="subpage-video" controls playsinline>
+            <source src="assets/spatial-os-system-bar.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p>The persistent navigation surface that anchors every spatial experience. I prototyped <strong>8 layout configurations</strong> exploring how the bar could feel always-accessible without feeling intrusive &mdash; spacing, density, position relative to the user's gaze, and how it responds when the user moves through space. The selected configuration shipped and influenced patterns across other system surfaces.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>Navigator</h3>
+        <div class="subpage-video-container">
+          <video class="subpage-video" controls playsinline>
+            <source src="assets/spatial-os-navigator.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p>The user's home base &mdash; how you launch apps, switch contexts, and orient yourself in the system. I built the interaction model in working code, tuning the feel of how tiles surface, how the focus moves under your gaze, and how transitions cushion between states.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>Window Continuity</h3>
+        <div class="subpage-video-container">
+          <video class="subpage-video" controls playsinline>
+            <source src="assets/spatial-os-continuity.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p>How windows persist, follow, and respect spatial relationships when users move through their environment. Prototyped the behaviors that make windows feel like physical objects with intent &mdash; they remember where they belong, but stay reachable when you walk away.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>Settings</h3>
+        <div class="subpage-video-container">
+          <video class="subpage-video" controls playsinline>
+            <source src="assets/spatial-os-settings.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p>System settings as a first-class spatial surface, not a flat menu transplanted from 2D. Prototyped how toggles, sliders, and panels feel in three dimensions &mdash; what depth, focus, and parallax do for legibility and control.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>Impact</h3>
+        <p>The work shipped to production and influenced the launch strategy for the next-generation Horizon OS. The 8 system-bar layout options established a vocabulary the team could reason about &mdash; turning subjective debate into concrete A/B-testable variants. Each prototype gave leadership a felt-rather-than-described version of the future, accelerating go/no-go decisions and aligning engineering on the implementation early.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>The Takeaway</h3>
+        <p>System UI lives or dies by the small stuff &mdash; the timing of a transition, the bias of a focus animation, the weight of a glance. Working in code meant every &ldquo;what if&rdquo; could be felt within hours, and the right answer surfaced from the prototypes themselves rather than from arguments about mockups.</p>
+      </div>
+
+    </div>
+
+    <div class="case-cta">
+      <a href="spatial-ui.html" class="btn btn-primary">Try Interactive Demo &rarr;</a>
+      <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
