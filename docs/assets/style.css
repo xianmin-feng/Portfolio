@@ -405,7 +405,7 @@ img { max-width: 100%; display: block; }
   padding-top: 40px;
 }
 .section.section-video {
-  padding: 100px 0;
+  padding: 140px 0 80px;
 }
 .back-link {
   display: inline-block;
