@@ -442,6 +442,9 @@ img { max-width: 100%; display: block; }
   margin-bottom: 24px;
 }
 .subpage-video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
   max-height: 600px;
   border-radius: 16px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
