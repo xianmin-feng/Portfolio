@@ -55,17 +55,20 @@
   <div class="container">
     <div class="case-study">
 
-      <div class="case-block">
-        <h3>Why I Built This</h3>
-        <p>After tracking my own wellness across multiple apps, I noticed a pattern: I had plenty of health data but never acted on it. Dashboards showed numbers I'd glance at and forget. AI chatbots gave generic advice disconnected from my actual state. As a designer working at the intersection of AI and product, I saw an opportunity to explore a different model -- one where the app already <em>understands</em> how you're doing and communicates through context-aware, ambient interactions instead of charts.</p>
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Why I Built This</span>
+        <p>After tracking my own wellness across multiple apps, I noticed a pattern: I had plenty of health data but never acted on it. Dashboards showed numbers I'd glance at and forget. AI chatbots gave generic advice disconnected from my actual state.</p>
+        <p>As a designer working at the intersection of AI and product, I saw an opportunity to explore a different model &mdash; one where the app already <em>understands</em> how you're doing and communicates through context-aware, ambient interactions instead of charts.</p>
       </div>
 
-      <div class="case-block">
+      <div class="case-block fade-in-up">
         <h3>The Design Challenge</h3>
-        <p>Design a wellness experience built around <em>calm intelligence</em>: filter multiple health signals into a single clear output, connect the dots across metrics (poor sleep + elevated stress = a breathing nudge), and deliver insight through agentic, anticipatory interactions -- not dashboards users have to interpret themselves.</p>
+        <p>Design a wellness experience built around <em>calm intelligence</em>: filter multiple health signals into a single clear output, connect the dots across metrics (poor sleep + elevated stress = a breathing nudge), and deliver insight through agentic, anticipatory interactions &mdash; not dashboards users have to interpret themselves.</p>
       </div>
 
-      <div class="case-block">
+      <blockquote class="case-pullquote fade-in-up">Calm intelligence: data in, clarity out.</blockquote>
+
+      <div class="case-block fade-in-up">
         <h3>The Solution</h3>
         <p>Nibi is an AI-native iOS wellness companion that transforms raw health data into personalized, context-aware interactions. Rather than presenting charts, Nibi assembles a real-time picture of your day -- sleep, stress, hydration, movement, heart rate -- and uses it to power every experience: an AI companion that already knows how you're doing before you say a word, ambient nudges that surface at the right moment, and a generative UI layer where the avatar, colors, and score all adapt to your current state.</p>
         <p>The name "Nibi" comes from the Japanese word for "you" -- because the app is entirely about you. Your habits, your mood, your pace.</p>
@@ -101,7 +104,7 @@
         </div>
       </div>
 
-      <div class="case-block">
+      <div class="case-block fade-in-up">
         <h3>Design Decisions</h3>
         <ul class="case-list">
           <li><strong>Zero dependencies</strong> -- Pure SwiftUI, SwiftData, HealthKit. No third-party bloat. Every icon is hand-drawn as a custom SwiftUI Shape for visual consistency.</li>
@@ -112,7 +115,7 @@
         </ul>
       </div>
 
-      <div class="case-block">
+      <div class="case-block fade-in-up">
         <h3>Design Process</h3>
 
         <h4>Information Architecture: Four Tabs, Clear Purpose</h4>
@@ -143,7 +146,7 @@
         <p>The 4-7-8 breathing exercise is an interaction design problem: guiding physical behavior through a screen. The visuals <em>become</em> the breath -- a soft orb expands on inhale, holds, and contracts on exhale. The screen shifts to a dark, minimal palette to signal a mode change. Progress stays subtle so users stay present, not monitoring.</p>
       </div>
 
-      <div class="case-block">
+      <div class="case-block fade-in-up">
         <h3>What Real Use Taught Me</h3>
         <p>The first build was only the starting point. Using Nibi every day surfaced friction the design hadn't anticipated. Six iterations stand out:</p>
         <ul class="case-list">
@@ -156,7 +159,9 @@
         </ul>
       </div>
 
-      <div class="case-block">
+      <blockquote class="case-pullquote fade-in-up">Using it taught me things designing it didn't.</blockquote>
+
+      <div class="case-block fade-in-up">
         <h3>How I Built It</h3>
         <p>I used <strong>Cursor + Claude</strong> as my primary development workflow -- designing the experience, then describing interactions in plain language and iterating in real time. The process followed a tight loop: <em>describe &rarr; implement &rarr; test &rarr; refine</em>. I'd test on the simulator, identify friction points, and articulate fixes conversationally -- getting precise, targeted results within minutes.</p>
         <p>This AI-assisted approach let me focus on design judgment and UX decisions while rapidly validating ideas through functional prototypes. The result: a polished, production-quality app built end to end -- concept, interaction design, architecture, and implementation.</p>
@@ -192,10 +197,10 @@
         </div>
       </div>
 
-      <div class="case-block">
-        <h3>The Takeaway</h3>
-        <p>Nibi reinforced that the hardest part of AI-native design isn't the technology -- it's shaping how intelligence <em>feels</em>. Every decision, from the adaptive avatar to the honest scoring system, came back to one question: does this make the person feel seen, not surveilled?</p>
-        <p>This project demonstrates what I bring to a team: the ability to identify a design opportunity, architect an end-to-end AI experience, build functional prototypes to validate it, and ship a polished product -- bridging design thinking, health data, and AI into a cohesive, human-centered experience.</p>
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">The Takeaway</span>
+        <p>Nibi reinforced that the hardest part of AI-native design isn't the technology &mdash; it's shaping how intelligence <em>feels</em>. Every decision, from the adaptive avatar to the honest scoring system, came back to one question: does this make the person feel seen, not surveilled?</p>
+        <p>This project demonstrates what I bring to a team: the ability to identify a design opportunity, architect an end-to-end AI experience, build functional prototypes to validate it, and ship a polished product &mdash; bridging design thinking, health data, and AI into a cohesive, human-centered experience.</p>
       </div>
 
     </div>
@@ -214,6 +219,28 @@
     <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.fade-in-up').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in-up').forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
 
 </body>
 </html>
