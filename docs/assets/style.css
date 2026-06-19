@@ -485,6 +485,44 @@ img { max-width: 100%; display: block; }
   margin-bottom: 10px;
   font-variant-numeric: tabular-nums;
 }
+
+/* Editorial-style summary block */
+.case-summary {
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+  border-left: 4px solid #6366f1;
+  border-radius: 16px;
+  padding: 36px 40px;
+  margin-bottom: 0;
+}
+.case-summary-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6366f1;
+  margin-bottom: 18px;
+}
+.case-summary p {
+  font-size: 16px;
+  line-height: 1.75;
+  color: #444;
+  margin-bottom: 24px;
+}
+.case-summary p:last-child {
+  margin-bottom: 0;
+}
+.case-summary p:first-of-type {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1a1a2e;
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .case-summary {
+    padding: 28px 24px;
+  }
+}
 @media (max-width: 900px) {
   .case-block-split {
     grid-template-columns: 1fr;
