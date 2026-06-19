@@ -60,17 +60,33 @@
         <p>After tracking my own wellness across multiple apps, I noticed a pattern: I had plenty of health data but never acted on it. Dashboards showed numbers I'd glance at and forget. AI chatbots gave generic advice disconnected from my actual state.</p>
         <p>As a designer working at the intersection of AI and product, I saw an opportunity to explore a different model &mdash; one where the app already <em>understands</em> how you're doing and communicates through context-aware, ambient interactions instead of charts.</p>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div class="case-block fade-in-up">
-        <span class="section-numeral">01</span>
-        <h3>The Design Challenge</h3>
-        <p>Design a wellness experience built around <em>calm intelligence</em>: filter multiple health signals into a single clear output, connect the dots across metrics (poor sleep + elevated stress = a breathing nudge), and deliver insight through agentic, anticipatory interactions &mdash; not dashboards users have to interpret themselves.</p>
-      </div>
+<!-- 01 The Design Challenge -->
+<section class="section section-case">
+  <div class="container">
+    <div class="case-block fade-in-up">
+      <span class="section-numeral">01</span>
+      <h3>The Design Challenge</h3>
+      <p>Design a wellness experience built around <em>calm intelligence</em>: filter multiple health signals into a single clear output, connect the dots across metrics (poor sleep + elevated stress = a breathing nudge), and deliver insight through agentic, anticipatory interactions &mdash; not dashboards users have to interpret themselves.</p>
+    </div>
+  </div>
+</section>
 
-      <blockquote class="case-pullquote fade-in-up">Calm intelligence: data in, clarity out.</blockquote>
+<!-- Pull Quote 1 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">Calm intelligence: data in, clarity out.</blockquote>
+  </div>
+</section>
 
-      <div class="case-block fade-in-up">
-        <span class="section-numeral">02</span>
+<!-- 02 The Solution -->
+<section class="section section-case section-alt">
+  <div class="container">
+    <div class="case-block fade-in-up">
+      <span class="section-numeral">02</span>
         <h3>The Solution</h3>
         <p>Nibi is an AI-native iOS wellness companion that transforms raw health data into personalized, context-aware interactions. Rather than presenting charts, Nibi assembles a real-time picture of your day -- sleep, stress, hydration, movement, heart rate -- and uses it to power every experience: an AI companion that already knows how you're doing before you say a word, ambient nudges that surface at the right moment, and a generative UI layer where the avatar, colors, and score all adapt to your current state.</p>
         <p>The name "Nibi" comes from the Japanese word for "you" -- because the app is entirely about you. Your habits, your mood, your pace.</p>
@@ -105,10 +121,15 @@
           </div>
         </div>
       </div>
+  </div>
+</section>
 
-      <div class="case-block fade-in-up">
-        <span class="section-numeral">03</span>
-        <h3>Design Decisions</h3>
+<!-- 03 Design Decisions -->
+<section class="section section-case">
+  <div class="container">
+    <div class="case-block fade-in-up">
+      <span class="section-numeral">03</span>
+      <h3>Design Decisions</h3>
         <ul class="case-list">
           <li><strong>Zero dependencies</strong> -- Pure SwiftUI, SwiftData, HealthKit. No third-party bloat. Every icon is hand-drawn as a custom SwiftUI Shape for visual consistency.</li>
           <li><strong>Privacy first</strong> -- All data stays on-device. No accounts, no sign-ups, no data collection. AI chat only activates with your own API key.</li>
@@ -117,10 +138,15 @@
           <li><strong>Scoring integrity</strong> -- Every core metric always counts toward the wellness score. Logging just one thing won't inflate your number -- the system uses a fixed denominator to stay honest.</li>
         </ul>
       </div>
+  </div>
+</section>
 
-      <div class="case-block fade-in-up">
-        <span class="section-numeral">04</span>
-        <h3>Design Process</h3>
+<!-- 04 Design Process -->
+<section class="section section-case section-alt">
+  <div class="container">
+    <div class="case-block fade-in-up">
+      <span class="section-numeral">04</span>
+      <h3>Design Process</h3>
 
         <h4>Information Architecture: Four Tabs, Clear Purpose</h4>
         <p>The app is organized into four distinct modes -- Home, Chat, Breathe, and Settings -- each with a single clear purpose. Home is both dashboard <em>and</em> input surface: today's score, weight trend, and one-tap logging on every metric card -- no separate check-in flow needed. Chat is for conversation. Breathe is for calm. There's no feature buried three levels deep. Users always know where they are and what they can do.</p>
@@ -149,10 +175,15 @@
         <h4>Designing for Presence: Guided Breathing</h4>
         <p>The 4-7-8 breathing exercise is an interaction design problem: guiding physical behavior through a screen. The visuals <em>become</em> the breath -- a soft orb expands on inhale, holds, and contracts on exhale. The screen shifts to a dark, minimal palette to signal a mode change. Progress stays subtle so users stay present, not monitoring.</p>
       </div>
+  </div>
+</section>
 
-      <div class="case-block fade-in-up">
-        <span class="section-numeral">05</span>
-        <h3>What Real Use Taught Me</h3>
+<!-- 05 What Real Use Taught Me -->
+<section class="section section-case">
+  <div class="container">
+    <div class="case-block fade-in-up">
+      <span class="section-numeral">05</span>
+      <h3>What Real Use Taught Me</h3>
         <p>The first build was only the starting point. Using Nibi every day surfaced friction the design hadn't anticipated. Six iterations stand out:</p>
         <ul class="case-list">
           <li><strong>Replaced the 9-step check-in wizard.</strong> The original flow lived in a separate Check-In tab with sliders for mood, sleep, water, meals, movement, stress, habits, heart rate, and notes -- 60-90 seconds per day. I collapsed it into in-place adjusters on each Home card and a single-screen Quick Log sheet with chip strips. A full day now takes ~6 taps. The Check-In tab became redundant; the dashboard absorbed its role.</li>
@@ -163,12 +194,22 @@
           <li><strong>Cut the day-1 silence.</strong> The streak banner originally hid until day 2 -- new users finished their first log and got nothing back. I added a Day 1 banner ("Day 1 logged! Come back tomorrow to start a streak.") at the exact moment users decide whether they'll return.</li>
         </ul>
       </div>
+  </div>
+</section>
 
-      <blockquote class="case-pullquote fade-in-up">Using it taught me things designing it didn't.</blockquote>
+<!-- Pull Quote 2 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">Using it taught me things designing it didn't.</blockquote>
+  </div>
+</section>
 
-      <div class="case-block fade-in-up">
-        <span class="section-numeral">06</span>
-        <h3>How I Built It</h3>
+<!-- 06 How I Built It -->
+<section class="section section-case section-alt">
+  <div class="container">
+    <div class="case-block fade-in-up">
+      <span class="section-numeral">06</span>
+      <h3>How I Built It</h3>
         <p>I used <strong>Cursor + Claude</strong> as my primary development workflow -- designing the experience, then describing interactions in plain language and iterating in real time. The process followed a tight loop: <em>describe &rarr; implement &rarr; test &rarr; refine</em>. I'd test on the simulator, identify friction points, and articulate fixes conversationally -- getting precise, targeted results within minutes.</p>
         <p>This AI-assisted approach let me focus on design judgment and UX decisions while rapidly validating ideas through functional prototypes. The result: a polished, production-quality app built end to end -- concept, interaction design, architecture, and implementation.</p>
         <div class="case-tech-table">
@@ -202,20 +243,29 @@
           </div>
         </div>
       </div>
+  </div>
+</section>
 
+<!-- The Takeaway -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
       <div class="case-block case-summary fade-in-up">
         <span class="case-summary-label">The Takeaway</span>
         <p>Nibi reinforced that the hardest part of AI-native design isn't the technology &mdash; it's shaping how intelligence <em>feels</em>. Every decision, from the adaptive avatar to the honest scoring system, came back to one question: does this make the person feel seen, not surveilled?</p>
         <p>This project demonstrates what I bring to a team: the ability to identify a design opportunity, architect an end-to-end AI experience, build functional prototypes to validate it, and ship a polished product &mdash; bridging design thinking, health data, and AI into a cohesive, human-centered experience.</p>
       </div>
-
     </div>
+  </div>
+</section>
 
+<!-- CTAs -->
+<section class="section">
+  <div class="container">
     <div class="case-cta">
       <a href="https://github.com/xianmin-feng/Nibi" target="_blank" class="btn btn-primary">View on GitHub &rarr;</a>
       <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
     </div>
-
   </div>
 </section>
 
