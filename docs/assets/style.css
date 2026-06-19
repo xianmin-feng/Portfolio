@@ -497,7 +497,7 @@ img { max-width: 100%; display: block; }
   background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
   border-radius: 16px;
   padding: 36px 40px;
-  margin-bottom: 48px;
+  margin-bottom: 80px;
 }
 .case-summary-label {
   display: inline-block;
