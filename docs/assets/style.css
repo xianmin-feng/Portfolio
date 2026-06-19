@@ -468,6 +468,9 @@ img { max-width: 100%; display: block; }
 .case-block-split .case-split-content {
   min-width: 0;
 }
+.case-block-split .case-split-media {
+  padding-top: 74px; /* match section-numeral height + margin so video aligns with H3 */
+}
 .case-block-split .case-split-media .subpage-video-container {
   margin-bottom: 0;
 }
@@ -526,6 +529,9 @@ img { max-width: 100%; display: block; }
   .case-block-split {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+  .case-block-split .case-split-media {
+    padding-top: 0;
   }
   .case-block-split.reverse .case-split-media {
     order: 0;
