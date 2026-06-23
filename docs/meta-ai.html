@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta AI Day 0 Case Study | Xianmin Feng</title>
+<meta name="description" content="Case study: Meta AI Day 0 Experience — designing and prototyping the foundational AI user journey in VR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">XF</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="subpage-hero">
+  <div class="container">
+    <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
+    <h1 class="subpage-title">Meta AI — Day 0 Experience</h1>
+    <p class="subpage-subtitle">Defining the foundational AI user journey in VR through a high-pressure, 5-day prototyping sprint</p>
+    <div class="subpage-meta">
+      <span>VR / Spatial UI</span>
+      <span>Unity 3D</span>
+      <span>AI Interaction Design</span>
+      <span>Strategic Initiative</span>
+    </div>
+  </div>
+</section>
+
+<!-- Video -->
+<section class="section">
+  <div class="container">
+    <div class="subpage-video-container">
+      <video class="subpage-video" controls playsinline>
+        <source src="assets/MetaAI.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- Case Study Content -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+
+      <div class="case-block">
+        <h3>The Context</h3>
+        <p>Meta AI was becoming a first-class citizen in the VR platform, but the team didn't yet have a shared vision for what the first-time AI experience should feel like in spatial computing. Leadership needed something they could <em>see and feel</em> — not a slide deck, but a working prototype that demonstrated the full user journey from invocation to conversation to task completion. The timeline: five days.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>My Role</h3>
+        <p>I owned the end-to-end design and prototyping of the Day 0 demo flow. This meant designing and building the complete storyboard sequence, the visual UI layer, and the interaction mechanics — all in Unity 3D, all functional, all ready for director-level review.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>What I Built</h3>
+        <p>The prototype covered the full Meta AI invocation-to-response journey in VR — from how the AI appears in spatial space to how it presents information and responds to voice input.</p>
+        <div class="case-features">
+          <div class="case-feature">
+            <strong>Storyboard Flow</strong>
+            <span>Designed and built the complete end-to-end demo sequence — the narrative arc leadership would experience during review</span>
+          </div>
+          <div class="case-feature">
+            <strong>AI Ring System</strong>
+            <span>Defined the size, position, and spatial relationship of the Meta AI ring relative to the main panel — establishing the visual anchor for AI presence in VR</span>
+          </div>
+          <div class="case-feature">
+            <strong>Dynamic Card System</strong>
+            <span>Built a flexible response framework where AI-generated content populates modular cards that adapt to different content types</span>
+          </div>
+          <div class="case-feature">
+            <strong>Expansion Animations</strong>
+            <span>Designed and implemented card expansion transitions — from summary to detail — with spatial depth and motion that feel native to VR</span>
+          </div>
+          <div class="case-feature">
+            <strong>Disambiguation Interfaces</strong>
+            <span>Created UI patterns for moments when the AI needs clarification — turning ambiguity into a structured, low-friction interaction</span>
+          </div>
+          <div class="case-feature">
+            <strong>Voice Command Integration</strong>
+            <span>Hooked up voice input to the spatial system, enabling hands-free invocation and natural language interaction with the AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-block">
+        <h3>Design Process</h3>
+
+        <h4>Compressed Timeline, Full Fidelity</h4>
+        <p>Five days with concurrent project demands. Rather than cutting fidelity, I compressed the design-to-prototype loop: defining the interaction model and visual direction on day one, building core systems on days two and three, integrating voice and polish on day four, and running the director review on day five. Every decision was made through working code, not mockups.</p>
+
+        <h4>Spatial AI Interaction Design</h4>
+        <p>The central design question was: <em>where does AI live in spatial space?</em> A flat overlay would ignore the medium. A fully 3D agent would be distracting. The AI ring system was designed as a middle ground — a persistent, spatially anchored presence that signals availability without competing with the user's environment. Its size and position relative to the main panel were tuned through rapid in-headset iteration.</p>
+
+        <h4>Designing for Ambiguity</h4>
+        <p>AI responses aren't always clean. When the system needs clarification — "Did you mean this restaurant or that one?" — the UX can't stall. The disambiguation interface turns these moments into structured choices: clear options, spatial layout, and a tone that frames clarification as helpful rather than broken. This pattern became a reusable primitive for the broader Meta AI experience.</p>
+
+        <h4>Motion as Communication</h4>
+        <p>In VR, motion isn't decoration — it's information. The card expansion animations were designed to communicate hierarchy: a summary card lifts and scales into a detail view with depth, reinforcing the spatial relationship between overview and deep-dive. The transitions guide the user's gaze and signal what's interactive, reducing the learning curve in an unfamiliar AI interface.</p>
+      </div>
+
+      <div class="case-block">
+        <h3>The Impact</h3>
+        <ul class="case-list">
+          <li><strong>Enabled 2+ rounds of director-level review</strong> — leadership could experience the AI journey in-headset, not on a screen, leading to higher-confidence decisions.</li>
+          <li><strong>Established the north-star vision</strong> for Meta AI's Day 0 experience in VR — the prototype became the reference point for what the team was building toward.</li>
+          <li><strong>Unblocked critical milestones</strong> — design questions that had stalled in slide reviews were resolved within minutes of in-headset walkthroughs.</li>
+          <li><strong>Defined spatial AI primitives</strong> — the ring system, card framework, and disambiguation patterns influenced downstream design decisions across the Meta AI VR experience.</li>
+        </ul>
+      </div>
+
+      <div class="case-block">
+        <h3>The Takeaway</h3>
+        <p>This project reinforced that the fastest path to alignment is a prototype you can feel — especially in spatial computing where flat mockups can't convey depth, motion, and spatial relationships. Compressing a multi-week schedule into five days wasn't about cutting corners; it was about making every decision through working code, eliminating the gap between "imagine this" and "experience this."</p>
+      </div>
+
+    </div>
+
+    <div class="case-cta">
+      <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
