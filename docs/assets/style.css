@@ -568,6 +568,7 @@ img { max-width: 100%; display: block; }
   line-height: 1.75;
   color: #444;
   margin-bottom: 24px;
+  max-width: none;
 }
 .case-summary p:last-child {
   margin-bottom: 0;
