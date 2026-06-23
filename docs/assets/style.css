@@ -459,6 +459,25 @@ img { max-width: 100%; display: block; }
   justify-content: center;
 }
 
+/* Case Study: full-width video + text below */
+.case-block-full {
+  margin-bottom: 56px;
+}
+.case-block-full .case-full-media {
+  margin-bottom: 36px;
+}
+.case-block-full .case-full-media video {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+.case-block-full .case-full-content {
+  max-width: 800px;
+}
+.case-block-full .case-full-content h3 {
+  margin-top: 0;
+}
+
 /* Case Study: zigzag (side-by-side video + text) */
 .case-block-split {
   display: grid;
