@@ -511,41 +511,6 @@ img { max-width: 100%; display: block; }
   }
 }
 
-/* Case Study: text wraps around video */
-.case-block-wrap {
-  margin-bottom: 56px;
-}
-.case-block-wrap .case-wrap-media {
-  float: left;
-  width: 45%;
-  margin: 8px 32px 16px 0;
-}
-.case-block-wrap .case-wrap-media video {
-  width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-}
-.case-block-wrap.wrap-right .case-wrap-media {
-  float: right;
-  margin: 8px 0 16px 32px;
-}
-.case-block-wrap::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-@media (max-width: 768px) {
-  .case-block-wrap .case-wrap-media {
-    float: none;
-    width: 100%;
-    margin: 0 0 24px 0;
-  }
-  .case-block-wrap.wrap-right .case-wrap-media {
-    float: none;
-    margin: 0 0 24px 0;
-  }
-}
-
 /* Case Study: zigzag (side-by-side video + text) */
 .case-block-split {
   display: grid;
