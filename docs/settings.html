@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horizon OS Settings &amp; Quick Settings &mdash; Xianmin Feng</title>
+<meta name="description" content="Case study: redesigning the settings experience for Horizon OS — introducing Quick Settings as a Navigator sub-surface with two architectural options.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">XF</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="subpage-hero">
+  <div class="container">
+    <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
+    <h1 class="subpage-title">Horizon OS Settings &amp; Quick Settings</h1>
+    <p class="subpage-subtitle">Redesigning how users access and customize system controls in a spatial OS &mdash; from a standalone app to an integrated Navigator experience.</p>
+    <div class="subpage-meta">
+      <span>Horizon OS</span>
+      <span>Unity 3D</span>
+      <span>C#</span>
+      <span>System UI</span>
+      <span>Information Architecture</span>
+      <span>Navigator Integration</span>
+      <span>Customization</span>
+    </div>
+  </div>
+</section>
+
+<!-- Summary -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Summary</span>
+        <p>The original Horizon OS had a single settings app &mdash; launch it, find the option, change it, close it. As the Navigator became the primary surface of the OS, the team needed a faster, more integrated way for users to access common controls without leaving their current context. I designed and prototyped Quick Settings as a sub-surface of the Navigator, and explored two architectural options for how the full Settings panel relates to it.</p>
+        <p>Beyond the IA question, I introduced a customization system that lets users choose which controls appear in their Quick Settings &mdash; with toggles in the full Settings that reflect simultaneously on the Quick Settings surface. The result is a settings experience that fits naturally into the spatial OS rather than living as a separate destination.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 1 -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/settings%20and%20qs.MP4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">01</span>
+          <h3>Quick Settings &mdash; Fast Access from the Navigator</h3>
+          <p>Quick Settings lives as a sub-page of the Navigator, accessible from a settings tab in the sub-navigation. Users can reach Wi-Fi, brightness, volume, VR/MR mode switching, and environment controls without launching a separate app &mdash; the most common settings are always one tap away from wherever they are in the OS.</p>
+          <p><strong>Contextual, not comprehensive.</strong> Quick Settings isn&rsquo;t a miniature version of the full settings app. It surfaces only the controls users need frequently &mdash; the adjustments you make mid-session without wanting to break flow. Everything else lives in the full Settings panel, accessible from a clear entry point within Quick Settings.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 1 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">Settings should come to you, not the other way around.</blockquote>
+  </div>
+</section>
+
+<!-- Section 2 -->
+<section class="section section-case section-alt">
+  <div class="container">
+      <div class="case-block case-block-split reverse fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/settings%20and%20qs.MP4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">02</span>
+          <h3>Two Options &mdash; Integrated vs. Independent</h3>
+          <p>The core IA question: should the full Settings live <em>inside</em> Quick Settings, or <em>outside</em> it? I prototyped both to let the team experience the trade-offs in-headset.</p>
+          <p><strong>Option A: Integrated.</strong> The full Settings extends below Quick Settings as a scrollable continuation. Scroll down from your quick controls and the full settings page appears &mdash; left-side navigation, right-side content. A top arrow lets you jump back to Quick Settings. One surface, one context, no window management. The trade-off: the panel becomes long, and the mental model blurs between &ldquo;quick&rdquo; and &ldquo;full.&rdquo;</p>
+          <p><strong>Option B: Independent.</strong> Quick Settings stays compact. Tapping the Settings button opens a separate, full-size Settings panel as its own window. Clean separation &mdash; Quick Settings stays fast, full Settings gets its own space. The trade-off: an extra window to manage, and a context switch between the two.</p>
+        </div>
+      </div>
+      <div class="case-block fade-in-up" style="max-width: none;">
+        <p style="max-width: none;"><strong>Why both needed to be built.</strong> This wasn&rsquo;t a question that could be resolved in a design review. The integrated model <em>sounds</em> simpler, but does it feel right when the panel gets long? The independent model <em>sounds</em> cleaner, but does opening a new window feel heavy in VR? Prototyping both in Unity and testing in-headset gave the team concrete answers instead of hypothetical trade-offs.</p>
+      </div>
+  </div>
+</section>
+
+<!-- Section 3 -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/settings%20and%20qs_hozriozn%20os%20vr.MP4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">03</span>
+          <h3>Customization &mdash; Your Quick Settings, Your Layout</h3>
+          <p>Not every user needs the same quick controls. I designed a customization system where users can choose which settings appear in their Quick Settings panel.</p>
+          <p><strong>Simultaneous reflection.</strong> In the full Settings under the General tab, each control has a toggle. Turn it on, and the control appears in Quick Settings immediately &mdash; no save button, no refresh. Turn it off, and it disappears. The two surfaces stay in sync in real time, so users can see exactly what their Quick Settings will look like as they configure it.</p>
+          <p><strong>Designing for agency.</strong> Customization isn&rsquo;t just a feature &mdash; it&rsquo;s a signal that the OS respects how each person uses it. A gamer might want environment switching front and center. A remote worker might prioritize Wi-Fi and mic controls. The same Quick Settings surface, tailored to different workflows.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 2 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">The same surface, tailored to different workflows.</blockquote>
+  </div>
+</section>
+
+<!-- Closing Thoughts -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Closing Thoughts</span>
+        <p>Settings sounds like a solved problem &mdash; until you redesign it for a spatial OS where launching a separate app feels like leaving the room. Moving settings into the Navigator as a sub-surface, exploring two IA models through working prototypes, and adding real-time customization turned a utilitarian feature into something that feels native to how people actually use VR.</p>
+        <p>The exploration defined how system controls should integrate with the Navigator &mdash; not as a bolted-on panel, but as a natural extension of the OS surface users already live in. Both architectural options gave the team the in-headset evidence they needed to make a confident product decision.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTAs -->
+<section class="section">
+  <div class="container">
+    <div class="case-cta">
+      <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.fade-in-up').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in-up').forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+
+</body>
+</html>
