@@ -82,27 +82,44 @@
   </div>
 </section>
 
-<!-- Section 2 -->
+<!-- Section 2: Option A -->
 <section class="section section-case section-alt">
   <div class="container">
       <div class="case-block case-block-split reverse fade-in-up">
         <div class="case-split-media">
           <div class="subpage-video-container">
             <video class="subpage-video" controls playsinline>
-              <source src="assets/settings%20and%20qs.MP4" type="video/mp4">
+              <source src="assets/settings%20inside%20navigator.mp4" type="video/mp4">
             </video>
           </div>
         </div>
         <div class="case-split-content">
           <span class="section-numeral">02</span>
-          <h3>Two Options &mdash; Integrated vs. Independent</h3>
+          <h3>Option A &mdash; Settings Inside the Navigator</h3>
           <p>The core IA question: should the full Settings live <em>inside</em> Quick Settings, or <em>outside</em> it? I prototyped both to let the team experience the trade-offs in-headset.</p>
-          <p><strong>Option A: Integrated.</strong> The full Settings extends below Quick Settings as a scrollable continuation. Scroll down from your quick controls and the full settings page appears &mdash; left-side navigation, right-side content. A top arrow lets you jump back to Quick Settings. One surface, one context, no window management. The trade-off: the panel becomes long, and the mental model blurs between &ldquo;quick&rdquo; and &ldquo;full.&rdquo;</p>
-          <p><strong>Option B: Independent.</strong> Quick Settings stays compact. Tapping the Settings button opens a separate, full-size Settings panel as its own window. Clean separation &mdash; Quick Settings stays fast, full Settings gets its own space. The trade-off: an extra window to manage, and a context switch between the two.</p>
+          <p><strong>Integrated model.</strong> The full Settings extends below Quick Settings as a scrollable continuation. Scroll down from your quick controls and the full settings page appears &mdash; left-side navigation, right-side content. A top arrow lets you jump back to Quick Settings. One surface, one context, no window management. The trade-off: the panel becomes long, and the mental model blurs between &ldquo;quick&rdquo; and &ldquo;full.&rdquo;</p>
         </div>
       </div>
-      <div class="case-block fade-in-up" style="max-width: none;">
-        <p style="max-width: none;"><strong>Why both needed to be built.</strong> This wasn&rsquo;t a question that could be resolved in a design review. The integrated model <em>sounds</em> simpler, but does it feel right when the panel gets long? The independent model <em>sounds</em> cleaner, but does opening a new window feel heavy in VR? Prototyping both in Unity and testing in-headset gave the team concrete answers instead of hypothetical trade-offs.</p>
+  </div>
+</section>
+
+<!-- Section 3: Option B -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/settings%20outside%20navigator.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">03</span>
+          <h3>Option B &mdash; Settings Outside the Navigator</h3>
+          <p><strong>Independent model.</strong> Quick Settings stays compact. Tapping the Settings button opens a separate, full-size Settings panel as its own window. Clean separation &mdash; Quick Settings stays fast, full Settings gets its own space. The trade-off: an extra window to manage, and a context switch between the two.</p>
+          <p><strong>Why both needed to be built.</strong> This wasn&rsquo;t a question that could be resolved in a design review. The integrated model <em>sounds</em> simpler, but does it feel right when the panel gets long? The independent model <em>sounds</em> cleaner, but does opening a new window feel heavy in VR? Prototyping both in Unity and testing in-headset gave the team concrete answers instead of hypothetical trade-offs.</p>
+        </div>
       </div>
   </div>
 </section>
@@ -119,7 +136,7 @@
           </div>
         </div>
         <div class="case-split-content">
-          <span class="section-numeral">03</span>
+          <span class="section-numeral">04</span>
           <h3>Customization &mdash; Your Quick Settings, Your Layout</h3>
           <p>Not every user needs the same quick controls. I designed a customization system where users can choose which settings appear in their Quick Settings panel.</p>
           <p><strong>Simultaneous reflection.</strong> In the full Settings under the General tab, each control has a toggle. Turn it on, and the control appears in Quick Settings immediately &mdash; no save button, no refresh. Turn it off, and it disappears. The two surfaces stay in sync in real time, so users can see exactly what their Quick Settings will look like as they configure it.</p>
