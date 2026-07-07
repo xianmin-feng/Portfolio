@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horizon OS System Bar Evolution &mdash; Xianmin Feng</title>
+<meta name="description" content="Case study: designing and implementing the system bar's evolution from AUI Bar to Navigator System Bar on Horizon OS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">XF</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="subpage-hero">
+  <div class="container">
+    <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
+    <h1 class="subpage-title">Horizon OS System Bar Evolution</h1>
+    <p class="subpage-subtitle">Designing the most persistent surface in VR &mdash; from the legacy AUI Bar to a simplified, focused Navigator System Bar.</p>
+    <div class="subpage-meta">
+      <span>Horizon OS</span>
+      <span>Unity 3D</span>
+      <span>C#</span>
+      <span>System Bar</span>
+      <span>Navigation Design</span>
+      <span>Shipped Product</span>
+    </div>
+  </div>
+</section>
+
+<!-- Summary -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Summary</span>
+        <p>The system bar is the most persistent surface in the OS &mdash; always visible, always reachable, always taxing attention. I owned its evolution from the legacy AUI Bar through to the Navigator System Bar that shipped on Horizon OS, iterating through multiple configurations to find the right balance between access and simplicity.</p>
+        <p>The journey went from a utility-heavy AUI Bar (settings, app launcher, running apps) to a 6-tab Navigator model (Meta, Spaces, People, Apps, Display, Search), and ultimately to a focused 3-tab structure (Settings, Apps, Search). Each reduction wasn&rsquo;t a feature removed &mdash; it was a tax repaid to the user&rsquo;s attention.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 1: AUI Bar -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%); border-radius: 16px; min-height: 280px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 14px;">
+            Video coming soon
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">01</span>
+          <h3>The AUI Bar &mdash; Where It Started</h3>
+          <p>The original AUI Bar was a utility surface &mdash; settings, app launcher, running apps, and system controls packed into a persistent bar. It worked, but it was built for a simpler OS. As Horizon OS grew in scope and the Navigator became the primary surface, the system bar needed to evolve alongside it.</p>
+          <p><strong>The problem with the legacy model.</strong> The AUI Bar tried to do too much in too little space. Every feature had earned its spot individually, but collectively they created a surface that competed with the content above it. In VR, where the system bar is always in your field of view, that visual weight compounds &mdash; every button is a persistent cost to the user&rsquo;s attention.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 1 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">Every persistent surface taxes attention.</blockquote>
+  </div>
+</section>
+
+<!-- Section 2: 6-Tab Model -->
+<section class="section section-case section-alt">
+  <div class="container">
+      <div class="case-block case-block-split reverse fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%); border-radius: 16px; min-height: 280px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 14px;">
+            Video coming soon
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">02</span>
+          <h3>The 6-Tab Navigator System Bar</h3>
+          <p>The first iteration of the Navigator System Bar organized the OS into six primary entry points: Meta, Spaces, People, Apps, Display (show/hide), and Search. Each tab mapped to a distinct surface in the Navigator, giving users direct access to every major area of the OS from the persistent bar.</p>
+          <p><strong>Functional, but busy.</strong> Six tabs covered the full breadth of the OS, but the system bar felt crowded. Six buttons competing for the same persistent surface meant none of them felt primary. The bar was comprehensive, but comprehensiveness isn&rsquo;t the same as usability &mdash; especially on a surface the user sees every single session.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Section 3: 3-Tab Model -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container" style="background: linear-gradient(135deg, #f0f4ff 0%, #e8ecff 100%); border-radius: 16px; min-height: 280px; display: flex; align-items: center; justify-content: center; color: #888; font-size: 14px;">
+            Video coming soon
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">03</span>
+          <h3>The 3-Tab System Bar &mdash; What Shipped</h3>
+          <p>Through iteration, in-headset testing, and leadership review, the system bar was reduced to three primary tabs: Settings, Apps, and Search. Every button that was removed wasn&rsquo;t a feature lost &mdash; it was a decision about what deserves persistent real estate versus what can live one level deeper in the Navigator.</p>
+          <p><strong>The simplification logic.</strong> Meta, Spaces, and People didn&rsquo;t disappear &mdash; they moved into the Navigator where they had room to breathe. The system bar kept only the actions users reach for mid-session without wanting to open the full Navigator: adjusting settings, switching apps, and searching. Three buttons, three clear purposes, zero ambiguity.</p>
+          <p><strong>Less bar, more OS.</strong> Reducing the system bar from six tabs to three freed visual space, reduced decision overhead, and made the remaining buttons feel more confident. The persistent surface became quieter, letting the content and Navigator above it take center stage.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 2 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">Each button removed isn&rsquo;t a feature lost &mdash; it&rsquo;s a tax repaid to the user.</blockquote>
+  </div>
+</section>
+
+<!-- Closing Thoughts -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Closing Thoughts</span>
+        <p>The system bar is deceptively simple &mdash; three buttons on a strip. But those three buttons are the result of multiple rounds of prototyping, in-headset testing, and leadership review. Every configuration was built and experienced in VR before the team made a call, because the difference between six buttons and three isn&rsquo;t something you can evaluate on a screen.</p>
+        <p>This evolution &mdash; from AUI Bar to 6-tab Navigator to a focused 3-tab structure &mdash; shaped the navigation model that shipped on Horizon OS. The system bar is the surface users see most, and getting it right meant having the discipline to remove what didn&rsquo;t earn its place.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTAs -->
+<section class="section">
+  <div class="container">
+    <div class="case-cta">
+      <a href="spatial-os.html" class="btn btn-primary">See the Shipped Navigator &rarr;</a>
+      <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.fade-in-up').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in-up').forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+
+</body>
+</html>
