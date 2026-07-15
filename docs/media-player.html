@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unified Media Player &amp; Co-watching Shelf &mdash; Xianmin Feng</title>
+<meta name="description" content="Case study: unifying the media player across Horizon OS and designing a co-watching shelf for shared viewing experiences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">XF</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="subpage-hero">
+  <div class="container">
+    <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
+    <h1 class="subpage-title">Unified Media Player &amp; Co-watching Shelf</h1>
+    <p class="subpage-subtitle">Designing a consistent media playback experience across Horizon OS &mdash; from near-field to far-field, solo to shared.</p>
+    <div class="subpage-meta">
+      <span>Horizon OS</span>
+      <span>Unity 3D</span>
+      <span>C#</span>
+      <span>Media Player</span>
+      <span>Co-watching</span>
+      <span>Interaction Design</span>
+      <span>Shipped Product</span>
+    </div>
+  </div>
+</section>
+
+<!-- Summary -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Summary</span>
+        <p>Media playback on Horizon OS spanned multiple apps &mdash; Browser, OCTV, and other VROS surfaces &mdash; each with its own player behavior. I designed and prototyped a unified media player that brings consistency to how users control, transition, and scale media across the OS. Alongside this, I designed a co-watching shelf that solves a fundamental problem in shared viewing: how to keep browsing content without the player blocking the panel.</p>
+        <p>These are two related but distinct projects, both addressing the same core question: how should media feel in a spatial operating system?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Part 1: Unified Media Player -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/unified%20media%20player.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">01</span>
+          <h3>Unified Media Player</h3>
+          <p>Before this work, the Browser and OCTV each had their own media player with different controls, layouts, and behaviors. I designed a unified player that brings a single, consistent playback experience across all VROS apps &mdash; same controls, same transitions, same interaction model regardless of where the content originated.</p>
+          <p><strong>The design challenge.</strong> A media player in VR isn&rsquo;t just a rectangle with a play button. It exists in spatial space, which means it needs to handle transitions that flat players never face: moving from near-field (embedded in a panel) to far-field (floating in the environment), scaling from a small embedded view to full screen, and casting to a big screen across the room.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 1 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">One player, every surface, every transition.</blockquote>
+  </div>
+</section>
+
+<!-- Section 2: Near-field to Far-field -->
+<section class="section section-case section-alt">
+  <div class="container">
+      <div class="case-block case-block-split reverse fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/nearfield%20-%20farfield.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">02</span>
+          <h3>Near-field to Far-field Transitions</h3>
+          <p>I designed the full transition flow for how media moves through spatial space:</p>
+          <p><strong>Embedded &rarr; Full screen.</strong> Media starts embedded within a panel &mdash; a video playing inside the Browser or an OCTV page. The user can expand it to full screen, where the player takes over the panel with dedicated controls and an immersive viewing area.</p>
+          <p><strong>Full screen &rarr; Big screen cast.</strong> From full screen, users can cast the content to a large screen in the environment &mdash; the media lifts out of the panel and scales up, transitioning from near-field to far-field. The cast interaction feels like sending the content into the room.</p>
+          <p><strong>Uncast &rarr; Quit.</strong> The reverse flow is equally important: uncasting brings the media back to the panel, and quitting the player returns the user to where they started. Each step in the chain is reversible and predictable &mdash; users always know how to get back.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Part 2: Co-watching Shelf -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/media-shelf-compressed.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">03</span>
+          <h3>Media Co-watching Shelf Design</h3>
+          <p>During co-watching sessions, the media player takes over the panel &mdash; which means users lose access to everything else on that surface. The shelf solves this by giving users a way to minimize the player without stopping playback.</p>
+          <p><strong>Shrink to shelf.</strong> Clicking the arrow-down button on the media player collapses it into a compact shelf strip at the bottom of the panel. The shelf displays the essential information &mdash; title, subtitle, timeline, and a thumbnail of the video content &mdash; so users know what&rsquo;s playing without the player blocking the view. The rest of the panel is now accessible for browsing, chatting, or navigating.</p>
+          <p><strong>Retrieve from shelf.</strong> Tapping the shelf expands it back into the full media player, restoring the complete playback experience. The transition is smooth and reversible &mdash; users can toggle between shelf and player as often as they need without losing their place in the content or disrupting the co-watching session.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 2 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">Minimize the player, not the experience.</blockquote>
+  </div>
+</section>
+
+<!-- Section 4: Invite Flow -->
+<section class="section section-case section-alt">
+  <div class="container">
+      <div class="case-block case-block-split reverse fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/media-shelf-compressed.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">04</span>
+          <h3>Co-watching Invite Flow</h3>
+          <p>Co-watching starts with an invite. I designed the invite flow to integrate naturally with the existing OS patterns &mdash; users send invites through familiar surfaces rather than learning a new co-watching-specific UI.</p>
+          <p><strong>While the media plays on the panel</strong>, the shelf gives both users a shared view of what&rsquo;s playing. If one person minimizes to shelf to browse, the other continues watching &mdash; the session stays in sync without forcing both users into the same view state. This flexibility is what makes co-watching feel like watching together, not being locked into the same screen.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Closing Thoughts -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Closing Thoughts</span>
+        <p>These two projects share a common design philosophy: media in VR should feel fluid, not rigid. The unified player brought consistency to a fragmented experience &mdash; one set of controls, one transition model, across every surface. The co-watching shelf solved the tension between watching and browsing by letting users minimize the player without losing it.</p>
+        <p>Together, they define how media playback behaves across Horizon OS &mdash; from the smallest embedded video to a cast big screen, from solo viewing to shared sessions. The patterns established here continue to shape how the platform handles media interaction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTAs -->
+<section class="section">
+  <div class="container">
+    <div class="case-cta">
+      <a href="horizon-media.html" class="btn btn-primary">See HzTV Case Study &rarr;</a>
+      <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.fade-in-up').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in-up').forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+
+</body>
+</html>
