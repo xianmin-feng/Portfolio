@@ -547,6 +547,39 @@ img { max-width: 100%; display: block; }
   font-variant-numeric: tabular-nums;
 }
 
+/* Project info box */
+.case-info-box {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  background: #f8f9fc;
+  border-radius: 12px;
+  padding: 24px 28px;
+  margin-bottom: 0;
+}
+.case-info-item {
+  min-width: 0;
+}
+.case-info-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #888;
+  margin-bottom: 6px;
+}
+.case-info-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a2e;
+  line-height: 1.5;
+}
+@media (max-width: 768px) {
+  .case-info-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Editorial-style summary block */
 .case-summary {
   background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
