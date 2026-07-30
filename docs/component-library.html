@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spatial UI Component Library &mdash; Xianmin Feng</title>
+<meta name="description" content="Case study: building a reusable, component-based design system in Unity for Horizon OS — adopted by 40+ designers and prototypers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">XF</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#work">Work</a>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="subpage-hero">
+  <div class="container">
+    <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
+    <h1 class="subpage-title">Spatial UI Component Library</h1>
+    <p class="subpage-subtitle">Building a reusable design system in Unity that became the shared language for prototyping across Horizon OS.</p>
+    <div class="subpage-meta">
+      <span>Horizon OS</span>
+      <span>Unity 3D</span>
+      <span>C#</span>
+      <span>Design Systems</span>
+      <span>Component Library</span>
+      <span>Tooling</span>
+      <span>40+ Adopters</span>
+    </div>
+  </div>
+</section>
+
+<!-- Summary -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-info-box fade-in-up">
+        <div class="case-info-item">
+          <div class="case-info-label">Role</div>
+          <div class="case-info-value">Design + Engineering</div>
+        </div>
+        <div class="case-info-item">
+          <div class="case-info-label">Scope</div>
+          <div class="case-info-value">Design System &amp; Tooling</div>
+        </div>
+        <div class="case-info-item">
+          <div class="case-info-label">Platform</div>
+          <div class="case-info-value">Unity 3D &middot; C#</div>
+        </div>
+        <div class="case-info-item">
+          <div class="case-info-label">Adoption</div>
+          <div class="case-info-value">40+ designers and prototypers across Horizon OS.</div>
+        </div>
+      </div>
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Summary</span>
+        <p>As the number of prototypers and designers working on Horizon OS grew, so did the inconsistency. Each person built their own buttons, cards, and panels from scratch &mdash; different spacing, different text hierarchies, different interaction behaviors. Prototypes looked different depending on who built them, and every new project started from zero.</p>
+        <p>I designed and built a component-based UI library in Unity &mdash; a set of composable primitives with built-in design decisions (typography hierarchy, spacing, interaction states, visual treatments) that any designer or prototyper could drop into a scene and start building with immediately. The library became the team&rsquo;s shared infrastructure, adopted by 40+ people across the organization.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 1 -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/OCComponents.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">01</span>
+          <h3>The Problem &mdash; Inconsistency at Scale</h3>
+          <p>When every prototyper builds UI from scratch, the results diverge. Buttons look different across prototypes. Card layouts use different spacing. Text hierarchies vary. For leadership reviews, this inconsistency becomes noise &mdash; reviewers spend time noticing visual differences instead of evaluating the interaction being tested.</p>
+          <p>The team needed a shared set of building blocks that enforced design consistency at the implementation level &mdash; not through guidelines people have to remember, but through components that are correct by default.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 1 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">Components that are correct by default.</blockquote>
+  </div>
+</section>
+
+<!-- Section 2 -->
+<section class="section section-case section-alt">
+  <div class="container">
+      <div class="case-block case-block-split reverse fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/OCComponents.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">02</span>
+          <h3>The Library &mdash; Composable UI Primitives</h3>
+          <p>I designed and implemented a component library with a clear architecture:</p>
+          <p><strong>Primitives.</strong> OCBase, OCButton, OCIcon, OCIconButton, OCImage, OCText &mdash; the foundational elements that everything else is built from. Each primitive carries its own styling, states, and interaction behavior.</p>
+          <p><strong>Composed components.</strong> OCCard, OCTile, OCMenu, OCMenuBtn, OCPanel, OCCheckbox, OCStars &mdash; higher-level components assembled from primitives. A Card, for example, combines an image area, a Primary/Secondary/Tertiary text hierarchy, and an action row &mdash; all with consistent spacing and visual treatment built in.</p>
+          <p><strong>Examples scene.</strong> A documented scene where every component is instantiated and visible, serving as both a reference and a testing ground for new additions.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Section 3 -->
+<section class="section section-case">
+  <div class="container">
+      <div class="case-block case-block-split fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/OCComponents.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">03</span>
+          <h3>Design Decisions Built Into Code</h3>
+          <p>The library isn&rsquo;t just a collection of prefabs &mdash; it encodes design decisions that would otherwise live in a spec document no one reads:</p>
+          <p><strong>Typography hierarchy.</strong> Every component with text enforces Primary, Secondary, and Tertiary levels &mdash; consistent font sizes, weights, and colors across every surface. Designers don&rsquo;t choose type styles; the component chooses for them.</p>
+          <p><strong>Spacing and layout.</strong> Padding, margins, and content spacing are built into each component, ensuring visual consistency without manual adjustment.</p>
+          <p><strong>Interaction states.</strong> Hover, focus, pressed, and disabled states are implemented in the component itself. Every button, tile, and card behaves the same way across every prototype.</p>
+          <p><strong>Composition over configuration.</strong> Rather than building one mega-component with dozens of options, the library uses small, focused primitives that compose together. Need a card with a different layout? Combine OCImage + OCText + OCButton in a new arrangement &mdash; the pieces already work together.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Pull Quote 2 -->
+<section class="section section-pullquote">
+  <div class="container">
+    <blockquote class="case-pullquote fade-in-up">The same architecture as a web component library &mdash; in Unity.</blockquote>
+  </div>
+</section>
+
+<!-- Section 4 -->
+<section class="section section-case section-alt">
+  <div class="container">
+      <div class="case-block case-block-split reverse fade-in-up">
+        <div class="case-split-media">
+          <div class="subpage-video-container">
+            <video class="subpage-video" controls playsinline>
+              <source src="assets/OCComponents.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+        <div class="case-split-content">
+          <span class="section-numeral">04</span>
+          <h3>Adoption &amp; Impact</h3>
+          <p><strong>40+ designers and prototypers</strong> adopted the library across the Horizon OS team. What changed:</p>
+          <p><strong>Faster prototyping.</strong> New prototypes no longer started from zero. Designers could drop components into a scene and start building immediately, focusing on the interaction being tested rather than rebuilding basic UI.</p>
+          <p><strong>Visual consistency.</strong> Prototypes built by different people looked like they came from the same system. Leadership reviews focused on the design question, not on visual discrepancies between prototypes.</p>
+          <p><strong>Lower barrier to entry.</strong> Designers who weren&rsquo;t strong Unity developers could still build high-fidelity prototypes by composing from the library. The components handled the implementation complexity.</p>
+          <p><strong>A shared language.</strong> The component names (OCCard, OCTile, OCButton) became vocabulary the team used in design discussions. &ldquo;Use an OCCard with a secondary label&rdquo; meant the same thing to everyone &mdash; design intent and implementation were the same artifact.</p>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Closing Thoughts -->
+<section class="section">
+  <div class="container">
+    <div class="case-study">
+      <div class="case-block case-summary fade-in-up">
+        <span class="case-summary-label">Closing Thoughts</span>
+        <p>Design systems aren&rsquo;t about the platform &mdash; they&rsquo;re about the architecture. Whether the components are React elements, SwiftUI views, or Unity prefabs, the principles are the same: composability, consistency, encoded design decisions, and documentation through examples. Building this library in Unity taught me that design system thinking is portable across any medium.</p>
+        <p>The most rewarding outcome wasn&rsquo;t the adoption number. It was hearing a designer say &ldquo;I built this prototype in an afternoon&rdquo; &mdash; something that would have taken days before the library existed. That&rsquo;s the real measure of a design system: not how many components it has, but how much it accelerates the people who use it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTAs -->
+<section class="section">
+  <div class="container">
+    <div class="case-cta">
+      <a href="index.html#work" class="btn btn-secondary">&larr; Back to Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Xianmin Feng. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.fade-in-up').forEach(function (el) {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in-up').forEach(function (el) {
+      observer.observe(el);
+    });
+  })();
+</script>
+
+</body>
+</html>
