@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Horizon OS Media Experience &mdash; Xianmin Feng</title>
-<meta name="description" content="Case study: leading prototyping for the Media Watch Experience on Horizon OS — shipped the HzTV app at Connect 2025.">
+<meta name="description" content="Case study: leading design and prototyping for the Media Watch Experience on Horizon OS — shipped the HzTV app at Connect 2025.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
@@ -28,34 +28,97 @@
   <div class="container">
     <a href="index.html#work" class="back-link">&larr; Back to Portfolio</a>
     <h1 class="subpage-title">Horizon OS Media Experience</h1>
-    <p class="subpage-subtitle">Prototyping the future of media consumption in VR &mdash; from ambiguous concept to shipped product at Connect 2025.</p>
+    <p class="subpage-subtitle">A 0&rarr;1 product: designing what watching media should feel like in VR &mdash; from an ambiguous concept to a shipped media hub at Connect 2025.</p>
     <div class="subpage-meta">
-      <span>Horizon OS</span>
-      <span>Unity 3D</span>
-      <span>C#</span>
-      <span>AR / VR / MR</span>
-      <span>Media &amp; Entertainment</span>
+      <span>0&rarr;1</span>
+      <span>Product Design</span>
+      <span>Interaction Design</span>
       <span>Motion Design</span>
-      <span>Shipped Product</span>
-      <span>Connect 2025</span>
+      <span>Unity Prototyping</span>
+      <span>AR / VR</span>
+      <span>Shipped at Connect 2025</span>
     </div>
   </div>
 </section>
 
-<!-- Summary -->
+<!-- Overview -->
 <section class="section">
   <div class="container">
     <div class="case-study">
+      <div class="case-info-box fade-in-up">
+        <div class="case-info-item">
+          <div class="case-info-label">Role</div>
+          <div class="case-info-value">Design + Prototyping Lead &middot; 0&rarr;1</div>
+        </div>
+        <div class="case-info-item">
+          <div class="case-info-label">Timeline</div>
+          <div class="case-info-value">Mar &ndash; Sep 2025 &middot; Kickoff &rarr; 2 leadership review rounds &rarr; Launch at Connect</div>
+        </div>
+        <div class="case-info-item">
+          <div class="case-info-label">Responsibilities</div>
+          <div class="case-info-value">UX design &middot; Interaction design &middot; Motion design &middot; Product direction &middot; In-headset playtesting &middot; Unity/C# prototyping &middot; Engineering handoff</div>
+        </div>
+        <div class="case-info-item">
+          <div class="case-info-label">Outcome</div>
+          <div class="case-info-value">Launched at Connect 2025 as the central media hub on Horizon OS; prototype patterns shipped nearly 1:1; carried forward to Meta&rsquo;s newest headset in 2026.</div>
+        </div>
+        <div class="case-info-item" style="grid-column: 1 / -1;">
+          <div class="case-info-label">Team</div>
+          <div class="case-info-value"><strong>Design:</strong> Me (UX, interaction &amp; motion design, prototyping) &middot; Art director + art designer (Cinema World 3D assets)<br><strong>Leadership:</strong> 2 design managers (Horizon OS System, Media) &middot; My manager &middot; Design director &middot; Consumer PM director<br><strong>Engineering:</strong> 4 engineers</div>
+        </div>
+      </div>
       <div class="case-block case-summary fade-in-up">
         <span class="case-summary-label">Summary</span>
-        <p>I led prototyping for the Media Watch Experience on Horizon OS &mdash; driving both the HzTV app and an immersive cinema effort from ambiguous concept to a clear, leadership-backed product direction. The HzTV app shipped at Connect 2025 as the central media hub on the platform.</p>
-        <p>Over three months, I delivered 45 production builds, powered weekly in-headset playtesting with cross-functional leads, and built prototypes that became the engineering team&rsquo;s working reference for implementation. This case study walks through three layers of that work: the interactive UX, the cinema experience, and the design-to-engineering bridge that made it ship.</p>
+        <p><strong>Situation.</strong> Watching media is one of the most common things people do in a headset &mdash; yet the default was a 2D player dropped into VR, ignoring everything that makes the medium special: depth, scale, presence, and other people. This was 0&rarr;1: no existing media hub or cinema experience to iterate on, and no shared vision &mdash; discussions kept stalling in the abstract.</p>
+        <p><strong>Task.</strong> As design and prototyping lead for the Media Watch Experience on Horizon OS, I needed to define what watching media should feel like &mdash; the HzTV app as the platform&rsquo;s media hub, plus an immersive cinema experience &mdash; and align leadership on a direction that could ship at Connect 2025.</p>
+        <p><strong>Action.</strong> I owned the experience end to end: the structure of the hub, the interaction model for browsing and watching, the motion language, and how depth communicates hierarchy in spatial UI. I set four design principles to guide every call, and designed in the medium: 45 playable builds, weekly in-headset reviews with cross-functional leads, and two rounds of leadership reviews.</p>
+        <p><strong>Result.</strong> HzTV launched at Connect 2025 as the central media hub on Horizon OS, and nearly every pattern from the prototype shipped as designed &mdash; parallax, navigation and page-transition motion, title layouts, and scrolling. A year later, it carried forward to Meta&rsquo;s newest headset.</p>
+        <p><strong>Learning.</strong> In a new medium, the fastest way to align a room is to let people feel the decision. Prototyping turned abstract debates into concrete choices &mdash; and kept design intent intact all the way to production.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Section 1 -->
+<!-- The Problem -->
+<section class="section section-case section-alt">
+  <div class="container">
+      <div class="case-block fade-in-up" style="max-width: none;">
+        <span class="section-numeral">01</span>
+        <h3>The Problem &mdash; A Flat Player in a Spatial World</h3>
+        <div class="design-question">
+          <span class="core-decision-label">The design question</span>
+          <p>How might we make media on Horizon OS feel native to the medium &mdash; a living hub people want to browse, and a viewing experience you can&rsquo;t get anywhere else &mdash; while staying simple, familiar, and within real platform performance limits?</p>
+        </div>
+      </div>
+      <div class="case-block fade-in-up" style="max-width: none;">
+        <h3>Design Principles</h3>
+        <div class="principles">
+          <div class="principle">
+            <span class="principle-num">01</span>
+            <h4>Native, not ported</h4>
+            <p>Use depth and space to communicate hierarchy &mdash; don&rsquo;t just float a flat screen in front of the user.</p>
+          </div>
+          <div class="principle">
+            <span class="principle-num">02</span>
+            <h4>Motion with restraint</h4>
+            <p>Motion should add life and orientation, never compete with the content. If it&rsquo;s noticed before the movie, it&rsquo;s too much.</p>
+          </div>
+          <div class="principle">
+            <span class="principle-num">03</span>
+            <h4>One pattern, every context</h4>
+            <p>Learn an interaction once and it works everywhere &mdash; in the app, with friends, in a shared cinema.</p>
+          </div>
+          <div class="principle">
+            <span class="principle-num">04</span>
+            <h4>Decide in the headset</h4>
+            <p>Spatial design can&rsquo;t be judged on a monitor. Every decision is validated where it will actually live.</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Section 2: HzTV decisions -->
 <section class="section section-case">
   <div class="container">
       <div class="case-block case-block-split fade-in-up">
@@ -67,16 +130,16 @@
           </div>
         </div>
         <div class="case-split-content">
-          <span class="section-numeral">01</span>
-          <h3>HzTV App &mdash; Interactive UX in Working Code</h3>
-          <p>The HzTV app needed to feel like a native media hub &mdash; not a ported 2D player dropped into VR. I designed and built the interactive UX entirely in working code: splash screen, landing page, content browsing, scrolling, 2.5D treatments, transitions, and animations.</p>
-          <p><strong>Splash screen &mdash; iterating in Unity.</strong> The first thing users see sets the tone. I explored multiple splash screen animations rapidly in Unity &mdash; testing timing, easing, and sequencing in the headset. The version that landed: a full-screen HzTV logo greets the user on launch. On press, the logo shrinks and settles into the bottom-right corner as the landing page comes alive behind it &mdash; featured wallpapers begin their crossfade loop, and the app feels like it&rsquo;s already breathing. The transition from branding moment to content surface happens in one continuous motion, so the user never feels like they&rsquo;re waiting for the app to &ldquo;load.&rdquo;</p>
+          <span class="section-numeral">02</span>
+          <h3>HzTV App &mdash; Designing a Hub That Feels Alive</h3>
+          <p>The HzTV app needed to be the front door to media on Horizon OS. I owned the interaction and motion design end-to-end &mdash; splash, landing page, content browsing, scrolling, 2.5D treatments, and transitions. Three decisions defined how it feels.</p>
+          <p><strong>Decision 1 &mdash; The splash screen should never feel like loading.</strong> A static logo followed by a cut to the landing page reads as a wait. I explored multiple splash animations in Unity, testing timing, easing, and sequencing in-headset. The version that landed: a full-screen HzTV logo that, on press, shrinks and settles into the bottom-right corner while the landing page comes alive behind it. <em>Why:</em> the brand moment and the content surface become one continuous motion, so the user is already browsing before they notice the transition &mdash; and the logo stays on screen as a persistent anchor.</p>
         </div>
       </div>
       <div class="case-block fade-in-up" style="max-width: none;">
-        <p style="max-width: none;"><strong>Wallpaper crossfade &mdash; ambient motion.</strong> The landing page hero area cycles through featured movie and show wallpapers with a slow crossfade. The transition is deliberately unhurried &mdash; smooth enough to feel cinematic, slow enough not to compete with the user&rsquo;s attention. It gives the landing page a sense of life and editorial curation without requiring any interaction, making the media hub feel like a living storefront rather than a static menu.</p>
-        <p style="max-width: none;"><strong>Parallax on content categories.</strong> Each content category row uses a parallax effect &mdash; as the user scrolls, thumbnails and labels shift at slightly different rates, creating a subtle sense of depth. In VR, this does more than look polished: it reinforces spatial hierarchy, makes browsing feel tactile, and adds a moment of delight to what would otherwise be a flat content grid. The effect was tuned in-headset until it felt natural &mdash; present enough to notice, restrained enough not to distract from the content itself.</p>
-        <p style="max-width: none;"><strong>Design through in-headset iteration.</strong> Every interaction was tested where it would live &mdash; in the headset, not on a monitor. I&rsquo;d build a version, put it on, feel what worked and what didn&rsquo;t, and refine. This tight loop ran weekly with cross-functional leads, turning open design questions into go/no-go decisions within minutes. 45 builds in three months &mdash; each addressing specific questions: Does this scroll feel right? Does the parallax depth add or distract? Where does the eye land first?</p>
+        <p style="max-width: none;"><strong>Decision 2 &mdash; Ambient motion on the landing page, deliberately slow.</strong> The hero area cycles through featured movie and show wallpapers with a crossfade. The key design call was pacing: faster felt like an ad carousel competing for attention; slower felt cinematic. <em>Trade-off:</em> I chose a deliberately unhurried crossfade &mdash; the landing page gets a sense of life and editorial curation without asking anything of the user, turning a static menu into a living storefront.</p>
+        <p style="max-width: none;"><strong>Decision 3 &mdash; Parallax to communicate hierarchy, not decoration.</strong> A flat content grid in VR feels like a website in a box. Each category row uses parallax &mdash; thumbnails and labels shift at slightly different rates as the user scrolls &mdash; creating a subtle sense of depth. <em>Why:</em> in a spatial interface, depth is information &mdash; it reinforces what&rsquo;s in front and what&rsquo;s behind, and makes browsing feel tactile. <em>Trade-off:</em> too much depth pulls focus from the content and adds visual strain, so I tuned it in-headset until it was present enough to notice but restrained enough to disappear behind the thumbnails.</p>
+        <p style="max-width: none;"><strong>How decisions got made.</strong> Each build was scoped to answer a specific question &mdash; Does this scroll feel right? Does the parallax depth add or distract? Where does the eye land first? &mdash; and weekly in-headset playtests turned those questions into go/no-go calls within minutes.</p>
       </div>
   </div>
 </section>
@@ -84,61 +147,182 @@
 <!-- Pull Quote 1 -->
 <section class="section section-pullquote">
   <div class="container">
-    <blockquote class="case-pullquote fade-in-up">The prototype became the engineering team&rsquo;s working reference.</blockquote>
+    <blockquote class="case-pullquote fade-in-up">In a spatial interface, depth isn&rsquo;t decoration &mdash; it&rsquo;s information.</blockquote>
   </div>
 </section>
 
-<!-- Section 2 -->
+<!-- Section 3: Exploration - HzTV entry point -->
 <section class="section section-case section-alt">
   <div class="container">
+      <div class="case-block fade-in-up" style="max-width: none;">
+        <span class="section-numeral">03</span>
+        <h3>Exploration &mdash; Getting HzTV One Tap Away</h3>
+        <p style="max-width: none;">A media hub only works if people can get to it quickly. Watching is a high-frequency activity, so I explored how HzTV should be launched from the system &mdash; not just how it behaves once it&rsquo;s open.</p>
+        <div class="decision-flow">
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">1</span>The goal</div>
+            <div class="df-body"><p>Make HzTV launchable in one tap from the Horizon OS Navigator, so watching something is never more than a step away.</p></div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">2</span>Ideal vs. shipped</div>
+            <div class="df-body">
+              <div class="df-options">
+                <div class="df-option">
+                  <div class="df-option-head"><span class="df-option-title">Quick Access in Navigator</span><span class="df-pill">Explored</span></div>
+                  <p>A pinned HzTV shortcut alongside other system shortcuts &mdash; explored in partnership with the Library team, who own Quick Access.</p>
+                </div>
+                <div class="df-option is-chosen">
+                  <div class="df-option-head"><span class="df-option-title">App Library</span><span class="df-pill is-chosen">Shipped</span></div>
+                  <p>HzTV launched through its configuration in the App Library &mdash; reachable, but one step further away than the ideal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">3</span>The constraint</div>
+            <div class="df-body"><p>Quick Access is shared system real estate with its own owners and priorities. We couldn&rsquo;t reach alignment across teams on adding HzTV there.</p></div>
+          </div>
+        </div>
+        <div class="df-takeaway"><p><strong>What I learned:</strong> entry points are a cross-team product decision, not just a design one. Designing the app well isn&rsquo;t enough if the way in belongs to someone else. Next time, I&rsquo;d bring the owning team in earlier &mdash; with the prototype in hand &mdash; and align on a shared goal before proposing a specific placement.</p></div>
+      </div>
+  </div>
+</section>
+
+<!-- Section 4: Cinema -->
+<section class="section section-case">
+  <div class="container">
       <div class="case-block fade-in-up">
-        <span class="section-numeral">02</span>
-        <h3>Immersive Cinema &mdash; From Exploration to Strategy</h3>
-        <p style="max-width: none;">Beyond the app, I spearheaded prototyping for an immersive cinema experience. The core challenge was twofold: define a media-watching flow that feels intriguing and seamless within the Horizon OS ecosystem, and push past technical limitations to create something that doesn&rsquo;t just replicate a theater &mdash; but delivers an experience you can&rsquo;t get anywhere else.</p>
+        <span class="section-numeral">04</span>
+        <h3>Immersive Cinema &mdash; Familiar Patterns, New Atmosphere</h3>
+        <p class="case-lead">Beyond the app, I drove UX, interaction, and motion design and prototyping for an immersive cinema experience &mdash; partnering with an art director and art designer who created the 3D environment assets. The goal was twofold: define a media-watching flow that feels seamless within the Horizon OS ecosystem, and go beyond replicating a theater &mdash; to deliver something only VR can offer.</p>
+        <div class="core-decision">
+          <span class="core-decision-label">Core design decision &middot; One interaction, many contexts</span>
+          <p>Rather than inventing a new UI for every viewing mode, I anchored the whole experience on a single gesture users already knew &mdash; drag-and-drop media. Travel into Cinema World with friends and the media carries over; drag-and-drop still works. Invite friends from the Navigator&rsquo;s People tab, and solo viewing becomes shared viewing with no mode switch. <em>Why:</em> each new capability adds atmosphere, not cognitive load.</p>
+        </div>
       </div>
 
-      <div class="case-block-media-cards fade-in-up">
-        <div class="case-media-left">
-          <video controls playsinline>
+      <div class="showcase fade-in-up">
+        <div class="showcase-media">
+          <video controls playsinline preload="metadata">
             <source src="assets/hztv_cinema.mp4" type="video/mp4">
           </video>
         </div>
-        <div class="case-cards-right">
-          <div class="case-feature">
-            <strong>Giant Screen</strong>
-            <span>Resolved a team debate by building a working prototype: drag-and-drop media toward the sky, and a giant screen appears overhead.</span>
-          </div>
-          <div class="case-feature">
-            <strong>Co-watching</strong>
-            <span>Invite flow anchored in the Navigator&rsquo;s People tab. Solo to shared viewing with no mode switch and no new UI to learn.</span>
-          </div>
-          <div class="case-feature">
-            <strong>Cinema World</strong>
-            <span>Travel into an immersive cinema with friends. Media carries over, drag-and-drop still works &mdash; same patterns, new atmosphere.</span>
-          </div>
-          <div class="case-feature">
-            <strong>Arrakis Experience</strong>
-            <span>Dynamic lighting casts from the film onto the space &mdash; shadows shift with the scene, ambient light responds to on-screen action.</span>
-          </div>
-          <div class="case-feature">
-            <strong>3P Takeover</strong>
-            <span>Third-party content providers take over the viewing surface, creating branded, curated media experiences.</span>
-          </div>
-          <div class="case-feature">
-            <strong>Allocentric Bloom</strong>
-            <span>Transition animation that expands content from a focal point outward, guiding the user&rsquo;s gaze into immersive viewing.</span>
-          </div>
-        </div>
+        <ul class="feature-list">
+          <li>
+            <span class="feature-num">01</span>
+            <span class="feature-head">Cinema World</span>
+            <span class="feature-desc">A dreamy, immersive cinema you travel into with friends to watch together.</span>
+          </li>
+          <li>
+            <span class="feature-num">02</span>
+            <span class="feature-head">Co-watching</span>
+            <span class="feature-desc">Shared viewing started from the People tab users already know &mdash; no new surface to learn.</span>
+          </li>
+          <li>
+            <span class="feature-num">03</span>
+            <span class="feature-head">Arrakis Experience</span>
+            <span class="feature-desc">The film extends into the room &mdash; spotlights driven by the screen cast light and reflections onto the floor as the scene changes.</span>
+          </li>
+          <li>
+            <span class="feature-num">04</span>
+            <span class="feature-head">Allocentric Bloom</span>
+            <span class="feature-desc">Content expands outward from a focal point, guiding the user&rsquo;s gaze from browsing into immersive viewing.</span>
+          </li>
+          <li>
+            <span class="feature-num">05</span>
+            <span class="feature-head">3P Takeover</span>
+            <span class="feature-desc">Third-party providers brand and curate the viewing surface while the core interaction model stays intact.</span>
+          </li>
+          <li>
+            <span class="feature-num">06</span>
+            <span class="feature-head">Giant Screen <span class="df-pill">Cut</span></span>
+            <span class="feature-desc">Prototyped two entry points for a contested concept; cut after in-headset testing with leadership &mdash; <a href="#giant-screen">see the deep dive</a>.</span>
+          </li>
+        </ul>
       </div>
 
       <div class="case-block fade-in-up" style="margin-top: 8px; max-width: none;">
-        <p style="max-width: none;"><strong>From exploration to clear strategy.</strong> Over five months of prototype-driven reviews with leadership, the cinema effort moved from open-ended exploration to a clear product direction &mdash; positioned to become a significant feature for the platform. My prototypes gave leadership something tangible to react to, accelerating decisions that had stalled in abstract discussion and establishing a strong foundation for future innovations.</p>
+        <h3 id="giant-screen">Decision Deep Dive &mdash; Should Giant Screen Exist?</h3>
+        <div class="decision-flow">
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">1</span>The disagreement</div>
+            <div class="df-body"><p>The HzTV window can already be resized by dragging its corners &mdash; scaled up, it effectively <em>is</em> a giant screen. I argued Giant Screen duplicated existing functionality and should be cut. Leads and managers still wanted to validate the concept before deciding.</p></div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">2</span>Options tested</div>
+            <div class="df-body">
+              <div class="df-options">
+                <div class="df-option is-chosen">
+                  <div class="df-option-head"><span class="df-option-title">Baseline &mdash; Resize HzTV</span><span class="df-pill is-chosen">Kept</span></div>
+                  <p>Drag the window&rsquo;s corners to make it as big as you want. Already existed.</p>
+                </div>
+                <div class="df-option">
+                  <div class="df-option-head"><span class="df-option-title">A &mdash; Drag to the sky</span><span class="df-pill">Cut</span></div>
+                  <p>Drag-and-drop a title onto a placeholder in the sky to watch on a giant screen overhead.</p>
+                </div>
+                <div class="df-option">
+                  <div class="df-option-head"><span class="df-option-title">B &mdash; Cast from control bar</span><span class="df-pill">Cut</span></div>
+                  <p>Cast directly from the control bar to the giant screen.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">3</span>Validation</div>
+            <div class="df-body"><p>Leads and director-level stakeholders tried both versions in-headset. Neither entry point made Giant Screen feel meaningfully different from simply enlarging the HzTV window.</p></div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">4</span>Decision &amp; trade-off</div>
+            <div class="df-body"><p>We cut Giant Screen. We gave up a visually impressive moment &mdash; in exchange for one clear way to make content bigger, less to learn, and timeline focused on the features that mattered.</p></div>
+          </div>
+        </div>
+        <div class="df-takeaway"><p><strong>My takeaway:</strong> when I disagree, I don&rsquo;t just argue &mdash; I build the fastest experience that lets the room decide. The goal isn&rsquo;t to be right; it&rsquo;s for the team to reach the decision with evidence instead of opinion.</p></div>
+      </div>
+
+      <div class="case-block fade-in-up" style="margin-top: 8px; max-width: none;">
+        <h3>Decision Deep Dive &mdash; Where Should Cinema World Live?</h3>
+        <div class="decision-flow">
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">1</span>The question</div>
+            <div class="df-body"><p>Cinema World needed an entry point, and the team was split on where it belonged: inside the media app, or at the system level alongside other virtual spaces.</p></div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">2</span>Options tested</div>
+            <div class="df-body">
+              <div class="df-options">
+                <div class="df-option is-chosen">
+                  <div class="df-option-head"><span class="df-option-title">A &mdash; Inside HzTV</span><span class="df-pill is-chosen">Chosen</span></div>
+                  <p>An entry inside the HzTV app &mdash; tap in and travel to a dreamy cinema world to watch.</p>
+                </div>
+                <div class="df-option">
+                  <div class="df-option-head"><span class="df-option-title">B &mdash; Navigator Spaces</span><span class="df-pill">Not chosen</span></div>
+                  <p>A set of cinema worlds under the Spaces tab in the Horizon OS Navigator.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">3</span>Why HzTV won</div>
+            <div class="df-body">
+              <ul class="df-reasons">
+                <li><strong>Intent.</strong> People arrive wanting to watch something, so the entry belongs next to the content &mdash; not in a list of places.</li>
+                <li><strong>Order.</strong> From Spaces, users pick a world first, then have to find something to watch. From HzTV, content comes first and carries into the world.</li>
+                <li><strong>Framing.</strong> Inside HzTV it reads as an upgraded way to watch; in Spaces it was just one more environment competing for attention.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="df-step">
+            <div class="df-label"><span class="df-num">4</span>What we gave up</div>
+            <div class="df-body"><p>System-level visibility. A Navigator entry would reach people who never open HzTV. We traded that reach for a flow that matches how people actually decide to watch.</p></div>
+          </div>
+        </div>
+        <div class="df-takeaway"><p><strong>Where it landed:</strong> HzTV became the recommended entry point, but Cinema World was deprioritized for the Connect 2025 timeline and didn&rsquo;t ship. The exploration still did its job &mdash; it settled where immersive viewing belongs in the platform, so the next team doesn&rsquo;t start from zero.</p></div>
       </div>
   </div>
 </section>
 
-<!-- Section 3 -->
-<section class="section section-case">
+<!-- Section 5: Prototyping as a design tool -->
+<section class="section section-case section-alt">
   <div class="container">
       <div class="case-block case-block-split reverse fade-in-up">
         <div class="case-split-media">
@@ -149,23 +333,12 @@
           </div>
         </div>
         <div class="case-split-content">
-          <span class="section-numeral">03</span>
-          <h3>Bridging Design &amp; Engineering</h3>
-          <p>Prototypes that stop at proof of concept create a handoff gap. Mine didn&rsquo;t. Because the prototypes were built in real, running code, they became the engineering team&rsquo;s working reference &mdash; directly shaping how features were implemented.</p>
-          <p><strong>Parallax adopted into production.</strong> The parallax effect I designed for the content category rows was directly referenced and adopted by the engineering team into the shipped product. What started as a design exploration in Unity became a production interaction pattern &mdash; proof that high-fidelity prototyping doesn&rsquo;t just inform engineering decisions, it sets the standard.</p>
-          <p><strong>Interaction details, resolved before development.</strong> Engineers could open the prototype, inspect the behavior, and align on interaction details and technical approach before writing production code. Animation timing, scroll physics, transition curves, spatial depth &mdash; these were validated in the prototype, not negotiated during implementation. That cut rework significantly.</p>
+          <span class="section-numeral">05</span>
+          <h3>Keeping Design Intent Intact to Production</h3>
+          <p>Design quality is often lost in handoff &mdash; timing gets approximated, curves get simplified, depth gets flattened. I prototyped in real, running code so the design itself became the spec.</p>
+          <p><strong>The prototype became the reference.</strong> Engineers could open the prototype, inspect the behavior, and align on interaction details before writing production code. Animation timing, scroll physics, transition curves, and spatial depth were validated in the prototype, not negotiated during implementation. Because engineers ran the same build I designed in, feasibility questions surfaced early and we resolved them together, in code &mdash; reducing rework.</p>
         </div>
       </div>
-      <div class="case-block fade-in-up" style="max-width: none;">
-        <p style="max-width: none;"><strong>Design judgment and engineering craft, reinforcing each other.</strong> The prototype wasn&rsquo;t a spec thrown over the wall. It was a shared artifact where design intent and engineering reality met. When an animation felt right in the headset but was too expensive to render, we knew immediately &mdash; and iterated on the trade-off together, in code.</p>
-      </div>
-  </div>
-</section>
-
-<!-- Pull Quote 2 -->
-<section class="section section-pullquote">
-  <div class="container">
-    <blockquote class="case-pullquote fade-in-up">Design judgment and engineering craft, reinforcing each other.</blockquote>
   </div>
 </section>
 
@@ -174,10 +347,14 @@
   <div class="container">
     <div class="case-study">
       <div class="case-block case-summary fade-in-up">
-        <span class="case-summary-label">Closing Thoughts</span>
-        <p>The HzTV app shipped at Connect 2025 with hundreds of titles, establishing &ldquo;TV&rdquo; as the central media hub on Horizon OS. The parallax interactions I prototyped were adopted directly into the production build. The cinema explorations &mdash; from Giant Screen to Arrakis &mdash; laid the foundation for the next generation of immersive media on the platform. This work didn&rsquo;t just address technical limitations; it defined what a compelling media-watching experience looks and feels like in VR.</p>
-        <p>Over dozens of builds, the prototypes evolved alongside the product itself. Some ideas shipped directly, others informed future explorations, and many changed through repeated testing with leadership and engineering. Building in Unity meant every discussion happened around experiences people could actually use, making trade-offs easier to evaluate and product direction faster to align on.</p>
-        <p>Looking back, the project wasn&rsquo;t simply about designing a media application. It was about exploring what media consumption could become in spatial computing &mdash; and using prototypes to turn uncertain ideas into concrete product decisions.</p>
+        <span class="case-summary-label">Outcome</span>
+        <ul class="case-list">
+          <li><strong>Launched at Connect 2025.</strong> HzTV shipped with hundreds of titles, establishing &ldquo;TV&rdquo; as the central media hub on Horizon OS.</li>
+          <li><strong>Built to last.</strong> A year after launch, HzTV carried forward to Meta&rsquo;s newest headset, announced at Connect 2026 &mdash; the design foundation holding up on new hardware.</li>
+          <li><strong>Prototype to production, nearly 1:1.</strong> The parallax pattern, navigation and page-transition motion, title layouts, and vertical and horizontal scrolling all shipped as designed in the prototype.</li>
+          <li><strong>Foundation for what&rsquo;s next.</strong> The cinema explorations &mdash; from Cinema World to Arrakis &mdash; left the team with a validated, prototyped direction for future immersive media &mdash; even though Cinema World itself didn&rsquo;t ship for Connect 2025.</li>
+        </ul>
+        <p>The project wasn&rsquo;t simply about designing a media app. It was about defining what media consumption should feel like in spatial computing &mdash; and using design and prototyping together to turn uncertain ideas into confident product decisions.</p>
       </div>
     </div>
   </div>
