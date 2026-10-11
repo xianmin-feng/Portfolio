@@ -1260,3 +1260,26 @@ img { max-width: 100%; display: block; }
 .case-block-split.split-centered .case-split-content p + p {
   margin-top: 16px;
 }
+
+/* Context quote under the design question */
+.case-block blockquote.context-quote {
+  margin: 16px 0 0;
+  padding: 20px 24px;
+  background: #ffffff;
+  border: 1px solid #e6e8f0;
+  border-left: 3px solid #6366f1;
+  border-radius: 0 14px 14px 0;
+  font-size: 16px;
+  line-height: 1.65;
+  color: #1a1a2e;
+}
+.context-quote cite {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-style: normal;
+  color: #888;
+}
+.context-quote cite a {
+  color: #6366f1;
+}
