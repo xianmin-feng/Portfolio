@@ -125,35 +125,37 @@
 <!-- Section 2: HzTV decisions -->
 <section class="section section-case">
   <div class="container">
-      <div class="case-block case-block-split split-centered fade-in-up">
-        <div class="case-split-media">
-          <div class="subpage-video-container">
-            <video class="subpage-video" controls playsinline preload="metadata">
-              <source src="assets/hztv_splashscreen.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div class="case-split-content">
-          <span class="section-numeral">02</span>
-          <h3>HzTV App &mdash; Designing a Hub That Feels Alive</h3>
-          <p>The HzTV app needed to be the front door to media on Horizon OS. I owned the interaction and motion design end-to-end &mdash; splash, landing page, content browsing, scrolling, 2.5D treatments, and transitions. Three decisions defined how it feels.</p>
-          <p><strong>Decision 1 &mdash; The splash screen should never feel like loading.</strong> A static logo followed by a cut to the landing page reads as a wait. I explored multiple splash animations in Unity, testing timing, easing, and sequencing in-headset. The version that landed: a full-screen HzTV logo that, on press, shrinks and settles into the bottom-right corner while the landing page comes alive behind it. <em>Why:</em> the brand moment and the content surface become one continuous motion, so the user is already browsing before they notice the transition &mdash; and the logo stays on screen as a persistent anchor.</p>
-        </div>
-      </div>
-      <div class="case-block case-block-split reverse split-centered fade-in-up">
-        <div class="case-split-media">
-          <div class="subpage-video-container">
-            <video class="subpage-video" controls playsinline preload="metadata">
-              <source src="assets/hztv_navigationpage.mp4" type="video/mp4">
-            </video>
-          </div>
-        </div>
-        <div class="case-split-content">
-          <p><strong>Decision 2 &mdash; Ambient motion on the landing page, deliberately slow.</strong> The hero area cycles through featured movie and show wallpapers with a crossfade. The key design call was pacing: faster felt like an ad carousel competing for attention; slower felt cinematic. <em>Trade-off:</em> I chose a deliberately unhurried crossfade &mdash; the landing page gets a sense of life and editorial curation without asking anything of the user, turning a static menu into a living storefront.</p>
-          <p><strong>Decision 3 &mdash; Parallax to communicate hierarchy, not decoration.</strong> A flat content grid in VR feels like a website in a box. Each category row uses parallax &mdash; thumbnails and labels shift at slightly different rates as the user scrolls &mdash; creating a subtle sense of depth. <em>Why:</em> in a spatial interface, depth is information &mdash; it reinforces what&rsquo;s in front and what&rsquo;s behind, and makes browsing feel tactile. <em>Trade-off:</em> too much depth pulls focus from the content and adds visual strain, so I tuned it in-headset until it was present enough to notice but restrained enough to disappear behind the thumbnails.</p>
-        </div>
-      </div>
       <div class="case-block fade-in-up" style="max-width: none;">
+        <span class="section-numeral">02</span>
+        <h3>HzTV App &mdash; Designing a Hub That Feels Alive</h3>
+        <p class="case-lead">The HzTV app needed to be the front door to media on Horizon OS. I owned the interaction and motion design end-to-end &mdash; splash, landing page, content browsing, scrolling, 2.5D treatments, and transitions. Three decisions defined how it feels.</p>
+        <div class="media-row">
+          <figure>
+            <video controls playsinline preload="metadata"><source src="assets/hztv_splashscreen.mp4" type="video/mp4"></video>
+            <figcaption>Decision 1 &middot; Splash</figcaption>
+          </figure>
+          <figure>
+            <video controls playsinline preload="metadata"><source src="assets/hztv_navigationpage.mp4" type="video/mp4"></video>
+            <figcaption>Decisions 2 &amp; 3 &middot; Landing page and content rows</figcaption>
+          </figure>
+        </div>
+        <div class="decision-cards">
+          <div class="decision-card">
+            <span class="principle-num">Decision 1</span>
+            <h4>The splash screen should never feel like loading.</h4>
+            <p>A static logo followed by a cut to the landing page reads as a wait. I explored multiple splash animations in Unity, testing timing, easing, and sequencing in-headset. The version that landed: a full-screen HzTV logo that, on press, shrinks and settles into the bottom-right corner while the landing page comes alive behind it. <em>Why:</em> the brand moment and the content surface become one continuous motion, so the user is already browsing before they notice the transition &mdash; and the logo stays on screen as a persistent anchor.</p>
+          </div>
+          <div class="decision-card">
+            <span class="principle-num">Decision 2</span>
+            <h4>Ambient motion on the landing page, deliberately slow.</h4>
+            <p>The hero area cycles through featured movie and show wallpapers with a crossfade. The key design call was pacing: faster felt like an ad carousel competing for attention; slower felt cinematic. <em>Trade-off:</em> I chose a deliberately unhurried crossfade &mdash; the landing page gets a sense of life and editorial curation without asking anything of the user, turning a static menu into a living storefront.</p>
+          </div>
+          <div class="decision-card">
+            <span class="principle-num">Decision 3</span>
+            <h4>Parallax to communicate hierarchy, not decoration.</h4>
+            <p>A flat content grid in VR feels like a website in a box. Each category row uses parallax &mdash; thumbnails and labels shift at slightly different rates as the user scrolls &mdash; creating a subtle sense of depth. <em>Why:</em> in a spatial interface, depth is information &mdash; it reinforces what&rsquo;s in front and what&rsquo;s behind, and makes browsing feel tactile. <em>Trade-off:</em> too much depth pulls focus from the content and adds visual strain, so I tuned it in-headset until it was present enough to notice but restrained enough to disappear behind the thumbnails.</p>
+          </div>
+        </div>
         <p style="max-width: none;"><strong>How decisions got made.</strong> Each build was scoped to answer a specific question &mdash; Does this scroll feel right? Does the parallax depth add or distract? Where does the eye land first? &mdash; and weekly in-headset playtests turned those questions into go/no-go calls within minutes.</p>
       </div>
       <div class="case-block fade-in-up" style="max-width: none;">
