@@ -1388,3 +1388,114 @@ img { max-width: 100%; display: block; }
     grid-template-columns: 1fr;
   }
 }
+
+/* Project structure: two parallel workstreams */
+.workstreams {
+  margin-top: 24px;
+  background: #fff;
+  border: 1px solid #e6e8f0;
+  border-radius: 16px;
+  padding: 28px;
+}
+.ws-head h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 4px 0 14px;
+}
+.ws-timeline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 18px;
+}
+.ws-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #d9daff, #6366f1);
+  position: relative;
+}
+.ws-line::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -4px;
+  border-left: 8px solid #6366f1;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.ws-lane {
+  display: grid;
+  grid-template-columns: 200px 1fr 180px;
+  gap: 18px;
+  align-items: center;
+  padding: 16px 0;
+  border-top: 1px solid #eef0f5;
+}
+.ws-name {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.ws-name strong {
+  display: block;
+  font-size: 15px;
+  color: #1a1a2e;
+}
+.ws-name em {
+  display: block;
+  font-size: 12px;
+  font-style: normal;
+  color: #888;
+}
+.ws-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #6366f1;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ws-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ws-chips span {
+  font-size: 12px;
+  color: #1a1a2e;
+  background: #f4f5fb;
+  border: 1px solid #e6e8f0;
+  border-radius: 999px;
+  padding: 5px 12px;
+}
+.ws-outcome {
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  color: #6b7080;
+  background: #eceef3;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.ws-outcome.is-shipped {
+  color: #fff;
+  background: #6366f1;
+}
+@media (max-width: 860px) {
+  .ws-lane {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .ws-outcome {
+    text-align: left;
+  }
+}
