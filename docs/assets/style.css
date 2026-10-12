@@ -1342,3 +1342,49 @@ img { max-width: 100%; display: block; }
     grid-template-columns: 1fr;
   }
 }
+
+/* Cinema World: three-step flow screenshots */
+.flow-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 20px;
+}
+.flow-strip figure {
+  margin: 0;
+  min-width: 0;
+}
+.flow-strip img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #000;
+}
+.flow-strip figcaption {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #555;
+}
+.flow-strip figcaption span {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ededff;
+  color: #6366f1;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .flow-strip {
+    grid-template-columns: 1fr;
+  }
+}
