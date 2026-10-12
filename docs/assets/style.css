@@ -1499,3 +1499,24 @@ img { max-width: 100%; display: block; }
     text-align: left;
   }
 }
+.flow-strip.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.case-block .flow-group {
+  margin: 24px 0 -8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #6366f1;
+}
+@media (max-width: 960px) {
+  .flow-strip.cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .flow-strip.cols-4 {
+    grid-template-columns: 1fr;
+  }
+}
